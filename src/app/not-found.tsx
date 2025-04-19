@@ -7,7 +7,7 @@ export default function NotFound() {
     <section className="min-h-screen flex flex-col justify-center items-center text-center bg-gray-950 text-white px-6">
       <h1 className="text-6xl font-bold text-purple-500 mb-4 animate-bounce">404</h1>
       <p className="text-lg text-gray-300 mb-8">
-        Oops! The page you're looking for doesn’t exist 😕
+        Oops! The page you&apos;re looking for doesn&apos;t exist 😕
       </p>
       <Link
         href="/"

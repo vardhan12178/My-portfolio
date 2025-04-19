@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "framer-motion";
 
 const projects = [
@@ -17,7 +18,7 @@ const projects = [
     imgUrl: "https://i.imgur.com/26tKsxV.jpeg",
     liveUrl: "https://vkartshop.netlify.app/",
     githubUrl: "https://github.com/vardhan12178/vkart",
-    technologies: ["React", "Node.js","Tailwind CSS", "MongoDB, AWS"]
+    technologies: ["React", "Node.js", "Tailwind CSS", "MongoDB, AWS"]
   },
   {
     title: "Weather Dashboard",
@@ -115,11 +116,14 @@ export default function Projects() {
             transition={{ type: "spring", stiffness: 250 }}
             className="bg-gray-800 p-6 rounded-xl border border-purple-700 hover:shadow-lg transition duration-300 flex flex-col"
           >
-            <img
-              src={project.imgUrl}
-              alt={project.title}
-              className="rounded-md mb-4 object-cover h-40 w-full"
-            />
+            <div className="relative w-full h-40 mb-4">
+              <Image
+                src={project.imgUrl}
+                alt={project.title}
+                fill
+                className="rounded-md object-cover"
+              />
+            </div>
             <h3 className="text-xl font-semibold mb-2 text-purple-300">{project.title}</h3>
             <p className="text-gray-300 text-sm mb-3 line-clamp-3">{project.description}</p>
             <div className="flex flex-wrap gap-2 text-xs text-gray-400 mb-4">

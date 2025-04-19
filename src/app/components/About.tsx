@@ -20,9 +20,9 @@ export default function About() {
         </h2>
 
         <p className="text-lg sm:text-xl lg:text-2xl text-gray-300 leading-relaxed">
-          I'm <strong>Bala Vardhan Pula</strong>, a passionate and versatile Full Stack Developer based in India,
+          I&apos;m <strong>Bala Vardhan Pula</strong>, a passionate and versatile Full Stack Developer based in India,
           specializing in creating clean, scalable, and user-centric digital solutions.
-          With <strong>3+ years of experience</strong>, I’ve worked at <strong>TCS</strong> (Dec 2021 – June 2024)
+          With <strong>3+ years of experience</strong>, I&apos;ve worked at <strong>TCS</strong> (Dec 2021 – June 2024)
           and currently contribute at <strong>HR Geckos</strong> (Oct 2024 – Present).
         </p>
 
@@ -36,7 +36,7 @@ export default function About() {
         </p>
 
         <p className="text-lg sm:text-xl lg:text-2xl text-gray-300 leading-relaxed">
-          Currently, I'm open to opportunities in <strong>Hyderabad</strong> and other locations. Let’s build something amazing together! 💻✨
+          Currently, I&apos;m open to opportunities in <strong>Hyderabad</strong> and other locations. Let&apos;s build something amazing together! 💻✨
         </p>
       </motion.div>
     </section>
