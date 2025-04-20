@@ -19,7 +19,7 @@ export default function Home() {
           transition={{ duration: 0.6 }}
           className="text-4xl sm:text-5xl md:text-6xl font-bold text-purple-400 mb-4"
         >
-          Hi, I&apos;m <span className="text-white">Bala Vardhan</span>
+          Hi, I&apos;m <span className="text-white">Bala&nbsp;Vardhan</span>
         </motion.h1>
 
         <motion.p
