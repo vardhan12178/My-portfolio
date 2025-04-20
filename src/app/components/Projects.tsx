@@ -31,7 +31,7 @@ const projects = [
   {
     title: "Movie Spot",
     description: "A sleek movie search and discovery app that fetches now playing, top-rated, and upcoming films from TMDB.",
-    imgUrl: "/img/movie-spot.webp",
+    imgUrl: "/img/Movie-spot.webp",
     liveUrl: "https://vardhan-moviespot.vercel.app/",
     githubUrl: "https://github.com/vardhan12178/moviespot",
     technologies: ["React", "Tailwind CSS", "TMDB API"]
