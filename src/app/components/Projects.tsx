@@ -5,84 +5,52 @@ import { motion } from "framer-motion";
 
 const projects = [
   {
-    title: "Fitness Tracker",
-    description: "A comprehensive fitness tracker that allows users to log daily workouts, meals, sleep, and track progress towards their fitness goals with personalized insights.",
-    imgUrl: "https://i.imgur.com/AMgOg3D.jpeg",
+    title: "Weatherly",
+    description: "A real-time weather app with animated weather effects, hourly & 5-day forecast, and air quality tracking.",
+    imgUrl: "/img/weatherly.webp",
+    liveUrl: "https://vardhan-weather.netlify.app/",
+    githubUrl: "https://github.com/vardhan12178/weather",
+    technologies: ["React", "Tailwind CSS", "OpenWeatherMap API"]
+  },
+  {
+    title: "Fitness Tracker Pro",
+    description: "A full-featured fitness tracker to log workouts, meals, sleep and view progress insights.",
+    imgUrl: "/img/fit-tracker-pro.webp",
     liveUrl: "https://vardhan-fittrack.vercel.app/",
     githubUrl: "https://github.com/vardhan12178/Fitness-Tracker",
     technologies: ["React", "Context API", "CSS"]
   },
   {
-    title: "Ecommerce Site",
-    description: "An ecommerce website built using React, featuring product listings, search functionality, and a shopping cart.",
-    imgUrl: "https://i.imgur.com/26tKsxV.jpeg",
+    title: "Vkart",
+    description: "A stylish ecommerce website with category-wise product listings, cart, wishlist, and user authentication.",
+    imgUrl: "/img/vkart.webp",
     liveUrl: "https://vkartshop.netlify.app/",
     githubUrl: "https://github.com/vardhan12178/vkart",
-    technologies: ["React", "Node.js", "Tailwind CSS", "MongoDB, AWS"]
+    technologies: ["React", "Node.js", "MongoDB", "Tailwind CSS"]
   },
   {
-    title: "Weather Dashboard",
-    description: "A weather dashboard application providing real-time weather updates and forecasts using a clean, responsive design.",
-    imgUrl: "https://i.imgur.com/Dtf2Ko0.jpeg",
-    liveUrl: "https://vardhan-weather.netlify.app/",
-    githubUrl: "https://github.com/vardhan12178/weather",
-    technologies: ["React", "Tailwindcss"]
-  },
-  {
-    title: "News App",
-    description: "A dynamic and responsive news application that aggregates the latest news articles from various sources.",
-    imgUrl: "https://i.imgur.com/tpoio39.jpeg",
-    liveUrl: "https://vardhan-news.vercel.app/",
-    githubUrl: "https://github.com/vardhan12178/news-app",
-    technologies: ["React", "CSS"]
-  },
-  {
-    title: "Weather App",
-    description: "A weather dashboard application providing real-time weather updates and forecasts using a clean, responsive design.",
-    imgUrl: "https://i.imgur.com/4HhyLwW.png",
-    liveUrl: "https://vardhan-weather.vercel.app/",
-    githubUrl: "https://github.com/vardhan12178/weather-app",
-    technologies: ["React", "CSS"]
-  },
-  {
-    title: "MovieSpot",
-    description: "MovieSpot is a sleek and interactive movie search application designed to help users explore and discover detailed information about movies.",
-    imgUrl: "https://i.imgur.com/M05Lig8.jpeg",
+    title: "Movie Spot",
+    description: "A sleek movie search and discovery app that fetches now playing, top-rated, and upcoming films from TMDB.",
+    imgUrl: "/img/movie-spot.webp",
     liveUrl: "https://vardhan-moviespot.vercel.app/",
     githubUrl: "https://github.com/vardhan12178/moviespot",
-    technologies: ["React", "Tailwind CSS"]
+    technologies: ["React", "Tailwind CSS", "TMDB API"]
   },
   {
-    title: "Portfolio",
-    description: "A personal portfolio showcasing my projects, skills, and professional background with a modern design.",
-    imgUrl: "https://i.imgur.com/kpoOc6l.jpeg",
-    liveUrl: "https://balavardhan.vercel.app/",
-    githubUrl: "https://github.com/vardhan12178/personal-portfolio",
-    technologies: ["React", "SCSS"]
+    title: "Image Magic Pro",
+    description: "A simple and fast image conversion tool that supports transforming image formats like JPG, PNG, and WebP with a clean user interface.",
+    imgUrl: "/img/image-magic-pro.webp",
+    liveUrl: "https://image-magic-pro.vercel.app/",
+    githubUrl: "https://github.com/vardhan12178/image-magic-pro",
+    technologies: ["Next.js", "Tailwind CSS"]
   },
   {
     title: "Food App",
-    description: "A comprehensive food ordering application featuring an intuitive UI and seamless order tracking.",
-    imgUrl: "https://i.imgur.com/s6nDRM2.jpeg",
-    liveUrl: "https://vardhan-food.netlify.app/",
-    githubUrl: "https://github.com/vardhan12178/Food-App",
-    technologies: ["React", "Firebase"]
-  },
-  {
-    title: "Expenses App",
-    description: "An application to track monthly expenses with detailed analytics.",
-    imgUrl: "https://i.imgur.com/QbmI0Y7.jpeg",
-    liveUrl: "https://vardhan-expense.netlify.app/",
-    githubUrl: "https://github.com/vardhan12178/Expenses",
-    technologies: ["React", "CSS"]
-  },
-  {
-    title: "Taskmate",
-    description: "A task management application for adding and tracking daily tasks.",
-    imgUrl: "https://i.imgur.com/Nuv1CNN.jpeg",
-    liveUrl: "https://vardhan-taskmate.netlify.app/",
-    githubUrl: "https://github.com/vardhan12178/Taskmate",
-    technologies: ["React", "Tailwindcss"]
+    description: "A modern food delivery UI with menu, cart, and authentication powered by Firebase.",
+    imgUrl: "/img/food-app.webp",
+    liveUrl: "https://vardhan-food.vercel.app/",
+    githubUrl: "https://github.com/vardhan12178/FoodApp",
+    technologies: ["Next.js", "Firebase", "CSS"]
   }
 ];
 
