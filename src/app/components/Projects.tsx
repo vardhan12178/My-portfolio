@@ -38,7 +38,7 @@ const projects = [
   },
   {
     title: "Image Magic Pro",
-    description: "A simple and fast image conversion tool that supports transforming image formats like JPG, PNG, and WebP with a clean user interface.",
+    description: "A fast image conversion tool that supports JPG, PNG, and WebP with a clean UI.",
     imgUrl: "/img/image-magic-pro.webp",
     liveUrl: "https://image-magic-pro.vercel.app/",
     githubUrl: "https://github.com/vardhan12178/image-magic-pro",
@@ -54,6 +54,17 @@ const projects = [
   }
 ];
 
+const getTechColor = (tech: string) => {
+  const key = tech.toLowerCase();
+  if (key.includes("react")) return "bg-purple-700";
+  if (key.includes("node")) return "bg-green-700";
+  if (key.includes("mongo")) return "bg-emerald-700";
+  if (key.includes("css")) return "bg-blue-700";
+  if (key.includes("next")) return "bg-gray-700";
+  if (key.includes("firebase")) return "bg-yellow-600";
+  return "bg-gray-600";
+};
+
 export default function Projects() {
   return (
     <section
@@ -65,54 +76,75 @@ export default function Projects() {
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
         viewport={{ once: true }}
-        className="text-4xl md:text-5xl font-bold text-purple-400 text-center mb-12"
+        className="text-4xl md:text-5xl font-bold text-purple-400 text-center mb-4"
       >
         🚀 Projects
       </motion.h2>
+      <p className="text-center text-gray-400 mb-10 text-sm sm:text-base">
+        Real-world full-stack apps built with modern frameworks and APIs
+      </p>
 
       <motion.div
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        transition={{ delay: 0.2, duration: 0.6 }}
+        initial="hidden"
+        whileInView="visible"
         viewport={{ once: true }}
+        variants={{
+          hidden: {},
+          visible: { transition: { staggerChildren: 0.1 } }
+        }}
         className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 max-w-6xl mx-auto"
       >
         {projects.map((project, index) => (
           <motion.div
             key={index}
-            whileHover={{ scale: 1.03 }}
-            transition={{ type: "spring", stiffness: 250 }}
-            className="bg-gray-800 p-6 rounded-xl border border-purple-700 hover:shadow-lg transition duration-300 flex flex-col"
+            variants={{
+              hidden: { opacity: 0, y: 20 },
+              visible: { opacity: 1, y: 0 }
+            }}
+            whileHover={{ scale: 1.02 }}
+            transition={{ type: "spring", stiffness: 200 }}
+            className="bg-gray-900 p-5 rounded-xl border border-gray-700 hover:shadow-lg hover:border-purple-700 transition duration-300 flex flex-col"
           >
-            <div className="relative w-full h-40 mb-4">
+            <div className="relative w-full h-44 mb-4 overflow-hidden rounded-md">
               <Image
                 src={project.imgUrl}
                 alt={project.title}
                 fill
-                className="rounded-md object-cover"
+                className="object-cover rounded-md hover:scale-105 transition-transform duration-300"
               />
             </div>
-            <h3 className="text-xl font-semibold mb-2 text-purple-300">{project.title}</h3>
-            <p className="text-gray-300 text-sm mb-3 line-clamp-3">{project.description}</p>
-            <div className="flex flex-wrap gap-2 text-xs text-gray-400 mb-4">
+            <h3 className="text-xl font-semibold mb-2 text-purple-300">
+              {project.title}
+            </h3>
+            <p className="text-gray-300 text-sm mb-3 line-clamp-3">
+              {project.description}
+            </p>
+            <div className="flex flex-wrap gap-2 text-xs mb-4">
               {project.technologies.map((tech, i) => (
-                <span key={i} className="px-2 py-1 bg-gray-700 rounded-full">
+                <span
+                  key={i}
+                  className={`capitalize px-2 py-1 rounded-full text-white ${getTechColor(
+                    tech
+                  )}`}
+                >
                   {tech}
                 </span>
               ))}
             </div>
-            <div className="mt-auto pt-2 flex justify-between items-center">
+            <div className="mt-auto pt-2 flex justify-between items-center gap-2">
               <a
                 href={project.liveUrl}
                 target="_blank"
-                className="text-sm text-purple-400 hover:text-purple-200 underline"
+                rel="noopener noreferrer"
+                className="px-4 py-1 bg-purple-700 hover:bg-purple-600 rounded-md text-sm font-medium text-white transition"
               >
                 Live
               </a>
               <a
                 href={project.githubUrl}
                 target="_blank"
-                className="text-sm text-purple-400 hover:text-purple-200 underline"
+                rel="noopener noreferrer"
+                className="px-4 py-1 border border-purple-500 text-purple-300 hover:bg-purple-700 hover:text-white rounded-md text-sm font-medium transition"
               >
                 Code
               </a>

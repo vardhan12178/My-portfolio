@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import toast from "react-hot-toast";
 import { FaArrowUp } from "react-icons/fa";
+import { HiOutlineMail } from "react-icons/hi";
 import { motion } from "framer-motion";
 
 export default function Contact() {
@@ -56,12 +57,18 @@ export default function Contact() {
         viewport={{ once: true }}
         className="max-w-2xl mx-auto text-center"
       >
-        <h2 className="text-4xl md:text-5xl font-bold text-purple-400 mb-8">📬 Contact</h2>
+        <h2 className="text-4xl md:text-5xl font-bold text-purple-400 mb-6">
+          📬 Contact
+        </h2>
         <p className="text-gray-300 mb-10">
           Have a question or want to work together? Drop me a message!
         </p>
 
-        <form onSubmit={handleSubmit} className="space-y-5">
+        {/* Contact Form */}
+        <form
+          onSubmit={handleSubmit}
+          className="space-y-5 bg-gray-900/50 backdrop-blur-md p-6 rounded-xl shadow-lg border border-purple-700"
+        >
           <input
             type="text"
             name="name"
@@ -69,7 +76,7 @@ export default function Contact() {
             required
             value={formData.name}
             onChange={handleChange}
-            className="w-full px-4 py-3 rounded bg-gray-800 text-white border border-gray-700 focus:outline-none focus:ring-2 focus:ring-purple-500"
+            className="w-full px-4 py-3 rounded bg-gray-800 text-white border border-gray-700 focus:outline-none focus:ring-2 focus:ring-purple-500 transition duration-200"
           />
           <input
             type="email"
@@ -78,7 +85,7 @@ export default function Contact() {
             required
             value={formData.email}
             onChange={handleChange}
-            className="w-full px-4 py-3 rounded bg-gray-800 text-white border border-gray-700 focus:outline-none focus:ring-2 focus:ring-purple-500"
+            className="w-full px-4 py-3 rounded bg-gray-800 text-white border border-gray-700 focus:outline-none focus:ring-2 focus:ring-purple-500 transition duration-200"
           />
           <textarea
             name="message"
@@ -87,21 +94,34 @@ export default function Contact() {
             required
             value={formData.message}
             onChange={handleChange}
-            className="w-full px-4 py-3 rounded bg-gray-800 text-white border border-gray-700 focus:outline-none focus:ring-2 focus:ring-purple-500"
+            className="w-full px-4 py-3 rounded bg-gray-800 text-white border border-gray-700 focus:outline-none focus:ring-2 focus:ring-purple-500 transition duration-200"
           ></textarea>
           <button
             type="submit"
-            className="bg-purple-600 hover:bg-purple-700 px-6 py-3 rounded-md font-medium text-white transition"
+            className="w-full bg-gradient-to-r from-purple-600 to-purple-800 hover:from-purple-700 hover:to-purple-900 px-6 py-3 rounded-md font-medium text-white flex items-center justify-center gap-2 transition"
           >
-            Send Message ✉️
+            <HiOutlineMail className="text-lg" /> Send Message
           </button>
         </form>
+
+        {/* Optional: direct email */}
+        <p className="text-sm text-gray-400 mt-6">
+          Or email me at{" "}
+          <a
+            href="mailto:balavardhanpula@gmail.com"
+            className="text-purple-400 underline hover:text-white transition"
+          >
+            balavardhanpula@gmail.com
+          </a>
+        </p>
       </motion.div>
 
+      {/* Scroll to Top Button */}
       {showScrollToTop && (
         <motion.button
           onClick={scrollToTop}
           aria-label="Scroll to top"
+          title="Back to Top"
           whileHover={{ scale: 1.15 }}
           whileTap={{ scale: 0.95 }}
           className="fixed bottom-6 right-6 bg-purple-600 hover:bg-purple-700 p-3 rounded-full text-white shadow-md z-50"
