@@ -3,6 +3,8 @@
 import { useEffect, useState } from "react";
 import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
 import { motion, AnimatePresence } from "framer-motion";
+import { usePathname } from "next/navigation";
+import Link from "next/link";
 
 const navLinks = [
   { href: "#home", label: "Home" },
@@ -13,6 +15,9 @@ const navLinks = [
 ];
 
 export default function Header() {
+  const pathname = usePathname();
+  const isHome = pathname === "/";
+
   const [isOpen, setIsOpen] = useState(false);
   const [activeLink, setActiveLink] = useState("#home");
   const [isMounted, setIsMounted] = useState(false);
@@ -21,6 +26,12 @@ export default function Header() {
 
   useEffect(() => {
     setIsMounted(true);
+
+    if (!isHome) {
+      setActiveLink(""); // No active link on subpages
+      return;
+    }
+
     const handleScroll = () => {
       const scrollPosition = window.scrollY + 120;
 
@@ -38,7 +49,7 @@ export default function Header() {
 
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [isHome]);
 
   const scrollToSection = (href: string) => {
     const element = document.querySelector(href);
@@ -52,7 +63,9 @@ export default function Header() {
   const handleNavLinkClick = (href: string) => {
     setIsOpen(false);
     setActiveLink(href);
-    scrollToSection(href);
+    if (isHome) {
+      scrollToSection(href);
+    }
   };
 
   if (!isMounted) return null;
@@ -61,7 +74,7 @@ export default function Header() {
     <header className="backdrop-blur-md bg-gray-900/80 px-6 py-5 shadow-md sticky top-0 z-50">
       <nav className="max-w-7xl mx-auto flex justify-between items-center">
         <motion.a
-          href="#home"
+          href="/#home"
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.4 }}
@@ -69,7 +82,9 @@ export default function Header() {
           onClick={() => {
             setIsOpen(false);
             setActiveLink("#home");
-            scrollToSection("#home");
+            if (isHome) {
+              scrollToSection("#home");
+            }
           }}
         >
           Bala Vardhan
@@ -79,16 +94,17 @@ export default function Header() {
         <ul className="hidden md:flex gap-6 text-sm text-gray-300">
           {navLinks.map((link) => (
             <li key={link.href}>
-              <button
+              <Link
+                href={isHome ? link.href : `/${link.href}`}
                 onClick={() => handleNavLinkClick(link.href)}
                 className={`relative px-2 py-1 transition rounded-md hover:text-white ${
-                  activeLink === link.href
+                  activeLink === link.href && isHome
                     ? "text-white after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-full after:bg-purple-500 after:rounded"
                     : ""
                 }`}
               >
                 {link.label}
-              </button>
+              </Link>
             </li>
           ))}
         </ul>
@@ -116,16 +132,17 @@ export default function Header() {
           >
             {navLinks.map((link) => (
               <li key={link.href}>
-                <button
+                <Link
+                  href={isHome ? link.href : `/${link.href}`}
                   onClick={() => handleNavLinkClick(link.href)}
                   className={`block w-full text-left py-2 px-2 rounded ${
-                    activeLink === link.href
+                    activeLink === link.href && isHome
                       ? "bg-purple-600/20 text-white border border-purple-500"
                       : "hover:bg-gray-700"
                   }`}
                 >
                   {link.label}
-                </button>
+                </Link>
               </li>
             ))}
           </motion.ul>
