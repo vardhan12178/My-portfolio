@@ -7,7 +7,7 @@ import {
 import {
   SiNextdotjs, SiJavascript, SiMongodb, SiTailwindcss,
   SiTypescript, SiAmazon, SiBootstrap, SiPython,
-  SiSelenium, SiMysql
+  SiSelenium, SiMysql, SiGit, SiDocker
 } from "react-icons/si";
 
 // Grouped skills
@@ -33,6 +33,8 @@ const groupedSkills = {
     { name: "Python", icon: <SiPython /> },
     { name: "Selenium", icon: <SiSelenium /> },
     { name: "GitHub", icon: <FaGithub /> },
+    { name: "Git", icon: <SiGit /> },
+    { name: "Docker", icon: <SiDocker /> },
   ]
 };
 
@@ -72,24 +74,25 @@ export default function Skills() {
         viewport={{ once: true }}
         className="max-w-6xl mx-auto space-y-16"
       >
-        {Object.entries(groupedSkills).map(([category, skillList]) => (
+        {Object.entries(groupedSkills).map(([category, skillList], index) => (
           <motion.div key={category} variants={item}>
             <h3 className="text-xl sm:text-2xl font-semibold text-left text-purple-300 mb-6 pl-2">
               {category}
             </h3>
 
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
+            <div role="list" className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
               {skillList.map((skill) => (
                 <motion.div
                   key={skill.name}
                   variants={item}
                   whileHover={{ scale: 1.05 }}
-                  className="group flex flex-col items-center gap-2 text-gray-300 hover:text-white transition duration-300 bg-gray-900/30 hover:bg-gradient-to-r from-purple-600/20 to-purple-900/20 hover:shadow-[0_0_12px_rgba(168,85,247,0.4)] p-5 rounded-xl"
+                  className="group flex flex-col items-center gap-2 text-gray-300 hover:text-white transition duration-300 bg-gray-900/30 hover:bg-gradient-to-r from-purple-600/20 to-purple-900/20 hover:shadow-[0_0_12px_rgba(168,85,247,0.4)] p-5 rounded-xl focus-within:ring-2 focus-within:ring-purple-500"
+                  tabIndex={0}
                 >
                   <motion.div
-                    whileHover={{ scale: 1.25, y: -2 }}
+                    whileHover={{ scale: 1.25, y: -2, rotate: 5 }}
                     transition={{ type: "spring", stiffness: 300 }}
-                    className="text-3xl sm:text-4xl transition duration-300"
+                    className="text-3xl sm:text-4xl transition duration-300 group-hover:text-purple-400"
                   >
                     {skill.icon}
                   </motion.div>
@@ -104,8 +107,15 @@ export default function Skills() {
               ))}
             </div>
 
-            {/* Divider */}
-            <div className="border-b border-gray-800 mt-12" />
+            {/* Divider (skip for last category) */}
+            {index < Object.keys(groupedSkills).length - 1 && (
+              <motion.div
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                transition={{ duration: 0.5, delay: 0.5 }}
+                className="border-b border-gray-800 mt-12"
+              />
+            )}
           </motion.div>
         ))}
       </motion.div>
