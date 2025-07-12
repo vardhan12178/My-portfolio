@@ -96,9 +96,9 @@ export default function Home() {
             variants={childVariants}
             className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-4"
           >
-            <span className="text-purple-400">Hi, I'm </span>
+            <span className="text-purple-400">Hi, I&apos;m </span>
             <span className="bg-gradient-to-r from-purple-400 to-white text-transparent bg-clip-text animate-gradient-x">
-              Bala&nbsp;Vardhan
+           Bala&nbsp;Vardhan
             </span>
           </motion.h1>
 
