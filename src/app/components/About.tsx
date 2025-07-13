@@ -55,11 +55,11 @@ export default function About() {
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.6 }}
-            className="w-40 h-40 md:w-48 md:h-48 rounded-full overflow-hidden shadow-lg border-4 border-purple-500"
+            className="w-48 h-48 md:w-48 md:h-48 rounded-full overflow-hidden shadow-lg border-4 border-purple-500"
           >
-    <div className="relative w-48 h-48 rounded-full overflow-hidden "> 
+    <div className="relative w-46 h-47 rounded-full overflow-hidden "> 
   <Image
-    src="/img/my-img.jpg"
+    src="/img/myimg.webp"
     alt="Bala Vardhan Pula"
     fill
     className="object-cover object-center"
