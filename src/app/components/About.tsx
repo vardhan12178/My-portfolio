@@ -1,179 +1,301 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { FaBriefcase, FaLaptopCode, FaArrowRight, FaCalendarAlt } from "react-icons/fa";
+import {
+  FaBriefcase,
+  FaLaptopCode,
+  FaArrowRight,
+  FaCalendarAlt,
+  FaMapMarkerAlt,
+  FaClock,
+  FaFileAlt,
+} from "react-icons/fa";
 import Image from "next/image";
 
 export default function About() {
-  const techStack = {
+  // --- Dynamic Experience Calculation ---
+  const startTCS = new Date("2021-12-29");
+  const endTCS = new Date("2024-06-10");
+  const startCurrent = new Date("2024-10-01");
+
+  function getExperience() {
+    const now = new Date();
+    const tcsMonths =
+      (endTCS.getFullYear() - startTCS.getFullYear()) * 12 +
+      (endTCS.getMonth() - startTCS.getMonth());
+    const currentMonths =
+      (now.getFullYear() - startCurrent.getFullYear()) * 12 +
+      (now.getMonth() - startCurrent.getMonth());
+    const totalMonths = tcsMonths + currentMonths;
+    const years = Math.floor(totalMonths / 12);
+    const months = totalMonths % 12;
+    return { years, months };
+  }
+
+  const { years, months } = getExperience();
+  const expText = `${years} yrs${months > 0 ? " " + months + " mos" : ""}`;
+
+  // --- Tech Stack ---
+  const techStack: Record<string, string[]> = {
     Frontend: ["React", "Next.js", "Tailwind", "Bootstrap"],
-    Backend: ["Node.js", "PHP", "Python"],
-    Database: ["MongoDB", "SQL"],
-    Others: ["AWS", "Selenium"],
+    Backend: ["Node.js", "Express.js"],
+    Database: ["MongoDB"],
+    Others: ["AWS", "Selenium", "GitHub Actions"],
   };
 
+  // --- Work Experience ---
   const experienceTimeline = [
     {
       company: "HR Geckos",
       role: "Full Stack Developer",
       period: "Oct 2024 – Present",
       achievements: [
-        "Led full-cycle development including UI, APIs, automation, and deployment.",
-        "Optimized scalable systems, reducing deployment time by 25%.",
+        "Re-architected a 100+ page legacy PHP application into a modular React + PHP hybrid, reducing redundancy by 95%.",
+        "Led automation of policy workflows and chatbot features integrating REST APIs, file storage, and AI components.",
+        "Streamlined CI/CD pipelines and deployments, cutting delivery time by ~25%.",
       ],
     },
     {
       company: "TCS",
       role: "Frontend Developer",
-      period: "Dec 2021 – June 2024",
+      period: "Dec 2021 – Jun 2024",
       achievements: [
-        "Developed responsive UIs for enterprise apps, improving user engagement by 15%.",
-        "Collaborated in agile teams on API integrations and cloud deployments.",
+        "Built and optimized reusable UI components and REST integrations, improving metrics by ~15%.",
+        "Collaborated in agile squads to deliver enterprise-grade modules and automation tools.",
       ],
     },
   ];
 
+  const container = {
+    hidden: { opacity: 0, y: 20 },
+    show: { opacity: 1, y: 0, transition: { duration: 0.6 } },
+  };
+
   return (
     <section
       id="about"
-      className="min-h-screen scroll-mt-20 bg-gray-950 text-white px-6 sm:px-8 lg:px-12 py-20 flex flex-col items-center justify-center"
+      className="scroll-mt-20 bg-gray-950 px-6 py-20 text-white sm:px-8 lg:px-12"
+      aria-labelledby="about-title"
     >
       <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
-        viewport={{ once: true }}
-        className="max-w-5xl w-full text-center space-y-12"
+        variants={container}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, amount: 0.2 }}
+        className="mx-auto max-w-6xl"
       >
-   
-        <h2 className="text-4xl md:text-5xl font-bold text-purple-400 flex items-center justify-center gap-2">
-          <FaBriefcase /> About Me
-        </h2>
-
-        <div className="flex flex-col md:flex-row items-center gap-8 text-left">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.6 }}
-            className="w-48 h-48 md:w-48 md:h-48 rounded-full overflow-hidden shadow-lg border-4 border-purple-500"
+        {/* Title */}
+        <header className="mb-10 text-center">
+          <h2
+            id="about-title"
+            className="flex items-center justify-center gap-2 text-3xl font-bold text-purple-300 md:text-4xl"
           >
-    <div className="relative w-46 h-47 rounded-full overflow-hidden "> 
-  <Image
-    src="/img/myimg.webp"
-    alt="Bala Vardhan Pula"
-    fill
-    className="object-cover object-center"
-    loading="lazy"
-  />
-</div>
+            <FaBriefcase aria-hidden className="text-purple-400" />
+            About Me
+          </h2>
+          <p className="mx-auto mt-3 max-w-3xl text-sm text-gray-400 md:text-base">
+            Full-stack developer focused on clean UI, robust APIs, and real-world outcomes.
+          </p>
+        </header>
+
+        {/* Intro block */}
+        <div className="grid items-center gap-8 md:grid-cols-[auto,1fr]">
+          {/* Avatar */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.5 }}
+            className="relative mx-auto h-40 w-40 overflow-hidden rounded-full ring-4 ring-purple-600/60 md:h-48 md:w-48"
+          >
+            <Image
+              src="/img/myimg.webp"
+              alt="Bala Vardhan Pula"
+              fill
+              sizes="(max-width: 768px) 160px, 192px"
+              className="object-cover object-center"
+              priority={false}
+            />
           </motion.div>
-          <div className="text-lg sm:text-xl text-gray-300 leading-relaxed space-y-6 flex-1">
-            <p>
-              I’m <span className="font-semibold text-white">Bala Vardhan Pula</span>, a full stack developer from <span className="text-purple-300">India</span> with a passion for building clean, scalable, and engaging web applications.
+
+          {/* Bio */}
+          <div className="space-y-4 text-gray-300">
+            <p className="text-lg leading-relaxed">
+              I’m{" "}
+              <span className="font-semibold text-white">
+                Bala Vardhan Pula
+              </span>
+              , a full-stack developer from
+              <span className="text-purple-300"> India</span>. I design and
+              ship scalable web apps with a strong focus on performance, DX, and
+              maintainability.
             </p>
             <p>
-              With over <span className="font-semibold text-white">3.5 years of experience</span> (as of July 2025), I've worked at 
-              <span className="text-purple-300"> TCS</span> (2021–2024) and currently at 
-              <span className="text-purple-300"> HR Geckos</span> (Oct 2024–Present).
+              With over{" "}
+              <span className="font-semibold text-white">
+                {expText} of professional experience
+              </span>
+              , I’ve contributed to both enterprise and startup environments,
+              specializing in building fast, modern web apps using{" "}
+              <span className="text-purple-300">
+                React, Next.js, and Node.js
+              </span>
+              .
             </p>
             <p>
-              My journey includes frontend and backend development, API architecture, automation scripting, and cloud deployment. I enjoy creating seamless user experiences and solving real-world problems with code.
+              Outside of work: cricket, exploring new tools, and polishing side
+              projects.
             </p>
-            <p>
-              Outside of coding, you’ll find me playing cricket, exploring new tech tools, or enhancing my personal projects.
-            </p>
+
+            {/* Quick facts */}
+            <dl className="mt-5 grid grid-cols-1 gap-3 text-sm sm:grid-cols-3">
+              <div className="rounded-lg border border-white/10 bg-white/5 p-3">
+                <dt className="flex items-center gap-2 text-gray-300">
+                  <FaMapMarkerAlt aria-hidden />
+                  Location
+                </dt>
+                <dd className="mt-1 font-medium text-white/90">India (IST)</dd>
+              </div>
+              <div className="rounded-lg border border-white/10 bg-white/5 p-3">
+                <dt className="flex items-center gap-2 text-gray-300">
+                  <FaClock aria-hidden />
+                  Availability
+                </dt>
+                <dd className="mt-1 font-medium text-green-300">
+                  Open to full-time roles & collaborations
+                </dd>
+              </div>
+              <div className="rounded-lg border border-white/10 bg-white/5 p-3">
+                <dt className="flex items-center gap-2 text-gray-300">
+                  <FaCalendarAlt aria-hidden />
+                  Experience
+                </dt>
+                <dd className="mt-1 font-medium text-white/90">{expText}</dd>
+              </div>
+            </dl>
           </div>
         </div>
 
-        {/* Info Grid */}
-        <div className="grid md:grid-cols-2 gap-8 text-left mt-8">
-          {/* Experience Timeline */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
+        {/* Cards: Experience + Tech Stack */}
+        <div className="mt-12 grid gap-8 md:grid-cols-2">
+          {/* Experience timeline */}
+          <motion.article
+            initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="bg-gray-900 rounded-lg p-6 shadow-lg space-y-4"
+            className="rounded-xl border border-white/10 bg-gray-900/70 p-6 shadow-lg"
+            aria-labelledby="experience-heading"
           >
-            <h3 className="flex items-center gap-2 text-xl font-semibold text-purple-400">
-              <FaCalendarAlt /> Work Experience
+            <h3
+              id="experience-heading"
+              className="mb-4 flex items-center gap-2 text-xl font-semibold text-purple-300"
+            >
+              <FaCalendarAlt aria-hidden className="text-purple-400" />
+              Work Experience
             </h3>
-            <div className="relative space-y-6 before:absolute before:left-4 before:top-0 before:bottom-0 before:w-0.5 before:bg-purple-500">
-              {experienceTimeline.map((exp, index) => (
-                <motion.div
-                  key={exp.company}
-                  initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.5, delay: index * 0.2 }}
-                  className="relative pl-10"
-                >
-                  <div className="absolute left-0 top-1 w-8 h-8 bg-purple-600 rounded-full flex items-center justify-center text-white text-sm">
-                    {index + 1}
-                  </div>
-                  <h4 className="font-semibold text-white">{exp.company} – {exp.role}</h4>
-                  <p className="text-sm text-gray-400">{exp.period}</p>
-                  <ul className="list-disc list-inside text-gray-300 mt-2 space-y-1">
-                    {exp.achievements.map((ach) => (
-                      <li key={ach}>{ach}</li>
-                    ))}
-                  </ul>
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
 
-          {/* Tech Stack Card */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            <ol className="relative ml-4 space-y-6">
+              <span
+                className="pointer-events-none absolute left-0 top-0 h-full w-px bg-gradient-to-b from-purple-500/60 via-purple-400/30 to-transparent"
+                aria-hidden
+              />
+              {experienceTimeline.map((exp) => (
+                <li key={exp.company} className="relative pl-6">
+                  <span
+                    className="absolute -left-2 top-1 inline-flex h-3.5 w-3.5 items-center justify-center rounded-full bg-purple-500 ring-4 ring-purple-500/20"
+                    aria-hidden
+                  />
+                  <div className="flex flex-col gap-1">
+                    <h4 className="font-semibold text-white">
+                      {exp.company} · {exp.role}
+                    </h4>
+                    <p className="text-xs text-gray-400">{exp.period}</p>
+                    <ul className="mt-2 list-disc space-y-1 pl-4 text-sm text-gray-300">
+                      {exp.achievements.map((a) => (
+                        <li key={a}>{a}</li>
+                      ))}
+                    </ul>
+                  </div>
+                </li>
+              ))}
+            </ol>
+          </motion.article>
+
+          {/* Tech stack */}
+          <motion.article
+            initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="bg-gray-900 rounded-lg p-6 shadow-lg space-y-4"
+            className="rounded-xl border border-white/10 bg-gray-900/70 p-6 shadow-lg"
+            aria-labelledby="techstack-heading"
           >
-            <h3 className="flex items-center gap-2 text-xl font-semibold text-purple-400">
-              <FaLaptopCode /> Tech Stack
+            <h3
+              id="techstack-heading"
+              className="mb-4 flex items-center gap-2 text-xl font-semibold text-purple-300"
+            >
+              <FaLaptopCode aria-hidden className="text-purple-400" />
+              Tech Stack
             </h3>
-            {Object.entries(techStack).map(([category, techs]) => (
-              <div key={category} className="space-y-2">
-                <h4 className="text-sm font-semibold text-gray-400 uppercase">{category}</h4>
-                <div className="flex flex-wrap gap-3 text-sm font-medium">
-                  {techs.map((tech) => (
-                    <motion.span
-                      key={tech}
-                      whileHover={{ scale: 1.1 }}
-                      transition={{ type: "spring", stiffness: 300 }}
-                      className="bg-purple-700/20 text-purple-300 px-3 py-1 rounded-full cursor-default"
-                    >
-                      {tech}
-                    </motion.span>
-                  ))}
+
+            <div className="space-y-5">
+              {Object.entries(techStack).map(([category, techs]) => (
+                <div key={category}>
+                  <h4 className="text-xs font-semibold uppercase tracking-wider text-gray-400">
+                    {category}
+                  </h4>
+                  <div className="mt-2 flex flex-wrap gap-2">
+                    {techs.map((t) => (
+                      <motion.span
+                        key={t}
+                        whileHover={{ y: -2 }}
+                        whileFocus={{ y: -2 }}
+                        transition={{
+                          type: "spring",
+                          stiffness: 350,
+                          damping: 22,
+                        }}
+                        tabIndex={0}
+                        className="cursor-default rounded-full border border-purple-500/30 bg-purple-700/20 px-3 py-1 text-sm text-purple-200 outline-none ring-purple-500/40 transition hover:border-purple-400 focus:ring-2"
+                        aria-label={t}
+                        title={t}
+                      >
+                        {t}
+                      </motion.span>
+                    ))}
+                  </div>
                 </div>
-              </div>
-            ))}
-          </motion.div>
+              ))}
+            </div>
+          </motion.article>
         </div>
 
         {/* Highlights */}
-        <ul className="list-disc list-inside text-left text-gray-300 text-lg sm:text-xl space-y-3 mt-10 max-w-3xl mx-auto">
-          <li>🚀 Built and deployed full-stack applications from scratch</li>
-          <li>💼 Experienced in enterprise environments and agile teams</li>
-          <li>🧠 Skilled in REST APIs, automation, and scalable UI systems</li>
-          <li>🌍 Open to remote, hybrid, or onsite roles (Hyderabad preferred)</li>
+        <ul className="mx-auto mt-12 max-w-3xl list-disc space-y-3 text-left text-base text-gray-300 sm:text-lg">
+          <li>🚀 Built and deployed multiple full-stack apps end-to-end (MERN & PHP)</li>
+          <li>💼 Experience in agile environments and design system implementation</li>
+          <li>🧠 Skilled in REST APIs, CI/CD automation, and scalable UI engineering</li>
+          <li>🌍 Open to hybrid or remote full-time roles (Hyderabad preferred)</li>
+          <li>🔗 Integrated third-party APIs like Razorpay, Google OAuth, and AWS S3</li>
         </ul>
 
-        {/* CTA */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="mt-10"
-        >
+        {/* CTAs */}
+        <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
+          <a
+            href="/resume.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 rounded-md border border-purple-500/60 bg-gradient-to-br from-purple-600/20 to-indigo-600/20 px-6 py-3 text-sm font-medium text-white transition hover:border-purple-400 hover:from-purple-600/30 hover:to-indigo-600/30"
+          >
+            <FaFileAlt className="text-base" />
+            Download Resume (PDF)
+          </a>
           <a
             href="#contact"
             aria-label="Go to Contact section"
-            className="inline-flex items-center gap-2 bg-purple-600 hover:bg-purple-700 text-white font-medium px-8 py-3 rounded-md shadow-md transition hover:scale-105"
+            className="inline-flex items-center gap-2 rounded-md bg-purple-600 px-7 py-3 text-sm font-medium text-white shadow-md transition hover:bg-purple-700 hover:shadow-purple-500/30"
           >
-            Let's Connect <FaArrowRight />
+            Let’s Connect <FaArrowRight />
           </a>
-        </motion.div>
+        </div>
       </motion.div>
     </section>
   );

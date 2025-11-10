@@ -1,15 +1,16 @@
 export const projects = [
   {
-    title: "Weatherly",
-    slug: "weatherly",
-    description: "A real-time weather app with animated weather effects, hourly & 5-day forecast, and air quality tracking.",
-    fullDescription: "Weatherly is a dynamic, user-friendly weather application built to provide accurate, real-time weather data. Key features include animated weather icons for visual appeal, hourly forecasts for short-term planning, a 5-day extended forecast, air quality index (AQI) monitoring with health recommendations, location-based search powered by geolocation, and customizable units (Celsius/Fahrenheit). The app integrates the OpenWeatherMap API for reliable data fetching. Challenges addressed include handling API rate limits with caching and optimizing performance for mobile devices. Technologies: React for the UI, Tailwind CSS for responsive styling, and API integration for data. Screenshots: Main dashboard shows current weather with animations; forecast tab displays charts for temperature trends.",
-    imgUrl: "/img/weatherly.webp",
-    liveUrl: "https://vardhan-weather.netlify.app/",
-    githubUrl: "https://github.com/vardhan12178/weather",
-    technologies: ["React", "Tailwind CSS", "OpenWeatherMap API"],
-    isFeatured: true,
+    "title": "Vkart (E-Commerce Platform)",
+    "slug": "vkart",
+    "description": "A full-stack MERN e-commerce app with Google OAuth (2FA) and real-time Razorpay payment integration.",
+    "fullDescription": "Vkart is a full-featured, production-ready e-commerce platform built from the ground up. The primary goal was to implement secure, complex, and real-world features. \n\nKey Features Include:\n\n* **Secure Authentication:** Implemented robust user authentication with JWT and **Google OAuth (2FA)**, including **cross-device login notifications** to enhance account security.\n\n* **Live Payment Gateway:** Integrated the **Razorpay Payment Gateway** for secure, real-time transaction processing and webhook verification.\n\n* **Admin Dashboard:** Developed a secure, **role-based Admin Dashboard (RBAC)** using protected routes for comprehensive product, user, and order management (CRUD operations).\n\n* **Core E-commerce Logic:** Features include dynamic product filtering, a persistent shopping cart, and wishlist functionality managed with React Context API and Mongoose schemas.\n\nTechnologies: Built on the **MERN stack (MongoDB, Express.js, React, Node.js)** with a focus on API scalability and a clean, responsive UI (Tailwind CSS). Key challenges included ensuring secure payment handoffs and architecting the protected routes for the admin panel.",
+    "imgUrl": "/img/vkart.webp",
+    "liveUrl": "https://vkart.balavardhan.dev/",
+    "githubUrl": "https://github.com/vardhan12178/vkart",
+    "technologies": ["React", "Node.js", "Express.js", "MongoDB", "Tailwind CSS", "JWT", "Google OAuth", "Razorpay API"],
+    "isFeatured": true
   },
+
   {
     title: "Fitness Tracker Pro",
     slug: "fitness-tracker-pro",
@@ -20,27 +21,8 @@ export const projects = [
     githubUrl: "https://github.com/vardhan12178/Fitness-Tracker",
     technologies: ["React", "Context API", "CSS"],
   },
-  {
-    title: "Vkart",
-    slug: "vkart",
-    description: "A stylish ecommerce website with category-wise product listings, cart, wishlist, and user authentication.",
-    fullDescription: "Vkart is a full-stack e-commerce platform simulating an online shopping experience. Key features: Product browsing by categories (e.g., electronics, clothing), search functionality with filters, shopping cart with real-time updates, wishlist for saved items, user authentication (login/signup) with JWT, checkout simulation, and admin dashboard for product management. Backend handles CRUD operations for products and users. Challenges: Secure authentication and optimizing database queries for fast loading. Technologies: React for frontend, Node.js and MongoDB for backend/API, Tailwind CSS for styling. Screenshots: Product grid with filters; Cart page with total calculations.",
-    imgUrl: "/img/vkart.webp",
-    liveUrl: "https://vkartshop.netlify.app/",
-    githubUrl: "https://github.com/vardhan12178/vkart",
-    technologies: ["React", "Node.js", "MongoDB", "Tailwind CSS"],
-    isFeatured: true,
-  },
-  {
-    title: "Movie Spot",
-    slug: "movie-spot",
-    description: "A sleek movie search and discovery app that fetches now playing, top-rated, and upcoming films from TMDB.",
-    fullDescription: "Movie Spot is an entertainment app for movie lovers to discover and search films. Features: Real-time search with autocomplete, categorized lists (now playing, top-rated, upcoming), detailed movie pages with trailers, cast, and reviews, watchlist functionality, and pagination for endless scrolling. It pulls data from the TMDB API with error handling for offline modes. Challenges: Managing large API responses and implementing responsive carousels. Technologies: React for the interface, Tailwind CSS for modern layouts, TMDB API for content. Screenshots: Home page with movie carousels; Search results with poster grids.",
-    imgUrl: "/img/Movie-spot.webp",
-    liveUrl: "https://vardhan-moviespot.vercel.app/",
-    githubUrl: "https://github.com/vardhan12178/moviespot",
-    technologies: ["React", "Tailwind CSS", "TMDB API"],
-  },
+   
+
   {
     title: "Image Magic Pro",
     slug: "image-magic-pro",
@@ -51,16 +33,7 @@ export const projects = [
     githubUrl: "https://github.com/vardhan12178/image-magic-pro",
     technologies: ["Next.js", "Tailwind CSS"],
   },
-  {
-    title: "Food App",
-    slug: "food-app",
-    description: "A modern food delivery UI with menu, cart, and authentication powered by Firebase.",
-    fullDescription: "Food App is a responsive food delivery interface mimicking popular apps like Uber Eats. Features: Menu browsing with categories and search, cart management with quantity adjustments, user authentication via Firebase (email/Google login), order history, and simulated payment integration. Real-time updates using Firebase Firestore. Challenges: Integrating auth with real-time database sync and mobile responsiveness. Technologies: Next.js for routing, Firebase for auth and storage, CSS for custom themes. Screenshots: Menu list with item cards; Cart checkout flow.",
-    imgUrl: "/img/food-app.webp",
-    liveUrl: "https://vardhan-food.vercel.app/",
-    githubUrl: "https://github.com/vardhan12178/FoodApp",
-    technologies: ["Next.js", "Firebase", "CSS"],
-  }
+  
 ];
 
 export const getTechColor = (tech: string) => {

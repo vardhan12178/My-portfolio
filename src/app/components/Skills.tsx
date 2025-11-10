@@ -1,124 +1,158 @@
 "use client";
 
+import { useMemo, ReactNode } from "react";
 import { motion } from "framer-motion";
+import { FaReact, FaNodeJs, FaHtml5, FaCss3Alt, FaGithub } from "react-icons/fa";
 import {
-  FaReact, FaNodeJs, FaHtml5, FaCss3Alt, FaPhp, FaGithub,
-} from "react-icons/fa";
-import {
-  SiNextdotjs, SiJavascript, SiMongodb, SiTailwindcss,
-  SiTypescript, SiAmazon, SiBootstrap, SiPython,
-  SiSelenium, SiMysql, SiGit, SiDocker
+  SiNextdotjs,
+  SiJavascript,
+  SiMongodb,
+  SiTailwindcss,
+  SiTypescript,
+  SiBootstrap,
+  SiPython,
+  SiMysql,
+  SiGit,
+  SiExpress,
 } from "react-icons/si";
 
-// Grouped skills
+/* ============================================================================
+   Types
+============================================================================ */
+type Skill = {
+  name: string;
+  icon: ReactNode;
+  level: "Advanced" | "Intermediate";
+};
+
+/* ============================================================================
+   Data (source of truth)
+============================================================================ */
 const groupedSkills = {
-  "Frontend": [
-    { name: "React", icon: <FaReact /> },
-    { name: "Next.js", icon: <SiNextdotjs /> },
-    { name: "JavaScript", icon: <SiJavascript /> },
-    { name: "TypeScript", icon: <SiTypescript /> },
-    { name: "HTML5", icon: <FaHtml5 /> },
-    { name: "CSS3", icon: <FaCss3Alt /> },
-    { name: "Tailwind CSS", icon: <SiTailwindcss /> },
-    { name: "Bootstrap", icon: <SiBootstrap /> },
+  frontend: [
+    { name: "React", icon: <FaReact />, level: "Advanced" },
+    { name: "Next.js", icon: <SiNextdotjs />, level: "Advanced" },
+    { name: "JavaScript", icon: <SiJavascript />, level: "Advanced" },
+    { name: "TypeScript", icon: <SiTypescript />, level: "Intermediate" },
+    { name: "HTML5", icon: <FaHtml5 />, level: "Advanced" },
+    { name: "CSS3", icon: <FaCss3Alt />, level: "Advanced" },
+    { name: "Tailwind CSS", icon: <SiTailwindcss />, level: "Advanced" },
+    { name: "Bootstrap", icon: <SiBootstrap />, level: "Intermediate" },
   ],
-  "Backend & Database": [
-    { name: "Node.js", icon: <FaNodeJs /> },
-    { name: "PHP", icon: <FaPhp /> },
-    { name: "MongoDB", icon: <SiMongodb /> },
-    { name: "SQL", icon: <SiMysql /> },
+  backend: [
+    { name: "Node.js", icon: <FaNodeJs />, level: "Advanced" },
+    { name: "Express.js", icon: <SiExpress />, level: "Advanced" },
+    { name: "MongoDB", icon: <SiMongodb />, level: "Advanced" },
+    { name: "SQL", icon: <SiMysql />, level: "Intermediate" },
+    { name: "Python", icon: <SiPython />, level: "Intermediate" },
   ],
-  "Tools & Others": [
-    { name: "AWS", icon: <SiAmazon /> },
-    { name: "Python", icon: <SiPython /> },
-    { name: "Selenium", icon: <SiSelenium /> },
-    { name: "GitHub", icon: <FaGithub /> },
-    { name: "Git", icon: <SiGit /> },
-    { name: "Docker", icon: <SiDocker /> },
-  ]
+  tools: [
+    { name: "Git", icon: <SiGit />, level: "Advanced" },
+    { name: "GitHub", icon: <FaGithub />, level: "Advanced" },
+  ],
 };
 
-// Framer animation config
-const container = {
-  hidden: {},
-  show: {
-    transition: {
-      staggerChildren: 0.08,
-      delayChildren: 0.1
-    }
-  }
+// Master list
+const ALL_SKILLS: Skill[] = [
+  ...groupedSkills.frontend,
+  ...groupedSkills.backend,
+  ...groupedSkills.tools,
+];
+
+/* ============================================================================
+   Motion
+============================================================================ */
+const container = { hidden: {}, show: { transition: { staggerChildren: 0.06, delayChildren: 0.04 } } };
+const item = { hidden: { opacity: 0, y: 14 }, show: { opacity: 1, y: 0 } };
+
+/* ============================================================================
+   Helpers
+============================================================================ */
+const levelStyle: Record<Skill["level"], string> = {
+  Advanced: "border-emerald-400/60 text-emerald-300 bg-emerald-500/10",
+  Intermediate: "border-sky-400/60 text-sky-300 bg-sky-500/10",
 };
 
-const item = {
-  hidden: { opacity: 0, y: 20 },
-  show: { opacity: 1, y: 0 }
-};
-
+/* ============================================================================
+   Component
+============================================================================ */
 export default function Skills() {
+  const skills = useMemo(() => ALL_SKILLS, []);
+
   return (
-    <section id="skills" className="py-24 bg-gray-950 text-white px-6 scroll-mt-20">
+    <section id="skills" className="scroll-mt-20 bg-gray-950 px-6 py-24 text-white">
+      {/* Title */}
       <motion.h2
-        initial={{ opacity: 0, y: 30 }}
+        initial={{ opacity: 0, y: 24 }}
         whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
         viewport={{ once: true }}
-        className="text-4xl md:text-5xl font-bold text-purple-400 text-center mb-14"
+        transition={{ duration: 0.5 }}
+        className="mb-6 text-center text-4xl font-bold text-purple-300 md:text-5xl"
       >
-        💼 Skills
+        Skills
       </motion.h2>
 
+      {/* Grid */}
       <motion.div
         variants={container}
         initial="hidden"
         whileInView="show"
-        viewport={{ once: true }}
-        className="max-w-6xl mx-auto space-y-16"
+        viewport={{ once: true, amount: 0.15 }}
+        className="mx-auto mt-10 grid max-w-6xl grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4"
       >
-        {Object.entries(groupedSkills).map(([category, skillList], index) => (
-          <motion.div key={category} variants={item}>
-            <h3 className="text-xl sm:text-2xl font-semibold text-left text-purple-300 mb-6 pl-2">
-              {category}
-            </h3>
-
-            <div role="list" className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
-              {skillList.map((skill) => (
-                <motion.div
-                  key={skill.name}
-                  variants={item}
-                  whileHover={{ scale: 1.05 }}
-                  className="group flex flex-col items-center gap-2 text-gray-300 hover:text-white transition duration-300 bg-gray-900/30 hover:bg-gradient-to-r from-purple-600/20 to-purple-900/20 hover:shadow-[0_0_12px_rgba(168,85,247,0.4)] p-5 rounded-xl focus-within:ring-2 focus-within:ring-purple-500"
-                  tabIndex={0}
+        {skills.map((skill) => (
+          <motion.div
+            key={skill.name}
+            variants={item}
+            whileHover={{ y: -3 }}
+            whileFocus={{ y: -3 }}
+            transition={{ type: "spring", stiffness: 320, damping: 22 }}
+            tabIndex={0}
+            className="group relative rounded-xl border border-white/10 bg-gray-900/50 p-4 outline-none ring-purple-500/40 transition hover:border-purple-400/60 hover:bg-white/5 focus:ring-2"
+            title={skill.name}
+            aria-label={skill.name}
+          >
+            <div className="flex items-center gap-3">
+              <div className="text-3xl text-gray-200 transition group-hover:text-purple-300">
+                {skill.icon}
+              </div>
+              <div className="min-w-0">
+                <p className="truncate text-sm font-medium text-white">{skill.name}</p>
+                <span
+                  className={[
+                    "mt-1 inline-block rounded-full border px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide",
+                    levelStyle[skill.level],
+                  ].join(" ")}
                 >
-                  <motion.div
-                    whileHover={{ scale: 1.25, y: -2, rotate: 5 }}
-                    transition={{ type: "spring", stiffness: 300 }}
-                    className="text-3xl sm:text-4xl transition duration-300 group-hover:text-purple-400"
-                  >
-                    {skill.icon}
-                  </motion.div>
-                  <span
-                    className="text-sm sm:text-base font-medium text-center"
-                    title={skill.name}
-                    aria-label={skill.name}
-                  >
-                    {skill.name}
-                  </span>
-                </motion.div>
-              ))}
+                  {skill.level}
+                </span>
+              </div>
             </div>
 
-            {/* Divider (skip for last category) */}
-            {index < Object.keys(groupedSkills).length - 1 && (
-              <motion.div
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                transition={{ duration: 0.5, delay: 0.5 }}
-                className="border-b border-gray-800 mt-12"
-              />
-            )}
+            {/* Glow */}
+            <span
+              className="pointer-events-none absolute inset-0 -z-10 rounded-xl bg-gradient-to-tr from-purple-600/0 via-purple-600/0 to-indigo-600/0 opacity-0 blur-xl transition-opacity duration-300 group-hover:opacity-20"
+              aria-hidden
+            />
           </motion.div>
         ))}
       </motion.div>
+
+      {/* Divider */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.5 }}
+        className="mx-auto mt-12 h-px max-w-6xl bg-gradient-to-r from-transparent via-white/10 to-transparent"
+      />
+
+      {/* Note */}
+      <p className="mx-auto mt-6 max-w-3xl text-center text-sm text-gray-400">
+        Tip: Explore the listed tools and technologies. Currently deepening{" "}
+        <span className="text-purple-300 font-medium">TypeScript</span> and expanding into{" "}
+        <span className="text-purple-300 font-medium">AI / Python data integration</span>.
+      </p>
     </section>
   );
 }
