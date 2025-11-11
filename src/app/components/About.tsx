@@ -37,7 +37,7 @@ export default function About() {
 
   // --- Tech Stack ---
   const techStack: Record<string, string[]> = {
-    Frontend: ["React", "Next.js", "Tailwind", "Bootstrap"],
+    Frontend: ["React", "Next.js", "Tailwind", "PHP","Bootstrap"],
     Backend: ["Node.js", "Express.js"],
     Database: ["MongoDB"],
     Others: ["AWS", "Selenium", "GitHub Actions"],
@@ -50,9 +50,10 @@ export default function About() {
       role: "Full Stack Developer",
       period: "Oct 2024 – Present",
       achievements: [
-        "Re-architected a 100+ page legacy PHP application into a modular React + PHP hybrid, reducing redundancy by 95%.",
-        "Led automation of policy workflows and chatbot features integrating REST APIs, file storage, and AI components.",
-        "Streamlined CI/CD pipelines and deployments, cutting delivery time by ~25%.",
+       "Architected and led the full-stack development of a complex, business-critical internal SAAS platform (PHP/JS/HTML) from initial wireframe to production.",
+      "Engineered a dynamic, multi-step policy approval workflow (Approve, Reject, Request Edits) that sequentially routes policies to multiple approvers.",
+      "Integrated a dynamic PDF generation module (using DOMPDF) with a complete digital signature and compliance-tracking system for all users.",
+      "Re-architected and modularized 120+ static pages into a dynamic JSON/JS template system, dramatically reducing code redundancy by 95% and improving site-wide performance."
       ],
     },
     {

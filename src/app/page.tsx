@@ -92,9 +92,10 @@ export default function Home() {
           animate="visible"
           className="relative z-10 mx-auto w-full max-w-[680px] sm:max-w-3xl"
         >
+          {/* Added mt-6 on mobile to avoid header overlap */}
           <motion.div
             variants={item}
-            className="mb-4 inline-flex max-w-full items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-purple-200"
+            className="mt-6 sm:mt-0 mb-4 inline-flex max-w-full items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-purple-200"
           >
             <span className="inline-block h-2 w-2 animate-pulse rounded-full bg-green-400" />
             Open to full-time roles & collaborations
@@ -161,7 +162,7 @@ export default function Home() {
               rel="noopener noreferrer"
               aria-label="GitHub"
               title="GitHub"
-              className="rounded-md p-2 transition hover:bg-white/5 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a0a23]"
+              className="rounded-md p-2 transition hover:bg-white/5 hover:text-white"
             >
               <FaGithub />
             </a>
@@ -171,7 +172,7 @@ export default function Home() {
               rel="noopener noreferrer"
               aria-label="LinkedIn"
               title="LinkedIn"
-              className="rounded-md p-2 transition hover:bg-white/5 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a0a23]"
+              className="rounded-md p-2 transition hover:bg-white/5 hover:text-white"
             >
               <FaLinkedin />
             </a>
@@ -179,7 +180,7 @@ export default function Home() {
               href="mailto:balavardhanpula@gmail.com"
               aria-label="Email"
               title="Email"
-              className="rounded-md p-2 transition hover:bg-white/5 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a0a23]"
+              className="rounded-md p-2 transition hover:bg-white/5 hover:text-white"
             >
               <FaEnvelope />
             </a>
@@ -208,11 +209,12 @@ export default function Home() {
           </motion.div>
         </motion.div>
 
+        {/* ↓ Smooth scroll to About section */}
         <a
           href="#about"
           onClick={(e) => smoothScroll(e, "#about")}
           aria-label="Scroll to About"
-          className="absolute bottom-8 text-2xl text-purple-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a0a23]"
+          className="absolute bottom-8 text-2xl text-purple-300 cursor-pointer"
         >
           <motion.span
             initial={{ opacity: 0, y: -8 }}

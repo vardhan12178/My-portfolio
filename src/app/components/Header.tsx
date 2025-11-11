@@ -4,18 +4,30 @@ import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
-import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
-import { FaGithub, FaLinkedin, FaDownload } from "react-icons/fa";
+import {
+  AiOutlineMenu,
+  AiOutlineClose,
+} from "react-icons/ai";
+import {
+  FaGithub,
+  FaLinkedin,
+  FaDownload,
+  FaHome,
+  FaUser,
+  FaCode,
+  FaFolderOpen,
+  FaEnvelope,
+} from "react-icons/fa";
 import Image from "next/image";
 
-type NavItem = { href: string; label: string; id: string };
+type NavItem = { href: string; label: string; id: string; icon: JSX.Element };
 
 const NAV: NavItem[] = [
-  { href: "/#home", label: "Home", id: "home" },
-  { href: "/#about", label: "About", id: "about" },
-  { href: "/#skills", label: "Skills", id: "skills" },
-  { href: "/#projects", label: "Projects", id: "projects" },
-  { href: "/#contact", label: "Contact", id: "contact" },
+  { href: "/#home", label: "Home", id: "home", icon: <FaHome /> },
+  { href: "/#about", label: "About", id: "about", icon: <FaUser /> },
+  { href: "/#skills", label: "Skills", id: "skills", icon: <FaCode /> },
+  { href: "/#projects", label: "Projects", id: "projects", icon: <FaFolderOpen /> },
+  { href: "/#contact", label: "Contact", id: "contact", icon: <FaEnvelope /> },
 ];
 
 export default function Header() {
@@ -30,12 +42,11 @@ export default function Header() {
 
   useEffect(() => setMounted(true), []);
 
-  // Scroll spy + header style on scroll
   useEffect(() => {
     const onScroll = () => {
       setScrolled(window.scrollY > 12);
       if (!isHome) return;
-      const y = window.scrollY + 120; // header offset
+      const y = window.scrollY + 120;
       for (const item of NAV) {
         const el = document.getElementById(item.id);
         if (!el) continue;
@@ -58,7 +69,10 @@ export default function Header() {
     const el = document.querySelector(hash);
     if (!el) return;
     const yOffset = -100;
-    const y = (el as HTMLElement).getBoundingClientRect().top + window.scrollY + yOffset;
+    const y =
+      (el as HTMLElement).getBoundingClientRect().top +
+      window.scrollY +
+      yOffset;
     window.scrollTo({ top: y, behavior: "smooth" });
   };
 
@@ -77,14 +91,14 @@ export default function Header() {
       className={[
         "sticky top-0 z-50 transition-all",
         "backdrop-blur-md bg-gray-900/70",
-        scrolled ? "shadow-[0_8px_30px_rgb(0,0,0,0.25)] border-b border-white/10" : "border-b border-transparent",
+        scrolled
+          ? "shadow-[0_8px_30px_rgb(0,0,0,0.25)] border-b border-white/10"
+          : "border-b border-transparent",
       ].join(" ")}
     >
-      {/* subtle gradient bar at bottom for a premium feel */}
       <div className="pointer-events-none absolute inset-x-0 bottom-0 h-[1px] bg-gradient-to-r from-purple-500/40 via-fuchsia-500/30 to-cyan-400/40" />
 
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
-        {/* Brand */}
         <motion.a
           href="/#home"
           initial={{ opacity: 0, x: -10 }}
@@ -93,7 +107,7 @@ export default function Header() {
           className="flex items-center gap-2 text-base font-semibold tracking-tight"
           onClick={(e) => handleNav("home", "/#home", e)}
         >
-           <Image
+          <Image
             src="/favicon.png"
             alt="BV logo"
             width={24}
@@ -106,7 +120,6 @@ export default function Header() {
           </span>
         </motion.a>
 
-        {/* Desktop nav */}
         <div className="hidden items-center gap-3 md:flex">
           <ul className="relative flex items-center gap-1 rounded-lg bg-white/5 p-1 text-sm text-gray-300 ring-1 ring-white/10">
             {NAV.map((item) => {
@@ -124,7 +137,6 @@ export default function Header() {
                   >
                     {item.label}
                   </Link>
-                  {/* Animated underline/pill background */}
                   {active && (
                     <motion.span
                       layoutId="active-pill"
@@ -137,7 +149,6 @@ export default function Header() {
             })}
           </ul>
 
-          {/* Socials */}
           <div className="ml-2 flex items-center gap-2">
             <a
               href="https://github.com/vardhan12178?tab=repositories"
@@ -157,7 +168,6 @@ export default function Header() {
             >
               <FaLinkedin />
             </a>
-            {/* Resume CTA */}
             <a
               href="/resume.pdf"
               target="_blank"
@@ -170,7 +180,6 @@ export default function Header() {
           </div>
         </div>
 
-        {/* Mobile buttons */}
         <div className="flex items-center gap-2 md:hidden">
           <a
             href="/resume.pdf"
@@ -197,7 +206,6 @@ export default function Header() {
         </div>
       </nav>
 
-      {/* Mobile drawer */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
@@ -212,7 +220,7 @@ export default function Header() {
               id="mobile-nav"
               role="menu"
               aria-label="Mobile navigation"
-              className="mx-4 mb-4 space-y-2 rounded-xl border border-white/10 bg-gray-850/95 p-3 shadow-xl"
+              className="mx-4 mb-4 space-y-3 rounded-xl border border-white/10 bg-gray-900/95 p-4 shadow-xl backdrop-blur-md"
               onKeyDown={(e) => {
                 if (e.key === "Escape") {
                   setIsOpen(false);
@@ -230,34 +238,37 @@ export default function Header() {
                       href={item.href}
                       onClick={(e) => handleNav(item.id, item.href, e)}
                       className={[
-                        "block w-full rounded-lg px-3 py-2 text-base transition",
+                        "flex items-center gap-3 rounded-lg px-3 py-2 text-base transition-all",
                         active
-                          ? "border border-purple-500 bg-purple-600/15 text-white"
-                          : "text-gray-200 hover:bg-white/5",
+                          ? "border border-purple-500 bg-gradient-to-r from-purple-600/20 to-indigo-600/20 text-white shadow-sm"
+                          : "text-gray-200 hover:bg-white/5 hover:text-white",
                       ].join(" ")}
                       aria-current={active ? "page" : undefined}
                     >
+                      <span className="text-purple-300 text-lg">{item.icon}</span>
                       {item.label}
                     </Link>
                   </li>
                 );
               })}
 
-              <div className="mt-2 flex items-center justify-between gap-2">
+              <div className="mt-3 flex items-center justify-between gap-2">
                 <a
                   href="https://github.com/vardhan12178?tab=repositories"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex-1 rounded-md bg-white/5 px-3 py-2 text-center text-sm text-gray-200 ring-1 ring-white/10 hover:bg-white/10"
+                  className="flex-1 flex items-center justify-center gap-2 rounded-md bg-white/5 px-3 py-2 text-center text-sm text-gray-200 ring-1 ring-white/10 hover:bg-white/10 transition"
                 >
+                  <FaGithub className="text-purple-300 text-base" />
                   GitHub
                 </a>
                 <a
                   href="https://www.linkedin.com/in/bala-vardhan-pula-753b011b9/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex-1 rounded-md bg-white/5 px-3 py-2 text-center text-sm text-gray-200 ring-1 ring-white/10 hover:bg-white/10"
+                  className="flex-1 flex items-center justify-center gap-2 rounded-md bg-white/5 px-3 py-2 text-center text-sm text-gray-200 ring-1 ring-white/10 hover:bg-white/10 transition"
                 >
+                  <FaLinkedin className="text-purple-300 text-base" />
                   LinkedIn
                 </a>
               </div>
