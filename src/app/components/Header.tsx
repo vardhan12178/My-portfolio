@@ -169,7 +169,7 @@ export default function Header() {
               <FaLinkedin />
             </a>
             <a
-              href="/resume.pdf"
+              href="/Bala_Vardhan_Resume.pdf"
               target="_blank"
               rel="noopener noreferrer"
               className="ml-1 inline-flex items-center gap-2 rounded-md border border-purple-500/60 bg-gradient-to-br from-purple-600/20 to-indigo-600/20 px-3 py-2 text-sm font-medium text-white hover:border-purple-400 hover:from-purple-600/30 hover:to-indigo-600/30"
@@ -182,7 +182,7 @@ export default function Header() {
 
         <div className="flex items-center gap-2 md:hidden">
           <a
-            href="/resume.pdf"
+            href="/Bala_Vardhan_Resume.pdf"
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Open resume"

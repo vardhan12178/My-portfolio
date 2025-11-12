@@ -281,7 +281,7 @@ export default function About() {
         {/* CTAs */}
         <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
           <a
-            href="/resume.pdf"
+            href="/Bala_Vardhan_Resume.pdf"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 rounded-md border border-purple-500/60 bg-gradient-to-br from-purple-600/20 to-indigo-600/20 px-6 py-3 text-sm font-medium text-white transition hover:border-purple-400 hover:from-purple-600/30 hover:to-indigo-600/30"
