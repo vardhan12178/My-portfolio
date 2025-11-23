@@ -151,7 +151,7 @@ export default function About() {
                 target="_blank"
                 className="mt-6 flex w-full items-center justify-center gap-2 rounded-xl bg-indigo-600 px-4 py-3 font-medium text-white transition hover:bg-indigo-700 active:scale-95"
               >
-                <Download size={18} /> Download CV
+                <Download size={18} /> Download Resume
               </a>
             </div>
           </motion.div>
