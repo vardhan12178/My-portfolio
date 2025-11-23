@@ -37,28 +37,28 @@ const VKART_DATA = {
       id: 0,
       title: "Admin Analytics",
       desc: "Role-protected admin panel with real-time metrics for revenue, user registrations, and order status distribution.",
-      img: "/img/vkart3.webp",
+      img: "/img/Vkart3.webp",
       icon: <BarChart3 size={18} />
     },
     {
       id: 1,
       title: "Secure Auth & 2FA",
       desc: "Email-password login, Google OAuth, JWT authentication, session security, and optional two-factor authentication.",
-      img: "/img/vkart2.webp",
+      img: "/img/Vkart2.webp",
       icon: <ShieldCheck size={18} />
     },
     {
       id: 2,
       title: "Inventory CMS",
       desc: "Product and category management with secure image uploads to AWS S3, activation toggles, and detail editing.",
-      img: "/img/vkart5.webp",
+      img: "/img/Vkart5.webp",
       icon: <Layers size={18} />
     },
     {
       id: 3,
       title: "Order Workflow",
       desc: "End-to-end order lifecycle: Pending → Placed → Shipped → Out for Delivery → Delivered, managed through a state-driven admin dashboard.",
-      img: "/img/vkart4.webp",
+      img: "/img/Vkart4.webp",
       icon: <ShoppingCart size={18} />
     }
   ]
