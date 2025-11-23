@@ -1,327 +1,262 @@
 "use client";
 
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect } from "react";
 import toast from "react-hot-toast";
-import { FaArrowUp, FaGithub, FaLinkedin, FaWhatsapp } from "react-icons/fa";
-import { HiOutlineMail, HiClipboardCopy, HiCheck } from "react-icons/hi";
-import { motion } from "framer-motion";
-
-type FormState = { name: string; email: string; message: string; subject?: string; honeypot?: string };
+import { motion, AnimatePresence } from "framer-motion";
+import { 
+  Send, 
+  Mail, 
+  Github, 
+  Linkedin, 
+  ArrowUp, 
+  Check, 
+  Copy,
+  MessageSquare
+} from "lucide-react";
 
 export default function Contact() {
-  const [formData, setFormData] = useState<FormState>({ name: "", email: "", message: "", subject: "" });
-  const [errors, setErrors] = useState<{ name?: string; email?: string; message?: string }>({});
+  const [formData, setFormData] = useState({ name: "", email: "", message: "", subject: "" });
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [sent, setSent] = useState(false);
   const [showScrollToTop, setShowScrollToTop] = useState(false);
   const [copied, setCopied] = useState(false);
 
-  const msgLen = formData.message.trim().length;
-  const msgMin = 10;
-  const msgMax = 1200;
-
-  const validate = useMemo(
-    () => (values: FormState) => {
-      const e: typeof errors = {};
-      if (!values.name.trim()) e.name = "Please enter your name.";
-      if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(values.email)) e.email = "Enter a valid email.";
-      if (values.message.trim().length < msgMin) e.message = `Please write at least ${msgMin} characters.`;
-      if (values.message.trim().length > msgMax) e.message = `Please keep it under ${msgMax} characters.`;
-      return e;
-    },
-    []
-  );
-
+  // --- Scroll Detection ---
   useEffect(() => {
     const onScroll = () => setShowScrollToTop(window.scrollY > 600);
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  // --- Handlers ---
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
-    setFormData((s) => ({ ...s, [name]: value }));
-    setErrors((prev) => ({ ...prev, [name]: undefined }));
-    if (name === "message") setSent(false);
+    setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (isSubmitting) return;
 
-    // Basic bot check (honeypot)
-    if ((formData as any)["honeypot"]) {
-      toast.error("Submission blocked.");
-      return;
-    }
-
-    const v = validate(formData);
-    setErrors(v);
-    if (Object.keys(v).length) {
-      toast.error("Please fix the highlighted fields.");
-      return;
-    }
-
     setIsSubmitting(true);
     try {
+      // Replace with your actual Formspree ID if different
       const res = await fetch("https://formspree.io/f/mgvagoen", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          name: formData.name,
-          email: formData.email,
-          message: formData.message,
-          subject: formData.subject || "Portfolio Contact",
-          _subject: formData.subject || "Portfolio Contact", // Formspree friendly
-          _gotcha: formData.honeypot || "", // honeypot
+          ...formData,
+          _subject: `Portfolio Contact: ${formData.subject || "New Message"}`, 
         }),
       });
 
       if (res.ok) {
-        toast.success("Message sent. I’ll get back to you soon!");
-        setSent(true);
+        toast.success("Message sent successfully!");
         setFormData({ name: "", email: "", message: "", subject: "" });
       } else {
-        toast.error("Failed to send message. Please try again.");
+        toast.error("Failed to send message.");
       }
     } catch {
-      toast.error("Something went wrong. Please try again.");
+      toast.error("Something went wrong.");
     } finally {
       setIsSubmitting(false);
     }
   };
 
-  const scrollToTop = () => window.scrollTo({ top: 0, behavior: "smooth" });
-
   const copyEmail = async () => {
     try {
       await navigator.clipboard.writeText("balavardhanpula@gmail.com");
       setCopied(true);
-      setTimeout(() => setCopied(false), 1500);
-      toast.success("Email copied");
+      toast.success("Email copied to clipboard");
+      setTimeout(() => setCopied(false), 2000);
     } catch {
-      toast.error("Couldn’t copy. Long-press to copy manually.");
+      toast.error("Failed to copy");
     }
   };
 
   return (
-    <section id="contact" className="relative min-h-screen scroll-mt-20 bg-gray-950 px-6 py-24 text-white">
-      <motion.div
-        initial={{ opacity: 0, y: 32 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.5 }}
-        className="mx-auto max-w-3xl text-center"
-      >
-        <h2 className="text-4xl font-bold text-purple-300 md:text-5xl">Contact</h2>
-        <p className="mx-auto mt-3 max-w-xl text-gray-300">
-          Have a question or want to work together? 
-        </p>
+    <section id="contact" className="relative min-h-screen bg-zinc-950 py-24 text-zinc-100">
+      
+      {/* Background Decor */}
+      <div className="absolute bottom-0 left-0 h-[500px] w-[500px] rounded-full bg-indigo-500/5 blur-[120px]" />
 
-        {/* Success panel */}
-        {sent && (
-          <div className="mx-auto mt-6 rounded-lg border border-emerald-400/50 bg-emerald-500/10 px-4 py-3 text-sm text-emerald-300">
-            Thanks! Your message has been sent. I’ll get back to you soon.
-          </div>
-        )}
-
-        {/* Form */}
-        <form
-          onSubmit={handleSubmit}
-          noValidate
-          className="mx-auto mt-8 space-y-4 rounded-xl border border-white/10 bg-gray-900/60 p-6 text-left shadow-lg backdrop-blur"
-          aria-describedby="contact-hint"
+      <div className="container mx-auto px-6 max-w-6xl">
+        
+        {/* Header */}
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="mb-16 text-center"
         >
-          <p id="contact-hint" className="sr-only">
-            All fields are required.
+          <h2 className="font-space text-4xl font-bold text-white sm:text-5xl">
+            Let's <span className="text-indigo-400">Connect</span>
+          </h2>
+          <p className="mx-auto mt-4 max-w-2xl text-zinc-400">
+            Currently actively interviewing for <span className="text-white font-medium">MERN Stack</span> roles. 
+            Have a project or job opportunity? Let's discuss.
           </p>
+        </motion.div>
 
-          {/* Honeypot (hidden from users) */}
-          <input
-            type="text"
-            name="honeypot"
-            tabIndex={-1}
-            autoComplete="off"
-            className="hidden"
-            onChange={handleChange}
-          />
-
-          <div>
-            <label htmlFor="name" className="block text-sm text-gray-300">
-              Name
-            </label>
-            <input
-              id="name"
-              name="name"
-              type="text"
-              required
-              minLength={2}
-              value={formData.name}
-              onChange={handleChange}
-              className={`mt-1 w-full rounded border bg-gray-800 px-4 py-3 text-white outline-none transition focus:ring-2 ${
-                errors.name ? "border-red-500 focus:ring-red-500/60" : "border-gray-700 focus:ring-purple-500/60"
-              }`}
-              placeholder="Your name"
-            />
-            {errors.name && <p className="mt-1 text-xs text-red-400">{errors.name}</p>}
-          </div>
-
-          <div>
-            <label htmlFor="email" className="block text-sm text-gray-300">
-              Email
-            </label>
-            <input
-              id="email"
-              name="email"
-              type="email"
-              required
-              value={formData.email}
-              onChange={handleChange}
-              className={`mt-1 w-full rounded border bg-gray-800 px-4 py-3 text-white outline-none transition focus:ring-2 ${
-                errors.email ? "border-red-500 focus:ring-red-500/60" : "border-gray-700 focus:ring-purple-500/60"
-              }`}
-              placeholder="you@example.com"
-            />
-            {errors.email && <p className="mt-1 text-xs text-red-400">{errors.email}</p>}
-          </div>
-
-          <div>
-            <label htmlFor="subject" className="block text-sm text-gray-300">
-              Subject <span className="text-gray-500">(optional)</span>
-            </label>
-            <input
-              id="subject"
-              name="subject"
-              type="text"
-              value={formData.subject || ""}
-              onChange={handleChange}
-              className="mt-1 w-full rounded border border-gray-700 bg-gray-800 px-4 py-3 text-white outline-none transition focus:border-purple-400 focus:ring-2 focus:ring-purple-500/60"
-              placeholder="Project inquiry, collaboration, etc."
-            />
-          </div>
-
-          <div>
-            <div className="flex items-center justify-between">
-              <label htmlFor="message" className="block text-sm text-gray-300">
-                Message
-              </label>
-              <span className={`text-xs ${msgLen > msgMax ? "text-red-400" : "text-gray-400"}`}>
-                {msgLen}/{msgMax}
-              </span>
-            </div>
-            <textarea
-              id="message"
-              name="message"
-              rows={6}
-              required
-              minLength={msgMin}
-              maxLength={msgMax + 1} // prevent crazy typing
-              value={formData.message}
-              onChange={handleChange}
-              className={`mt-1 w-full resize-y rounded border bg-gray-800 px-4 py-3 text-white outline-none transition focus:ring-2 ${
-                errors.message ? "border-red-500 focus:ring-red-500/60" : "border-gray-700 focus:ring-purple-500/60"
-              }`}
-              placeholder="Tell me about your idea, timeline, and goals…"
-            />
-            {errors.message && <p className="mt-1 text-xs text-red-400">{errors.message}</p>}
-          </div>
-
-          <button
-            type="submit"
-            disabled={isSubmitting}
-            className="inline-flex w-full items-center justify-center gap-2 rounded-md bg-gradient-to-r from-purple-600 to-purple-800 px-6 py-3 font-medium text-white transition hover:from-purple-700 hover:to-purple-900 disabled:cursor-not-allowed disabled:opacity-60"
+        <div className="grid gap-12 lg:grid-cols-2">
+          
+          {/* LEFT: Contact Info & Cards */}
+          <motion.div 
+            initial={{ opacity: 0, x: -50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            className="flex flex-col gap-6"
           >
-            {isSubmitting ? (
-              <>
-                <span className="inline-block h-4 w-4 animate-spin rounded-full border-2 border-white/30 border-t-white" />
-                Sending…
-              </>
-            ) : (
-              <>
-                <HiOutlineMail className="text-lg" /> Send Message
-              </>
-            )}
-          </button>
-        </form>
-
-        {/* Contact cards */}
-        <div className="mx-auto mt-10 grid max-w-3xl grid-cols-1 gap-3 sm:grid-cols-3">
-          <a
-            href="mailto:balavardhanpula@gmail.com"
-            className="group rounded-lg border border-white/10 bg-white/5 p-4 text-sm text-gray-300 transition hover:border-purple-400 hover:bg-purple-600/10"
-          >
-            <div className="flex items-center gap-2 text-white">
-              <HiOutlineMail />
-              <span className="font-medium">Email</span>
+            {/* Email Card */}
+            <div className="group rounded-2xl border border-zinc-800 bg-zinc-900/50 p-6 transition-colors hover:border-indigo-500/50 hover:bg-zinc-900">
+              <div className="flex items-start justify-between">
+                <div className="flex items-center gap-4">
+                  <div className="rounded-lg bg-zinc-800 p-3 text-indigo-400 group-hover:bg-indigo-500/20 group-hover:text-indigo-300 transition-colors">
+                    <Mail size={24} />
+                  </div>
+                  <div>
+                    <h3 className="font-space text-lg font-bold text-white">Email Me</h3>
+                    <p className="text-sm text-zinc-400">For interviews & inquiries</p>
+                  </div>
+                </div>
+                <button 
+                  onClick={copyEmail}
+                  className="rounded-full border border-zinc-700 p-2 text-zinc-400 transition-colors hover:bg-zinc-800 hover:text-white"
+                  aria-label="Copy Email"
+                >
+                  {copied ? <Check size={18} className="text-green-400" /> : <Copy size={18} />}
+                </button>
+              </div>
+              <p className="mt-6 font-mono text-zinc-300">balavardhanpula@gmail.com</p>
             </div>
-            <p className="mt-1 break-all text-xs">balavardhanpula@gmail.com</p>
-            <button
-              type="button"
-              onClick={(e) => {
-                e.preventDefault();
-                copyEmail();
-              }}
-              className="mt-2 inline-flex items-center gap-1 rounded-md border border-white/10 bg-white/5 px-2 py-1 text-xs text-gray-200 transition hover:bg-white/10"
-              aria-label="Copy email"
-              title="Copy email"
-            >
-              {copied ? <HiCheck /> : <HiClipboardCopy />} {copied ? "Copied" : "Copy"}
-            </button>
-          </a>
 
-          <a
-            href="https://github.com/vardhan12178?tab=repositories"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group rounded-lg border border-white/10 bg-white/5 p-4 text-sm text-gray-300 transition hover:border-purple-400 hover:bg-white/10"
-          >
-            <div className="flex items-center gap-2 text-white">
-              <FaGithub />
-              <span className="font-medium">GitHub</span>
+            {/* Social Grid */}
+            <div className="grid grid-cols-2 gap-4">
+              <a 
+                href="https://linkedin.com/in/bala-vardhan-pula-753b011b9/" 
+                target="_blank" 
+                rel="noreferrer"
+                className="group flex flex-col items-center justify-center gap-3 rounded-2xl border border-zinc-800 bg-zinc-900/50 p-6 transition-all hover:-translate-y-1 hover:border-indigo-500/30 hover:bg-zinc-900"
+              >
+                <Linkedin size={32} className="text-zinc-400 group-hover:text-[#0077B5] transition-colors" />
+                <span className="font-medium text-zinc-300">LinkedIn</span>
+              </a>
+              <a 
+                href="https://github.com/vardhan12178" 
+                target="_blank" 
+                rel="noreferrer"
+                className="group flex flex-col items-center justify-center gap-3 rounded-2xl border border-zinc-800 bg-zinc-900/50 p-6 transition-all hover:-translate-y-1 hover:border-indigo-500/30 hover:bg-zinc-900"
+              >
+                <Github size={32} className="text-zinc-400 group-hover:text-white transition-colors" />
+                <span className="font-medium text-zinc-300">GitHub</span>
+              </a>
             </div>
-            <p className="mt-1 text-xs">See my code & contributions</p>
-          </a>
 
-          <a
-            href="https://www.linkedin.com/in/bala-vardhan-pula-753b011b9/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group rounded-lg border border-white/10 bg-white/5 p-4 text-sm text-gray-300 transition hover:border-purple-400 hover:bg-white/10"
+             {/* WhatsApp/Direct */}
+             <a 
+                href="https://wa.me/918688412181" 
+                target="_blank" 
+                rel="noreferrer"
+                className="flex items-center justify-center gap-2 rounded-2xl border border-zinc-800 bg-zinc-900/30 p-4 text-sm text-zinc-400 transition-colors hover:text-green-400 hover:border-green-900/50"
+              >
+                <MessageSquare size={16} /> Prefer WhatsApp? <span className="underline decoration-dotted underline-offset-4">Chat directly</span>
+             </a>
+          </motion.div>
+
+          {/* RIGHT: The Form */}
+          <motion.div 
+            initial={{ opacity: 0, x: 50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            className="rounded-3xl border border-zinc-800 bg-zinc-900/30 p-8 backdrop-blur-sm"
           >
-            <div className="flex items-center gap-2 text-white">
-              <FaLinkedin />
-              <span className="font-medium">LinkedIn</span>
-            </div>
-            <p className="mt-1 text-xs">Let’s connect professionally</p>
-          </a>
+            <form onSubmit={handleSubmit} className="space-y-6">
+              <div className="grid gap-6 md:grid-cols-2">
+                <div className="space-y-2">
+                  <label htmlFor="name" className="text-sm font-medium text-zinc-400">Name</label>
+                  <input
+                    id="name"
+                    name="name"
+                    required
+                    value={formData.name}
+                    onChange={handleChange}
+                    placeholder="Your Full Name"
+                    className="w-full rounded-xl border border-zinc-800 bg-zinc-950 px-4 py-3 text-white placeholder-zinc-600 outline-none transition focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
+                  />
+                </div>
+                <div className="space-y-2">
+                  <label htmlFor="email" className="text-sm font-medium text-zinc-400">Email</label>
+                  <input
+                    id="email"
+                    name="email"
+                    type="email"
+                    required
+                    value={formData.email}
+                    onChange={handleChange}
+                    placeholder="hr@company.com"
+                    className="w-full rounded-xl border border-zinc-800 bg-zinc-950 px-4 py-3 text-white placeholder-zinc-600 outline-none transition focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
+                  />
+                </div>
+              </div>
+              
+              <div className="space-y-2">
+                <label htmlFor="subject" className="text-sm font-medium text-zinc-400">Subject</label>
+                <input
+                  id="subject"
+                  name="subject"
+                  value={formData.subject}
+                  onChange={handleChange}
+                  placeholder="Regarding MERN Opportunity..."
+                  className="w-full rounded-xl border border-zinc-800 bg-zinc-950 px-4 py-3 text-white placeholder-zinc-600 outline-none transition focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
+                />
+              </div>
+
+              <div className="space-y-2">
+                <label htmlFor="message" className="text-sm font-medium text-zinc-400">Message</label>
+                <textarea
+                  id="message"
+                  name="message"
+                  required
+                  rows={4}
+                  value={formData.message}
+                  onChange={handleChange}
+                  placeholder="Tell me about the role or project..."
+                  className="w-full resize-none rounded-xl border border-zinc-800 bg-zinc-950 px-4 py-3 text-white placeholder-zinc-600 outline-none transition focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
+                />
+              </div>
+
+              <button
+                type="submit"
+                disabled={isSubmitting}
+                className="group flex w-full items-center justify-center gap-2 rounded-xl bg-indigo-600 px-6 py-4 font-bold text-white transition-all hover:bg-indigo-700 hover:shadow-lg hover:shadow-indigo-500/20 disabled:cursor-not-allowed disabled:opacity-70"
+              >
+                {isSubmitting ? (
+                  <span className="h-5 w-5 animate-spin rounded-full border-2 border-white/20 border-t-white" />
+                ) : (
+                  <>
+                    Send Message <Send size={18} className="transition-transform group-hover:translate-x-1" />
+                  </>
+                )}
+              </button>
+            </form>
+          </motion.div>
         </div>
+      </div>
 
-        {/* WhatsApp (optional) */}
-        <div className="mt-4">
-          <a
-            href="https://wa.me/918688412181"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-xs text-gray-400 underline-offset-2 hover:text-gray-200 hover:underline"
+      {/* Scroll To Top Button */}
+      <AnimatePresence>
+        {showScrollToTop && (
+          <motion.button
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.8 }}
+            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+            className="fixed bottom-8 right-8 z-50 rounded-full bg-indigo-600 p-3 text-white shadow-xl transition-all hover:bg-indigo-700 hover:-translate-y-1"
+            aria-label="Scroll to top"
           >
-            Prefer WhatsApp? Ping me here →
-          </a>
-        </div>
-      </motion.div>
-
-      {/* Scroll to Top */}
-      {showScrollToTop && (
-        <motion.button
-          onClick={scrollToTop}
-          aria-label="Back to top"
-          title="Back to Top"
-          whileHover={{ scale: 1.08 }}
-          whileTap={{ scale: 0.96 }}
-          className="fixed bottom-6 right-6 z-50 rounded-full bg-purple-600 p-3 text-white shadow-lg outline-none transition hover:bg-purple-700 focus:ring-2 focus:ring-purple-400/70"
-        >
-          <FaArrowUp />
-        </motion.button>
-      )}
+            <ArrowUp size={24} />
+          </motion.button>
+        )}
+      </AnimatePresence>
     </section>
   );
 }

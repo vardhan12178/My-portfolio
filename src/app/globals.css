@@ -1,5 +1,9 @@
 @import "tailwindcss";
 
+/* Add this to the top of your globals.css */
+html {
+  overflow-x: hidden;
+}
 :root {
   --background: #ffffff;
   --foreground: #171717;

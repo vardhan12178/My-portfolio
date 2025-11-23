@@ -1,158 +1,165 @@
 "use client";
 
-import { useMemo, ReactNode } from "react";
 import { motion } from "framer-motion";
-import { FaReact, FaNodeJs, FaHtml5, FaCss3Alt, FaGithub } from "react-icons/fa";
-import {
-  SiNextdotjs,
-  SiJavascript,
-  SiMongodb,
-  SiTailwindcss,
-  SiTypescript,
-  SiBootstrap,
-  SiPython,
-  SiMysql,
+import { 
+  SiReact, 
+  SiNextdotjs, 
+  SiTypescript, 
+  SiTailwindcss, 
+  SiNodedotjs, 
+  SiExpress, 
+  SiMongodb, 
+  SiPostgresql,
+  SiRedis,
+  SiDocker,
   SiGit,
-  SiExpress,
+  SiPostman,
+  SiFramer,
+  SiRedux,
+  SiSocketdotio,
+  // SiAmazonaws removed causing error
 } from "react-icons/si";
+import { FaAws } from "react-icons/fa"; // <--- Added Safe Import
+import { Code2, Cpu, Database, Globe, Layers, Server } from "lucide-react";
 
 /* ============================================================================
-   Types
+   Data: High-Value MERN Stack Only
 ============================================================================ */
-type Skill = {
-  name: string;
-  icon: ReactNode;
-  level: "Advanced" | "Intermediate";
-};
-
-/* ============================================================================
-   Data (source of truth)
-============================================================================ */
-const groupedSkills = {
-  frontend: [
-    { name: "React", icon: <FaReact />, level: "Advanced" },
-    { name: "Next.js", icon: <SiNextdotjs />, level: "Advanced" },
-    { name: "JavaScript", icon: <SiJavascript />, level: "Advanced" },
-    { name: "TypeScript", icon: <SiTypescript />, level: "Intermediate" },
-    { name: "HTML5", icon: <FaHtml5 />, level: "Advanced" },
-    { name: "CSS3", icon: <FaCss3Alt />, level: "Advanced" },
-    { name: "Tailwind CSS", icon: <SiTailwindcss />, level: "Advanced" },
-    { name: "Bootstrap", icon: <SiBootstrap />, level: "Intermediate" },
-  ],
-  backend: [
-    { name: "Node.js", icon: <FaNodeJs />, level: "Advanced" },
-    { name: "Express.js", icon: <SiExpress />, level: "Advanced" },
-    { name: "MongoDB", icon: <SiMongodb />, level: "Advanced" },
-    { name: "SQL", icon: <SiMysql />, level: "Intermediate" },
-    { name: "Python", icon: <SiPython />, level: "Intermediate" },
-  ],
-  tools: [
-    { name: "Git", icon: <SiGit />, level: "Advanced" },
-    { name: "GitHub", icon: <FaGithub />, level: "Advanced" },
-  ],
-};
-
-// Master list
-const ALL_SKILLS: Skill[] = [
-  ...groupedSkills.frontend,
-  ...groupedSkills.backend,
-  ...groupedSkills.tools,
+const SKILL_CATEGORIES = [
+  {
+    title: "Frontend Ecosystem",
+    icon: <Globe className="text-indigo-400" size={20} />,
+    skills: [
+      { name: "Next.js 14", icon: <SiNextdotjs size={20} />, color: "text-white" },
+      { name: "React", icon: <SiReact size={20} />, color: "text-cyan-400" },
+      { name: "TypeScript", icon: <SiTypescript size={20} />, color: "text-blue-400" },
+      { name: "Tailwind CSS", icon: <SiTailwindcss size={20} />, color: "text-teal-400" },
+      { name: "Redux Toolkit", icon: <SiRedux size={20} />, color: "text-purple-500" },
+      { name: "Framer Motion", icon: <SiFramer size={20} />, color: "text-pink-500" },
+    ],
+  },
+  {
+    title: "Backend Architecture",
+    icon: <Server className="text-purple-400" size={20} />,
+    skills: [
+      { name: "Node.js", icon: <SiNodedotjs size={20} />, color: "text-green-500" },
+      { name: "Express.js", icon: <SiExpress size={20} />, color: "text-white" },
+      { name: "JWT Auth", icon: <Code2 size={20} />, color: "text-yellow-400" },
+      { name: "REST APIs", icon: <Layers size={20} />, color: "text-orange-400" },
+    ],
+  },
+  {
+    title: "Data & Infrastructure",
+    icon: <Database className="text-pink-400" size={20} />,
+    skills: [
+      { name: "MongoDB", icon: <SiMongodb size={20} />, color: "text-green-400" },
+      { name: "Docker", icon: <SiDocker size={20} />, color: "text-blue-500" },
+      { name: "Git / GitHub", icon: <SiGit size={20} />, color: "text-orange-500" },
+      { name: "AWS (S3)", icon: <FaAws size={20} />, color: "text-yellow-500" }, 
+    ],
+  },
 ];
 
 /* ============================================================================
-   Motion
+   Animations
 ============================================================================ */
-const container = { hidden: {}, show: { transition: { staggerChildren: 0.06, delayChildren: 0.04 } } };
-const item = { hidden: { opacity: 0, y: 14 }, show: { opacity: 1, y: 0 } };
+const container = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: { staggerChildren: 0.1 },
+  },
+};
 
-/* ============================================================================
-   Helpers
-============================================================================ */
-const levelStyle: Record<Skill["level"], string> = {
-  Advanced: "border-emerald-400/60 text-emerald-300 bg-emerald-500/10",
-  Intermediate: "border-sky-400/60 text-sky-300 bg-sky-500/10",
+const item = {
+  hidden: { opacity: 0, y: 20 },
+  show: { opacity: 1, y: 0 },
 };
 
 /* ============================================================================
    Component
 ============================================================================ */
 export default function Skills() {
-  const skills = useMemo(() => ALL_SKILLS, []);
-
   return (
-    <section id="skills" className="scroll-mt-20 bg-gray-950 px-6 py-24 text-white">
-      {/* Title */}
-      <motion.h2
-        initial={{ opacity: 0, y: 24 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.5 }}
-        className="mb-6 text-center text-4xl font-bold text-purple-300 md:text-5xl"
-      >
-        Skills
-      </motion.h2>
+    <section id="skills" className="relative bg-zinc-950 py-24">
+      
+      {/* Background Decor */}
+      <div className="absolute left-0 top-1/4 h-96 w-96 rounded-full bg-indigo-500/5 blur-[100px]" />
+      <div className="absolute right-0 bottom-1/4 h-64 w-64 rounded-full bg-purple-500/5 blur-[80px]" />
 
-      {/* Grid */}
-      <motion.div
-        variants={container}
-        initial="hidden"
-        whileInView="show"
-        viewport={{ once: true, amount: 0.15 }}
-        className="mx-auto mt-10 grid max-w-6xl grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4"
-      >
-        {skills.map((skill) => (
-          <motion.div
-            key={skill.name}
-            variants={item}
-            whileHover={{ y: -3 }}
-            whileFocus={{ y: -3 }}
-            transition={{ type: "spring", stiffness: 320, damping: 22 }}
-            tabIndex={0}
-            className="group relative rounded-xl border border-white/10 bg-gray-900/50 p-4 outline-none ring-purple-500/40 transition hover:border-purple-400/60 hover:bg-white/5 focus:ring-2"
-            title={skill.name}
-            aria-label={skill.name}
-          >
-            <div className="flex items-center gap-3">
-              <div className="text-3xl text-gray-200 transition group-hover:text-purple-300">
-                {skill.icon}
+      <div className="container mx-auto px-6">
+        
+        {/* Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="mb-16 text-center"
+        >
+          <h2 className="font-space text-4xl font-bold text-white sm:text-5xl">
+            Technical <span className="text-indigo-400">Expertise</span>
+          </h2>
+          <p className="mx-auto mt-4 max-w-2xl text-zinc-400">
+            A specialized stack focused on performance, scalability, and type-safety.
+          </p>
+        </motion.div>
+
+        {/* Skills Grid */}
+        <motion.div
+          variants={container}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, amount: 0.1 }}
+          className="grid gap-8 md:grid-cols-2 lg:grid-cols-3"
+        >
+          {SKILL_CATEGORIES.map((category, idx) => (
+            <motion.div
+              key={idx}
+              variants={item}
+              className="group relative overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-900/40 p-8 hover:border-indigo-500/30 transition-all duration-300"
+            >
+              {/* Category Header */}
+              <div className="mb-6 flex items-center gap-3">
+                <div className="rounded-lg bg-zinc-800 p-2.5 ring-1 ring-white/5 group-hover:bg-indigo-500/20 group-hover:text-indigo-300 transition-colors">
+                  {category.icon}
+                </div>
+                <h3 className="font-space text-xl font-bold text-zinc-100">
+                  {category.title}
+                </h3>
               </div>
-              <div className="min-w-0">
-                <p className="truncate text-sm font-medium text-white">{skill.name}</p>
-                <span
-                  className={[
-                    "mt-1 inline-block rounded-full border px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide",
-                    levelStyle[skill.level],
-                  ].join(" ")}
-                >
-                  {skill.level}
-                </span>
+
+              {/* Skills List */}
+              <div className="flex flex-wrap gap-3">
+                {category.skills.map((skill) => (
+                  <div
+                    key={skill.name}
+                    className="flex items-center gap-2 rounded-lg bg-zinc-950/50 px-3 py-2 text-sm font-medium text-zinc-300 border border-zinc-800 transition-all hover:border-indigo-500/30 hover:bg-indigo-950/30 hover:text-white cursor-default"
+                  >
+                    <span className={skill.color}>{skill.icon}</span>
+                    {skill.name}
+                  </div>
+                ))}
               </div>
-            </div>
+            </motion.div>
+          ))}
+        </motion.div>
 
-            {/* Glow */}
-            <span
-              className="pointer-events-none absolute inset-0 -z-10 rounded-xl bg-gradient-to-tr from-purple-600/0 via-purple-600/0 to-indigo-600/0 opacity-0 blur-xl transition-opacity duration-300 group-hover:opacity-20"
-              aria-hidden
-            />
-          </motion.div>
-        ))}
-      </motion.div>
+        {/* Bottom "Focus" Bar */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.4 }}
+          className="mt-16 rounded-2xl border border-dashed border-zinc-800 bg-zinc-900/20 p-8 text-center"
+        >
+         <p className="text-zinc-400">
+          <Cpu className="inline-block mr-2 text-indigo-400 mb-1" size={18} />
+          Currently exploring <span className="text-white font-medium">AWS serverless architecture</span> (Lambda, S3, CloudFront) and strengthening my <span className="text-white font-medium">DevOps fundamentals</span>.
+        </p>
 
-      {/* Divider */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.5 }}
-        className="mx-auto mt-12 h-px max-w-6xl bg-gradient-to-r from-transparent via-white/10 to-transparent"
-      />
+        </motion.div>
 
-      {/* Note */}
-      <p className="mx-auto mt-6 max-w-3xl text-center text-sm text-gray-400">
-        Tip: Explore the listed tools and technologies. Currently deepening{" "}
-        <span className="text-purple-300 font-medium">TypeScript</span> and expanding into{" "}
-        <span className="text-purple-300 font-medium">AI / Python data integration</span>.
-      </p>
+      </div>
     </section>
   );
 }

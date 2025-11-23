@@ -1,36 +1,38 @@
 "use client";
 
-import React, { MouseEvent, useCallback } from "react";
+import React, { useCallback } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { 
+  ArrowRight, 
+  Github, 
+  Linkedin, 
+  Mail, 
+  ChevronDown, 
+  Code2, 
+  Layers, 
+  Cpu 
+} from "lucide-react";
+
+// Components
 import About from "./components/About";
 import Skills from "./components/Skills";
 import Projects from "./components/Projects";
 import Contact from "./components/Contact";
-import { motion, useReducedMotion } from "framer-motion";
-import {
-  FaArrowRight,
-  FaProjectDiagram,
-  FaGithub,
-  FaLinkedin,
-  FaEnvelope,
-  FaChevronDown,
-} from "react-icons/fa";
 
 export default function Home() {
-  const prefersReducedMotion = useReducedMotion();
+  const { scrollY } = useScroll();
+  const y1 = useTransform(scrollY, [0, 500], [0, 200]);
+  const y2 = useTransform(scrollY, [0, 500], [0, -150]);
 
-  // --- Experience Calculation ---
+  // --- Experience Calculation Logic (Preserved) ---
   const startTCS = new Date("2021-12-29");
   const endTCS = new Date("2024-06-10");
   const startCurrent = new Date("2024-10-01");
 
   function getExperience() {
     const now = new Date();
-    const tcsMonths =
-      (endTCS.getFullYear() - startTCS.getFullYear()) * 12 +
-      (endTCS.getMonth() - startTCS.getMonth());
-    const currentMonths =
-      (now.getFullYear() - startCurrent.getFullYear()) * 12 +
-      (now.getMonth() - startCurrent.getMonth());
+    const tcsMonths = (endTCS.getFullYear() - startTCS.getFullYear()) * 12 + (endTCS.getMonth() - startTCS.getMonth());
+    const currentMonths = (now.getFullYear() - startCurrent.getFullYear()) * 12 + (now.getMonth() - startCurrent.getMonth());
     const totalMonths = tcsMonths + currentMonths;
     const years = Math.floor(totalMonths / 12);
     const months = totalMonths % 12;
@@ -38,202 +40,175 @@ export default function Home() {
   }
 
   const { years, months } = getExperience();
-  const expText = `${years} yrs${months > 0 ? " " + months + " mos" : ""} Exp.`;
+  const expText = `${years}.${months} Years`; // Cleaned up format for "Tech" look
 
-  const container = {
-    hidden: { opacity: 0 },
-    visible: { opacity: 1, transition: { staggerChildren: 0.15 } },
-  };
-
-  const item = {
-    hidden: { opacity: 0, y: 14 },
-    visible: { opacity: 1, y: 0 },
-  };
-
-  const smoothScroll = useCallback((e: MouseEvent, target: string) => {
+  const smoothScroll = useCallback((e: React.MouseEvent, target: string) => {
     e.preventDefault();
     const el = document.querySelector(target);
     if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
-    else window.location.hash = target;
   }, []);
 
   return (
     <>
-      <main
-        id="home"
-        role="main"
-        className="relative flex min-h-[92svh] sm:min-h-[88vh] flex-col items-center justify-center overflow-hidden bg-gradient-to-b from-[#0a0a23] to-black px-4 sm:px-6 text-center pt-[env(safe-area-inset-top)]"
+      {/* --- HERO SECTION --- */}
+      <section 
+        id="home" 
+        className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden pt-36 md:pt-40" 
       >
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(120,119,198,0.10),transparent_60%)]" />
-        <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.06)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.06)_1px,transparent_1px)] bg-[size:40px_40px] opacity-[0.07]" />
+        
+        {/* Parallax Background Elements */}
+        <motion.div style={{ y: y1, x: -50 }} className="absolute top-20 left-[10%] -z-10 h-[300px] w-[300px] rounded-full bg-indigo-600/20 blur-[100px]" />
+        <motion.div style={{ y: y2, x: 50 }} className="absolute bottom-20 right-[10%] -z-10 h-[250px] w-[250px] rounded-full bg-purple-600/20 blur-[100px]" />
 
-        {!prefersReducedMotion && (
-          <>
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9, x: -80 }}
-              whileInView={{ opacity: 0.35, scale: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 1.2, ease: "easeOut" }}
-              className="pointer-events-none absolute -top-16 -left-16 hidden h-[300px] w-[300px] -z-10 rounded-full bg-purple-700 blur-[120px] md:block"
-            />
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9, x: 80 }}
-              whileInView={{ opacity: 0.25, scale: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 1.2, ease: "easeOut", delay: 0.2 }}
-              className="pointer-events-none absolute -bottom-24 -right-24 hidden h-[360px] w-[360px] -z-10 rounded-full bg-indigo-900 blur-[110px] md:block"
-            />
-          </>
-        )}
-
-        <motion.div
-          variants={container}
-          initial="hidden"
-          animate="visible"
-          className="relative z-10 mx-auto w-full max-w-[680px] sm:max-w-3xl"
-        >
-          {/* Added mt-6 on mobile to avoid header overlap */}
+        <div className="container relative z-10 mx-auto px-6 text-center">
+          
+          {/* 1. Status Badge */}
           <motion.div
-            variants={item}
-            className="mt-6 sm:mt-0 mb-4 inline-flex max-w-full items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-purple-200"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="mb-6 flex justify-center"
           >
-            <span className="inline-block h-2 w-2 animate-pulse rounded-full bg-green-400" />
-            Open to full-time roles & collaborations
+            <div className="inline-flex items-center gap-2 rounded-full border border-indigo-500/30 bg-indigo-500/10 px-4 py-1.5 text-xs font-medium text-indigo-300 backdrop-blur-md">
+              <span className="relative flex h-2 w-2">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-indigo-400 opacity-75"></span>
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-indigo-500"></span>
+              </span>
+              <span>Available for MERN Stack Opportunities</span>
+            </div>
           </motion.div>
 
-          <motion.p
-            variants={item}
-            className="text-[11px] sm:text-xs uppercase tracking-[0.25em] text-purple-300/90"
-          >
-            Full-Stack Developer
-          </motion.p>
-
+          {/* 2. Main Headline */}
           <motion.h1
-            variants={item}
-            className="mt-2 text-balance font-extrabold leading-tight text-[clamp(2rem,7vw,4rem)] sm:text-[clamp(2.5rem,5vw,4.5rem)]"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="font-space mx-auto max-w-4xl text-5xl font-bold tracking-tight text-white sm:text-7xl md:text-8xl"
           >
-            <span className="text-purple-300">Hi, I’m </span>
-            <span className="bg-gradient-to-r from-purple-300 via-pink-200 to-white bg-clip-text text-transparent">
-              Bala&nbsp;Vardhan
+            Engineering Scalable <br />
+            <span className="bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
+              Digital Solutions.
             </span>
           </motion.h1>
 
+          {/* 3. Sub-headline */}
           <motion.p
-            variants={item}
-            className="mx-auto mt-4 max-w-[44rem] text-[15px] text-gray-400 sm:text-lg"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="mx-auto mt-8 max-w-2xl text-lg text-zinc-400 sm:text-xl leading-relaxed"
           >
-            I build fast, modern web apps with
-            <span className="font-semibold text-purple-200">
-              {" "}
-              React, Next.js, and Node.js
-            </span>
-            . I focus on clean UI, strong DX, and measurable impact.
+            Hi, I'm <span className="text-white font-semibold">Bala Vardhan</span> - 
+          a Full-Stack Engineer focused on re-architecting and optimizing modern web applications. 
+          I build high-performance, secure digital systems using 
+          <span className="text-indigo-400"> React, Next.js, and Node.js</span>.
+
           </motion.p>
 
+          {/* 4. CTA Buttons */}
           <motion.div
-            variants={item}
-            className="mt-6 grid w-full gap-3 sm:inline-flex sm:w-auto sm:justify-center"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row"
           >
             <a
               href="#projects"
               onClick={(e) => smoothScroll(e, "#projects")}
-              aria-label="View projects"
-              className="flex w-full sm:w-auto items-center justify-center gap-2 rounded-md bg-gradient-to-r from-purple-600 to-indigo-600 px-5 py-3 text-sm font-medium text-white shadow-md transition will-change-transform hover:-translate-y-0.5 hover:from-purple-700 hover:to-indigo-700 hover:shadow-purple-500/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a0a23] active:translate-y-0"
+              className="group relative inline-flex h-12 w-full sm:w-auto items-center justify-center overflow-hidden rounded-full bg-white px-8 font-medium text-zinc-950 transition-all hover:bg-zinc-200 hover:scale-105"
             >
-              View Projects <FaProjectDiagram />
+              <span className="mr-2">View Featured Work</span>
+              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
             </a>
+            
             <a
-              href="#about"
-              onClick={(e) => smoothScroll(e, "#about")}
-              aria-label="Learn more about me"
-              className="flex w-full sm:w-auto items-center justify-center gap-2 rounded-md border border-purple-500/60 bg-white/5 px-5 py-3 text-sm font-medium text-white shadow-sm transition will-change-transform hover:-translate-y-0.5 hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400/70 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a0a23] active:translate-y-0"
+              href="#contact"
+              onClick={(e) => smoothScroll(e, "#contact")}
+              className="inline-flex h-12 w-full sm:w-auto items-center justify-center rounded-full border border-zinc-800 bg-zinc-950/50 px-8 font-medium text-white backdrop-blur-sm transition-all hover:bg-zinc-900 hover:border-zinc-600"
             >
-              About Me <FaArrowRight />
+              Contact Me
             </a>
           </motion.div>
 
+          {/* 5. Social Links (Minimalist) */}
           <motion.div
-            variants={item}
-            className="mt-7 flex justify-center gap-5 text-xl text-gray-400"
+             initial={{ opacity: 0 }}
+             animate={{ opacity: 1 }}
+             transition={{ duration: 0.8, delay: 0.5 }}
+             className="mt-10 flex justify-center gap-6"
           >
-            <a
-              href="https://github.com/vardhan12178?tab=repositories"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="GitHub"
-              title="GitHub"
-              className="rounded-md p-2 transition hover:bg-white/5 hover:text-white"
-            >
-              <FaGithub />
-            </a>
-            <a
-              href="https://www.linkedin.com/in/bala-vardhan-pula-753b011b9/"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="LinkedIn"
-              title="LinkedIn"
-              className="rounded-md p-2 transition hover:bg-white/5 hover:text-white"
-            >
-              <FaLinkedin />
-            </a>
-            <a
-              href="mailto:balavardhanpula@gmail.com"
-              aria-label="Email"
-              title="Email"
-              className="rounded-md p-2 transition hover:bg-white/5 hover:text-white"
-            >
-              <FaEnvelope />
-            </a>
+            {[
+              { icon: Github, href: "https://github.com/vardhan12178", label: "Github" },
+              { icon: Linkedin, href: "https://www.linkedin.com/in/bala-vardhan-pula-753b011b9/", label: "LinkedIn" },
+              { icon: Mail, href: "mailto:balavardhanpula@gmail.com", label: "Email" },
+            ].map((social, index) => (
+              <a
+                key={index}
+                href={social.href}
+                target="_blank"
+                rel="noreferrer"
+                aria-label={social.label}
+                className="text-zinc-500 hover:text-indigo-400 hover:scale-110 transition-all duration-300"
+              >
+                <social.icon className="h-6 w-6" />
+              </a>
+            ))}
           </motion.div>
 
+          {/* 6. Glass Bento Grid Stats */}
           <motion.div
-            variants={item}
-            className="mx-auto mt-8 grid w-full max-w-2xl grid-cols-1 min-[420px]:grid-cols-2 md:grid-cols-3 gap-4 text-xs text-gray-300 sm:text-sm"
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.6 }}
+            className="mx-auto mt-20 grid max-w-4xl grid-cols-1 gap-4 sm:grid-cols-3"
           >
-            <div className="rounded-lg border border-white/10 bg-white/5 px-4 py-4 text-center">
-              <p className="text-2xl font-bold text-white">{expText}</p>
-              <p className="opacity-80">Experience</p>
+            {/* Stat 1: Experience */}
+            <div className="group relative overflow-hidden rounded-2xl border border-white/5 bg-white/5 p-6 backdrop-blur-sm transition-colors hover:bg-white/10 hover:border-white/10">
+              <div className="flex flex-col items-center">
+                <div className="mb-3 rounded-full bg-indigo-500/20 p-3 text-indigo-400">
+                  <Code2 size={24} />
+                </div>
+                <h3 className="text-3xl font-bold text-white font-space">{expText}</h3>
+                <p className="text-sm text-zinc-400">Professional Experience</p>
+              </div>
             </div>
-            <div className="rounded-lg border border-white/10 bg-white/5 px-4 py-4 text-center">
-              <p className="font-bold text-white tracking-tight whitespace-nowrap text-[clamp(0.95rem,1.6vw,1.1rem)]">
-                Full-Stack E-Commerce
-              </p>
-              <p className="opacity-80">VKart Project</p>
+
+            {/* Stat 2: VKart Project */}
+            <div className="group relative overflow-hidden rounded-2xl border border-white/5 bg-white/5 p-6 backdrop-blur-sm transition-colors hover:bg-white/10 hover:border-white/10">
+               <div className="flex flex-col items-center">
+                <div className="mb-3 rounded-full bg-purple-500/20 p-3 text-purple-400">
+                  <Layers size={24} />
+                </div>
+                <h3 className="text-3xl font-bold text-white font-space">VKart</h3>
+                <p className="text-sm text-zinc-400">Full Stack E-commerce</p>
+              </div>
             </div>
-            <div className="rounded-lg border border-white/10 bg-white/5 px-4 py-4 text-center">
-              <p className="font-bold text-white tracking-tight whitespace-nowrap text-[clamp(0.95rem,1.6vw,1.1rem)]">
-                MERN Stack Developer
-              </p>
-              <p className="opacity-80">Core Expertise</p>
+
+             {/* Stat 3: Tech Focus */}
+             <div className="group relative overflow-hidden rounded-2xl border border-white/5 bg-white/5 p-6 backdrop-blur-sm transition-colors hover:bg-white/10 hover:border-white/10">
+               <div className="flex flex-col items-center">
+                <div className="mb-3 rounded-full bg-pink-500/20 p-3 text-pink-400">
+                  <Cpu size={24} />
+                </div>
+                <h3 className="text-3xl font-bold text-white font-space">MERN</h3>
+                <p className="text-sm text-zinc-400">Core Expertise</p>
+              </div>
             </div>
           </motion.div>
-        </motion.div>
 
-        {/* ↓ Smooth scroll to About section */}
-        <a
-          href="#about"
-          onClick={(e) => smoothScroll(e, "#about")}
-          aria-label="Scroll to About"
-          className="absolute bottom-8 text-2xl text-purple-300 cursor-pointer"
+        </div>
+
+        {/* Scroll Indicator */}
+        <motion.div 
+          animate={{ y: [0, 10, 0] }}
+          transition={{ duration: 2, repeat: Infinity }}
+          className="absolute bottom-10 left-1/2 -translate-x-1/2 text-zinc-500"
         >
-          <motion.span
-            initial={{ opacity: 0, y: -8 }}
-            animate={
-              prefersReducedMotion ? undefined : { opacity: 1, y: 0 }
-            }
-            transition={{
-              delay: 1.1,
-              duration: 0.8,
-              repeat: prefersReducedMotion ? 0 : Infinity,
-              repeatType: "reverse",
-            }}
-            className="inline-block"
-          >
-            <FaChevronDown />
-          </motion.span>
-        </a>
-      </main>
+          <ChevronDown className="h-6 w-6" />
+        </motion.div>
+      </section>
 
+      {/* --- Rest of the Page --- */}
       <About />
       <Skills />
       <Projects />
