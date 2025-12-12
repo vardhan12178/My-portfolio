@@ -1,14 +1,14 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { 
-  SiReact, 
-  SiNextdotjs, 
-  SiTypescript, 
-  SiTailwindcss, 
-  SiNodedotjs, 
-  SiExpress, 
-  SiMongodb, 
+import {
+  SiReact,
+  SiNextdotjs,
+  SiTypescript,
+  SiTailwindcss,
+  SiNodedotjs,
+  SiExpress,
+  SiMongodb,
   SiPostgresql,
   SiRedis,
   SiDocker,
@@ -20,7 +20,7 @@ import {
   // SiAmazonaws removed causing error
 } from "react-icons/si";
 import { FaAws } from "react-icons/fa"; // <--- Added Safe Import
-import { Code2, Cpu, Database, Globe, Layers, Server } from "lucide-react";
+import { Code2, Cpu, Database, Globe, Layers, Server, Sparkles } from "lucide-react";
 
 /* ============================================================================
    Data: High-Value MERN Stack Only
@@ -44,6 +44,7 @@ const SKILL_CATEGORIES = [
     skills: [
       { name: "Node.js", icon: <SiNodedotjs size={20} />, color: "text-green-500" },
       { name: "Express.js", icon: <SiExpress size={20} />, color: "text-white" },
+      { name: "Redis", icon: <SiRedis size={20} />, color: "text-red-500" },
       { name: "JWT Auth", icon: <Code2 size={20} />, color: "text-yellow-400" },
       { name: "REST APIs", icon: <Layers size={20} />, color: "text-orange-400" },
     ],
@@ -53,9 +54,10 @@ const SKILL_CATEGORIES = [
     icon: <Database className="text-pink-400" size={20} />,
     skills: [
       { name: "MongoDB", icon: <SiMongodb size={20} />, color: "text-green-400" },
+      { name: "AI Search", icon: <Sparkles size={20} />, color: "text-yellow-400" },
       { name: "Docker", icon: <SiDocker size={20} />, color: "text-blue-500" },
       { name: "Git / GitHub", icon: <SiGit size={20} />, color: "text-orange-500" },
-      { name: "AWS (S3)", icon: <FaAws size={20} />, color: "text-yellow-500" }, 
+      { name: "AWS (S3)", icon: <FaAws size={20} />, color: "text-yellow-500" },
     ],
   },
 ];
@@ -82,13 +84,13 @@ const item = {
 export default function Skills() {
   return (
     <section id="skills" className="relative bg-zinc-950 py-24">
-      
+
       {/* Background Decor */}
       <div className="absolute left-0 top-1/4 h-96 w-96 rounded-full bg-indigo-500/5 blur-[100px]" />
       <div className="absolute right-0 bottom-1/4 h-64 w-64 rounded-full bg-purple-500/5 blur-[80px]" />
 
       <div className="container mx-auto px-6">
-        
+
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -144,20 +146,7 @@ export default function Skills() {
           ))}
         </motion.div>
 
-        {/* Bottom "Focus" Bar */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.4 }}
-          className="mt-16 rounded-2xl border border-dashed border-zinc-800 bg-zinc-900/20 p-8 text-center"
-        >
-         <p className="text-zinc-400">
-          <Cpu className="inline-block mr-2 text-indigo-400 mb-1" size={18} />
-          Currently exploring <span className="text-white font-medium">AWS serverless architecture</span> (Lambda, S3, CloudFront) and strengthening my <span className="text-white font-medium">DevOps fundamentals</span>.
-        </p>
 
-        </motion.div>
 
       </div>
     </section>

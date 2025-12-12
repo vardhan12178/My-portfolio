@@ -3,15 +3,16 @@
 import { useState } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
-import { 
-  ExternalLink, 
-  Github, 
-  Layers, 
-  ShieldCheck, 
-  ShoppingCart, 
-  BarChart3, 
-  ArrowRight, 
-  Zap
+import {
+  ExternalLink,
+  Github,
+  Layers,
+  ShieldCheck,
+  ShoppingCart,
+  BarChart3,
+  ArrowRight,
+  Zap,
+  Sparkles
 } from "lucide-react";
 
 // --- PROJECT DATA (Updated for AWS S3) ---
@@ -24,6 +25,8 @@ const VKART_DATA = {
   technologies: [
     "React",
     "Redux",
+    "Redis",
+    "AI Search",
     "Node.js",
     "Express",
     "MongoDB",
@@ -35,27 +38,34 @@ const VKART_DATA = {
   gallery: [
     {
       id: 0,
+      title: "AI Smart Search",
+      desc: "AI-powered product discovery using MongoDB AI Search to find relevant items based on semantic meaning.",
+      img: "/img/Vkart1.webp",
+      icon: <Sparkles size={18} />
+    },
+    {
+      id: 1,
       title: "Admin Analytics",
       desc: "Role-protected admin panel with real-time metrics for revenue, user registrations, and order status distribution.",
       img: "/img/Vkart3.webp",
       icon: <BarChart3 size={18} />
     },
     {
-      id: 1,
+      id: 2,
       title: "Secure Auth & 2FA",
       desc: "Email-password login, Google OAuth, JWT authentication, session security, and optional two-factor authentication.",
       img: "/img/Vkart2.webp",
       icon: <ShieldCheck size={18} />
     },
     {
-      id: 2,
+      id: 3,
       title: "Inventory CMS",
       desc: "Product and category management with secure image uploads to AWS S3, activation toggles, and detail editing.",
       img: "/img/Vkart5.webp",
       icon: <Layers size={18} />
     },
     {
-      id: 3,
+      id: 4,
       title: "Order Workflow",
       desc: "End-to-end order lifecycle: Pending → Placed → Shipped → Out for Delivery → Delivered, managed through a state-driven admin dashboard.",
       img: "/img/Vkart4.webp",
@@ -81,15 +91,15 @@ export default function Projects() {
 
   return (
     <section id="projects" className="relative bg-zinc-950 py-5 text-zinc-100">
-      
+
       {/* Background Glows */}
       <div className="absolute right-0 top-1/4 h-[500px] w-[500px] rounded-full bg-indigo-500/5 blur-[120px]" />
 
       <div className="container mx-auto px-6 max-w-6xl">
-        
+
         {/* Section Header */}
         <div className="mb-20 text-center">
-          <motion.h2 
+          <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -105,7 +115,7 @@ export default function Projects() {
         {/* --- FLAGSHIP PROJECT: VKART --- */}
         <div className="group relative rounded-3xl border border-zinc-800 bg-zinc-900/30 p-4 sm:p-8 backdrop-blur-sm lg:p-12">
           <div className="grid gap-12 lg:grid-cols-[1.2fr_0.8fr]">
-            
+
             {/* LEFT: Interactive Browser Window */}
             <div className="relative">
               {/* Browser Header */}
@@ -119,7 +129,7 @@ export default function Projects() {
               </div>
 
               {/* Dynamic Screen */}
-              <div className="relative aspect-[16/10] overflow-hidden rounded-b-xl border border-zinc-700 bg-zinc-950 shadow-2xl">
+              <div className="relative aspect-video overflow-hidden rounded-b-xl border border-zinc-700 bg-zinc-950 shadow-2xl">
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={activeTab}
@@ -136,27 +146,27 @@ export default function Projects() {
                       className="object-cover object-top"
                       priority
                     />
-                   
+
                     <div className="absolute inset-0 bg-gradient-to-t from-zinc-950/20 to-transparent" />
                   </motion.div>
                 </AnimatePresence>
               </div>
               {/* Description under image */}
-            <div className="mt-4 p-4 bg-zinc-900/60 border border-zinc-800 rounded-xl h-32 overflow-y-auto">
-              <motion.div
-                key={activeTab}
-                initial={{ opacity: 0, y: 5 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.2 }}
-              >
-                <h4 className="text-sm font-bold text-white mb-1">
-                  {VKART_DATA.gallery[activeTab].title}
-                </h4>
-                <p className="text-xs text-zinc-400 leading-relaxed">
-                  {VKART_DATA.gallery[activeTab].desc}
-                </p>
-              </motion.div>
-            </div>
+              <div className="mt-4 p-4 bg-zinc-900/60 border border-zinc-800 rounded-xl h-32 overflow-y-auto">
+                <motion.div
+                  key={activeTab}
+                  initial={{ opacity: 0, y: 5 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <h4 className="text-sm font-bold text-white mb-1">
+                    {VKART_DATA.gallery[activeTab].title}
+                  </h4>
+                  <p className="text-xs text-zinc-400 leading-relaxed">
+                    {VKART_DATA.gallery[activeTab].desc}
+                  </p>
+                </motion.div>
+              </div>
 
             </div>
 
@@ -184,15 +194,13 @@ export default function Projects() {
                     <button
                       key={item.id}
                       onClick={() => setActiveTab(index)}
-                      className={`group flex w-full items-center gap-4 rounded-xl border p-3 text-left transition-all ${
-                        activeTab === index 
-                          ? "border-indigo-500 bg-indigo-500/10" 
-                          : "border-zinc-800 bg-zinc-900/50 hover:border-zinc-700"
-                      }`}
+                      className={`group flex w-full items-center gap-4 rounded-xl border p-3 text-left transition-all ${activeTab === index
+                        ? "border-indigo-500 bg-indigo-500/10"
+                        : "border-zinc-800 bg-zinc-900/50 hover:border-zinc-700"
+                        }`}
                     >
-                      <div className={`rounded-lg p-2 transition-colors ${
-                         activeTab === index ? "bg-indigo-500 text-white" : "bg-zinc-800 text-zinc-400 group-hover:text-white"
-                      }`}>
+                      <div className={`rounded-lg p-2 transition-colors ${activeTab === index ? "bg-indigo-500 text-white" : "bg-zinc-800 text-zinc-400 group-hover:text-white"
+                        }`}>
                         {item.icon}
                       </div>
                       <div>
@@ -207,16 +215,16 @@ export default function Projects() {
 
                 {/* Actions */}
                 <div className="flex gap-4">
-                  <a 
-                    href={VKART_DATA.liveUrl} 
-                    target="_blank" 
+                  <a
+                    href={VKART_DATA.liveUrl}
+                    target="_blank"
                     className="flex items-center gap-2 rounded-full bg-indigo-600 px-6 py-3 font-medium text-white transition-all hover:bg-indigo-700 hover:scale-105"
                   >
                     View Live App <ArrowRight size={18} />
                   </a>
-                  <a 
-                    href={VKART_DATA.githubUrl} 
-                    target="_blank" 
+                  <a
+                    href={VKART_DATA.githubUrl}
+                    target="_blank"
                     className="flex items-center gap-2 rounded-full border border-zinc-700 bg-zinc-800 px-6 py-3 font-medium text-white transition-all hover:bg-zinc-700"
                   >
                     <Github size={18} /> Source Code
@@ -228,7 +236,7 @@ export default function Projects() {
         </div>
 
         {/* --- SECONDARY PROJECT: IMAGE MAGIC --- */}
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -237,12 +245,12 @@ export default function Projects() {
         >
           {/* Screenshot */}
           <div className="relative overflow-hidden rounded-xl border border-zinc-700 bg-zinc-950 aspect-video group">
-             <Image
-                src={SECONDARY_PROJECT.img}
-                alt={SECONDARY_PROJECT.title}
-                fill
-                className="object-cover transition-transform duration-500 group-hover:scale-105"
-             />
+            <Image
+              src={SECONDARY_PROJECT.img}
+              alt={SECONDARY_PROJECT.title}
+              fill
+              className="object-cover transition-transform duration-500 group-hover:scale-105"
+            />
           </div>
 
           {/* Info */}
@@ -250,12 +258,12 @@ export default function Projects() {
             <div className="flex items-center justify-between mb-4">
               <h3 className="font-space text-2xl font-bold text-white">{SECONDARY_PROJECT.title}</h3>
               <div className="flex gap-3">
-                 <a href={SECONDARY_PROJECT.links.github} target="_blank" className="p-2 rounded-full bg-zinc-800 text-zinc-400 hover:text-white transition-colors">
-                   <Github size={20} />
-                 </a>
-                 <a href={SECONDARY_PROJECT.links.live} target="_blank" className="p-2 rounded-full bg-zinc-800 text-zinc-400 hover:text-white transition-colors">
-                   <ExternalLink size={20} />
-                 </a>
+                <a href={SECONDARY_PROJECT.links.github} target="_blank" className="p-2 rounded-full bg-zinc-800 text-zinc-400 hover:text-white transition-colors">
+                  <Github size={20} />
+                </a>
+                <a href={SECONDARY_PROJECT.links.live} target="_blank" className="p-2 rounded-full bg-zinc-800 text-zinc-400 hover:text-white transition-colors">
+                  <ExternalLink size={20} />
+                </a>
               </div>
             </div>
             <p className="text-zinc-400 mb-6">

@@ -64,21 +64,21 @@ export default function About() {
   // --- Tech Stack (Grouped for Visual Impact) ---
   const skills = [
     { label: "Frontend", icon: Layout, items: ["React", "Next.js", "Tailwind CSS", "Redux"] },
-    { label: "Backend", icon: Server, items: ["Node.js", "Express", "PHP (Legacy)", "REST APIs"] },
-    { label: "Database", icon: Database, items: ["MongoDB", "MySQL", "PostgreSQL"] },
+    { label: "Backend", icon: Server, items: ["Node.js", "Express", "Redis", "REST APIs"] },
+    { label: "Database", icon: Database, items: ["MongoDB", "AI Search", "MySQL", "PostgreSQL"] },
     { label: "DevOps/Tools", icon: Terminal, items: ["Git", "AWS (Basic)", "Postman", "Docker"] },
   ];
 
   return (
     <section id="about" className="relative bg-zinc-950 py-24 text-zinc-100">
-      
+
       {/* Background Glow */}
       <div className="absolute right-0 top-0 -z-10 h-[500px] w-[500px] rounded-full bg-indigo-500/5 blur-[120px]" />
 
       <div className="container mx-auto px-6">
-        
+
         {/* Section Header */}
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -89,14 +89,14 @@ export default function About() {
           </h2>
           <div className="mt-2 h-1 w-20 rounded-full bg-gradient-to-r from-indigo-500 to-purple-500" />
           <p className="mt-6 max-w-2xl text-zinc-400 text-lg">
-           A results-driven engineer modernizing legacy systems into scalable, high-performance MERN applications
+            A results-driven engineer modernizing legacy systems into scalable, high-performance MERN applications
           </p>
         </motion.div>
 
         <div className="grid gap-12 lg:grid-cols-[1fr_1.5fr]">
-          
+
           {/* LEFT COLUMN: Profile & Bio */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
@@ -113,7 +113,7 @@ export default function About() {
                   className="object-cover"
                 />
               </div>
-              
+
               <h3 className="font-space text-2xl font-bold text-white">Bala Vardhan</h3>
               <p className="text-indigo-400 font-medium">Full Stack Engineer</p>
 
@@ -126,13 +126,13 @@ export default function About() {
                   <div className="text-zinc-200 text-sm font-semibold">Hyderabad, IN</div>
                 </div>
                 <div className="rounded-xl bg-zinc-950/50 p-3 border border-zinc-800/50">
-                   <div className="flex items-center gap-2 text-zinc-500 text-xs uppercase tracking-wider mb-1">
+                  <div className="flex items-center gap-2 text-zinc-500 text-xs uppercase tracking-wider mb-1">
                     <Briefcase size={12} /> Experience
                   </div>
                   <div className="text-zinc-200 text-sm font-semibold">{expText}</div>
                 </div>
                 <div className="rounded-xl bg-zinc-950/50 p-3 border border-zinc-800/50 col-span-2">
-                   <div className="flex items-center gap-2 text-zinc-500 text-xs uppercase tracking-wider mb-1">
+                  <div className="flex items-center gap-2 text-zinc-500 text-xs uppercase tracking-wider mb-1">
                     <Clock size={12} /> Status
                   </div>
                   <div className="text-green-400 text-sm font-semibold flex items-center gap-2">
@@ -157,24 +157,24 @@ export default function About() {
           </motion.div>
 
           {/* RIGHT COLUMN: Timeline & Tech */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
             className="space-y-8"
           >
-            
+
             {/* Experience Section */}
             <div>
               <h3 className="mb-6 flex items-center gap-2 font-space text-2xl font-bold text-white">
                 <Code2 className="text-indigo-400" /> Work History
               </h3>
-              
+
               <div className="space-y-6">
                 {experienceTimeline.map((job, index) => (
-                  <div 
-                    key={index} 
+                  <div
+                    key={index}
                     className="group relative rounded-2xl border border-zinc-800 bg-zinc-900/30 p-6 transition-all hover:border-indigo-500/30 hover:bg-zinc-900/60"
                   >
                     <div className="flex flex-col justify-between gap-2 sm:flex-row sm:items-center">
@@ -188,7 +188,7 @@ export default function About() {
                         <Calendar size={12} /> {job.period}
                       </span>
                     </div>
-                    
+
                     <ul className="mt-4 space-y-2">
                       {job.achievements.map((achievement, i) => (
                         <li key={i} className="flex items-start gap-2 text-sm text-zinc-400">
@@ -215,8 +215,8 @@ export default function About() {
                     </div>
                     <div className="flex flex-wrap gap-2">
                       {skill.items.map((item) => (
-                        <span 
-                          key={item} 
+                        <span
+                          key={item}
                           className="rounded-md bg-zinc-800/50 px-2 py-1 text-xs text-zinc-400 border border-zinc-700/50 hover:border-indigo-500/50 hover:text-indigo-300 transition-colors cursor-default"
                         >
                           {item}
