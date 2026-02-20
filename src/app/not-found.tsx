@@ -4,44 +4,44 @@ import React from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
-import { Home, ArrowLeft, AlertCircle } from "lucide-react";
+import { Home, ArrowLeft } from "lucide-react";
 
 export default function NotFound() {
   const router = useRouter();
 
   return (
     <div className="relative flex min-h-screen w-full flex-col items-center justify-center overflow-hidden bg-zinc-950 text-white">
-      
+
       {/* --- Background Ambient Glows (Matches Home Page) --- */}
-      <motion.div 
-        animate={{ 
+      <motion.div
+        animate={{
           scale: [1, 1.2, 1],
-          opacity: [0.3, 0.5, 0.3] 
+          opacity: [0.3, 0.5, 0.3]
         }}
-        transition={{ 
-          duration: 8, 
+        transition={{
+          duration: 8,
           repeat: Infinity,
-          repeatType: "reverse" 
+          repeatType: "reverse"
         }}
-        className="absolute top-1/4 left-1/4 -z-10 h-[400px] w-[400px] rounded-full bg-indigo-600/20 blur-[120px]" 
+        className="absolute top-1/4 left-1/4 -z-10 h-[400px] w-[400px] rounded-full bg-emerald-600/20 blur-[120px]"
       />
-      <motion.div 
-        animate={{ 
+      <motion.div
+        animate={{
           scale: [1, 1.1, 1],
-          opacity: [0.3, 0.5, 0.3] 
+          opacity: [0.3, 0.5, 0.3]
         }}
-        transition={{ 
-          duration: 10, 
+        transition={{
+          duration: 10,
           repeat: Infinity,
           repeatType: "reverse",
-          delay: 1 
+          delay: 1
         }}
-        className="absolute bottom-1/4 right-1/4 -z-10 h-[400px] w-[400px] rounded-full bg-purple-600/20 blur-[120px]" 
+        className="absolute bottom-1/4 right-1/4 -z-10 h-[400px] w-[400px] rounded-full bg-teal-600/20 blur-[120px]"
       />
 
       {/* --- Main Content --- */}
       <div className="container relative z-10 mx-auto px-6 text-center">
-        
+
         {/* 1. Error Badge */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -49,10 +49,10 @@ export default function NotFound() {
           transition={{ duration: 0.5 }}
           className="mb-8 flex justify-center"
         >
-          <div className="inline-flex items-center gap-2 rounded-full border border-pink-500/30 bg-pink-500/10 px-4 py-1.5 text-xs font-medium text-pink-300 backdrop-blur-md">
+          <div className="inline-flex items-center gap-2 rounded-full border border-cyan-500/30 bg-cyan-500/10 px-4 py-1.5 text-xs font-medium text-cyan-300 backdrop-blur-md">
             <span className="relative flex h-2 w-2">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-pink-400 opacity-75"></span>
-              <span className="relative inline-flex h-2 w-2 rounded-full bg-pink-500"></span>
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-cyan-400 opacity-75"></span>
+              <span className="relative inline-flex h-2 w-2 rounded-full bg-cyan-500"></span>
             </span>
             <span>404 System Error</span>
           </div>
@@ -65,7 +65,7 @@ export default function NotFound() {
           transition={{ duration: 0.8, ease: "easeOut" }}
         >
           <h1 className="font-space text-9xl font-bold tracking-tighter sm:text-[10rem] md:text-[12rem]">
-            <span className="bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-emerald-400 via-teal-400 to-cyan-400 bg-clip-text text-transparent">
               404
             </span>
           </h1>
@@ -82,7 +82,7 @@ export default function NotFound() {
             Lost in Hyper-Space?
           </h2>
           <p className="mt-4 text-lg text-zinc-400 leading-relaxed">
-            The coordinates you are trying to reach do not exist in this sector. 
+            The coordinates you are trying to reach do not exist in this sector.
             It seems this page has drifted into a black hole.
           </p>
         </motion.div>
@@ -102,7 +102,7 @@ export default function NotFound() {
             <Home className="mr-2 h-4 w-4 transition-transform group-hover:-translate-y-1" />
             <span>Return Home</span>
           </Link>
-          
+
           {/* Secondary Button (Glass) */}
           <button
             onClick={() => router.back()}
@@ -117,7 +117,7 @@ export default function NotFound() {
       {/* --- Decorative Grid Lines --- */}
       <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-zinc-800 to-transparent opacity-50" />
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-zinc-800 to-transparent opacity-50" />
-      
+
     </div>
   );
 }

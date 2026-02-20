@@ -2,15 +2,15 @@
 
 import React, { useCallback } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { 
-  ArrowRight, 
-  Github, 
-  Linkedin, 
-  Mail, 
-  ChevronDown, 
-  Code2, 
-  Layers, 
-  Cpu 
+import {
+  ArrowRight,
+  Github,
+  Linkedin,
+  Mail,
+  ChevronDown,
+  Code2,
+  Layers,
+  Cpu
 } from "lucide-react";
 
 // Components
@@ -51,17 +51,17 @@ export default function Home() {
   return (
     <>
       {/* --- HERO SECTION --- */}
-      <section 
-        id="home" 
-        className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden pt-36 md:pt-40" 
+      <section
+        id="home"
+        className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden pt-36 md:pt-40"
       >
-        
+
         {/* Parallax Background Elements */}
-        <motion.div style={{ y: y1, x: -50 }} className="absolute top-20 left-[10%] -z-10 h-[300px] w-[300px] rounded-full bg-indigo-600/20 blur-[100px]" />
-        <motion.div style={{ y: y2, x: 50 }} className="absolute bottom-20 right-[10%] -z-10 h-[250px] w-[250px] rounded-full bg-purple-600/20 blur-[100px]" />
+        <motion.div style={{ y: y1, x: -50 }} className="absolute top-20 left-[10%] -z-10 h-[300px] w-[300px] rounded-full bg-emerald-600/20 blur-[100px]" />
+        <motion.div style={{ y: y2, x: 50 }} className="absolute bottom-20 right-[10%] -z-10 h-[250px] w-[250px] rounded-full bg-teal-600/20 blur-[100px]" />
 
         <div className="container relative z-10 mx-auto px-6 text-center">
-          
+
           {/* 1. Status Badge */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -69,12 +69,12 @@ export default function Home() {
             transition={{ duration: 0.5 }}
             className="mb-6 flex justify-center"
           >
-            <div className="inline-flex items-center gap-2 rounded-full border border-indigo-500/30 bg-indigo-500/10 px-4 py-1.5 text-xs font-medium text-indigo-300 backdrop-blur-md">
+            <div className="inline-flex items-center gap-2 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-4 py-1.5 text-xs font-medium text-emerald-300 backdrop-blur-md">
               <span className="relative flex h-2 w-2">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-indigo-400 opacity-75"></span>
-                <span className="relative inline-flex h-2 w-2 rounded-full bg-indigo-500"></span>
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75"></span>
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500"></span>
               </span>
-              <span>Available for MERN Stack Opportunities</span>
+              <span>Actively looking for MERN Stack roles</span>
             </div>
           </motion.div>
 
@@ -85,9 +85,9 @@ export default function Home() {
             transition={{ duration: 0.6, delay: 0.1 }}
             className="font-space mx-auto max-w-4xl text-5xl font-bold tracking-tight text-white sm:text-7xl md:text-8xl"
           >
-            Engineering Scalable <br />
-            <span className="bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
-              Digital Solutions.
+            Engineering Solid <br />
+            <span className="bg-gradient-to-r from-emerald-400 via-teal-400 to-cyan-400 bg-clip-text text-transparent">
+              Web Applications.
             </span>
           </motion.h1>
 
@@ -98,10 +98,9 @@ export default function Home() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="mx-auto mt-8 max-w-2xl text-lg text-zinc-400 sm:text-xl leading-relaxed"
           >
-            Hi, I'm <span className="text-white font-semibold">Bala Vardhan</span> - 
-          a Full-Stack Engineer focused on re-architecting and optimizing modern web applications. 
-          I build high-performance, secure digital systems using 
-          <span className="text-indigo-400"> React, Next.js, and Node.js</span>.
+            Hi, I'm <span className="text-white font-semibold">Bala Vardhan</span> -
+            a Full-Stack Engineer who loves building clean and maintainable web applications.
+            My core tools are React, Next.js, and Node.js.
 
           </motion.p>
 
@@ -120,7 +119,7 @@ export default function Home() {
               <span className="mr-2">View Featured Work</span>
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
             </a>
-            
+
             <a
               href="#contact"
               onClick={(e) => smoothScroll(e, "#contact")}
@@ -132,10 +131,10 @@ export default function Home() {
 
           {/* 5. Social Links (Minimalist) */}
           <motion.div
-             initial={{ opacity: 0 }}
-             animate={{ opacity: 1 }}
-             transition={{ duration: 0.8, delay: 0.5 }}
-             className="mt-10 flex justify-center gap-6"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.8, delay: 0.5 }}
+            className="mt-10 flex justify-center gap-6"
           >
             {[
               { icon: Github, href: "https://github.com/vardhan12178", label: "Github" },
@@ -148,7 +147,7 @@ export default function Home() {
                 target="_blank"
                 rel="noreferrer"
                 aria-label={social.label}
-                className="text-zinc-500 hover:text-indigo-400 hover:scale-110 transition-all duration-300"
+                className="text-zinc-500 hover:text-emerald-400 hover:scale-110 transition-all duration-300"
               >
                 <social.icon className="h-6 w-6" />
               </a>
@@ -165,7 +164,7 @@ export default function Home() {
             {/* Stat 1: Experience */}
             <div className="group relative overflow-hidden rounded-2xl border border-white/5 bg-white/5 p-6 backdrop-blur-sm transition-colors hover:bg-white/10 hover:border-white/10">
               <div className="flex flex-col items-center">
-                <div className="mb-3 rounded-full bg-indigo-500/20 p-3 text-indigo-400">
+                <div className="mb-3 rounded-full bg-emerald-500/20 p-3 text-emerald-400">
                   <Code2 size={24} />
                 </div>
                 <h3 className="text-3xl font-bold text-white font-space">{expText}</h3>
@@ -175,8 +174,8 @@ export default function Home() {
 
             {/* Stat 2: VKart Project */}
             <div className="group relative overflow-hidden rounded-2xl border border-white/5 bg-white/5 p-6 backdrop-blur-sm transition-colors hover:bg-white/10 hover:border-white/10">
-               <div className="flex flex-col items-center">
-                <div className="mb-3 rounded-full bg-purple-500/20 p-3 text-purple-400">
+              <div className="flex flex-col items-center">
+                <div className="mb-3 rounded-full bg-teal-500/20 p-3 text-teal-400">
                   <Layers size={24} />
                 </div>
                 <h3 className="text-3xl font-bold text-white font-space">VKart</h3>
@@ -184,10 +183,10 @@ export default function Home() {
               </div>
             </div>
 
-             {/* Stat 3: Tech Focus */}
-             <div className="group relative overflow-hidden rounded-2xl border border-white/5 bg-white/5 p-6 backdrop-blur-sm transition-colors hover:bg-white/10 hover:border-white/10">
-               <div className="flex flex-col items-center">
-                <div className="mb-3 rounded-full bg-pink-500/20 p-3 text-pink-400">
+            {/* Stat 3: Tech Focus */}
+            <div className="group relative overflow-hidden rounded-2xl border border-white/5 bg-white/5 p-6 backdrop-blur-sm transition-colors hover:bg-white/10 hover:border-white/10">
+              <div className="flex flex-col items-center">
+                <div className="mb-3 rounded-full bg-cyan-500/20 p-3 text-cyan-400">
                   <Cpu size={24} />
                 </div>
                 <h3 className="text-3xl font-bold text-white font-space">MERN</h3>
@@ -199,7 +198,7 @@ export default function Home() {
         </div>
 
         {/* Scroll Indicator */}
-        <motion.div 
+        <motion.div
           animate={{ y: [0, 10, 0] }}
           transition={{ duration: 2, repeat: Infinity }}
           className="absolute bottom-10 left-1/2 -translate-x-1/2 text-zinc-500"

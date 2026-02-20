@@ -1,6 +1,6 @@
 import "./globals.css";
 import type { Metadata, Viewport } from "next";
-import { Inter, Space_Grotesk } from "next/font/google"; // Added Premium Header Font
+import { Inter, Space_Grotesk } from "next/font/google";
 import { Toaster } from "react-hot-toast";
 import Header from "./components/Header";
 import { MotionConfig } from "framer-motion";
@@ -74,11 +74,11 @@ function ThemeProvider({ children }: { children: React.ReactNode }) {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className="scroll-smooth" suppressHydrationWarning>
-     <body
+      <body
         className={clsx(
           inter.variable,
           spaceGrotesk.variable,
-          "overflow-x-hidden bg-zinc-950 text-zinc-100 flex min-h-screen flex-col antialiased selection:bg-indigo-500/30 selection:text-indigo-200"
+          "overflow-x-hidden bg-zinc-950 text-zinc-100 flex min-h-screen flex-col antialiased selection:bg-emerald-500/30 selection:text-emerald-200"
         )}
       >
         {/* --- Ambient Background Glow (Fixed Layer) --- */}
@@ -90,7 +90,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <ThemeProvider>
           <MotionConfig reducedMotion="user">
             <Toaster position="bottom-right" toastOptions={{ style: { background: '#333', color: '#fff' } }} />
-            
+
             {/* Header */}
             <Header />
 
@@ -98,54 +98,54 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <main id="main" className="flex-grow relative z-10">
               {children}
             </main>
-        {/* --- Refined Glassmorphism Footer --- */}
-        <footer className="border-t border-zinc-800/50 bg-zinc-950/50 backdrop-blur-xl">
-          <div className="mx-auto max-w-6xl px-6 py-12">
-            <div className="flex flex-col items-center justify-between gap-6 md:flex-row">
-              
-              {/* Brand & Copyright */}
-              <div className="text-center md:text-left">
-                <h3 className="font-space text-lg font-bold text-white">
-                  Bala <span className="text-indigo-400">Vardhan</span>
-                </h3>
-                <p className="mt-2 text-sm text-zinc-500">
-                  Built with Next.js, Tailwind & Framer Motion.
-                  <br className="hidden md:block" />
-                  © {new Date().getFullYear()} Bala Vardhan. All rights reserved.
-                </p>
-              </div>
+            {/* --- Refined Glassmorphism Footer --- */}
+            <footer className="border-t border-zinc-800/50 bg-zinc-950/50 backdrop-blur-xl">
+              <div className="mx-auto max-w-6xl px-6 py-12">
+                <div className="flex flex-col items-center justify-between gap-6 md:flex-row">
 
-              {/* Social Links (Icons) */}
-              <div className="flex gap-6 text-zinc-500">
-                <a 
-                  href="https://github.com/vardhan12178" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  aria-label="GitHub"
-                  className="transition-colors hover:text-indigo-400 hover:scale-110"
-                >
-                  <Github size={20} />
-                </a>
-                <a 
-                  href="https://linkedin.com/in/bala-vardhan-pula-753b011b9/" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  aria-label="LinkedIn"
-                  className="transition-colors hover:text-indigo-400 hover:scale-110"
-                >
-                  <Linkedin size={20} />
-                </a>
-                <a 
-                  href="mailto:balavardhanpula@gmail.com" 
-                  aria-label="Email"
-                  className="transition-colors hover:text-indigo-400 hover:scale-110"
-                >
-                  <Mail size={20} />
-                </a>
+                  {/* Brand & Copyright */}
+                  <div className="text-center md:text-left">
+                    <h3 className="font-space text-lg font-bold text-white">
+                      Bala <span className="text-emerald-400">Vardhan</span>
+                    </h3>
+                    <p className="mt-2 text-sm text-zinc-500">
+                      Built with Next.js, Tailwind & Framer Motion.
+                      <br className="hidden md:block" />
+                      © {new Date().getFullYear()} Bala Vardhan. All rights reserved.
+                    </p>
+                  </div>
+
+                  {/* Social Links (Icons) */}
+                  <div className="flex gap-6 text-zinc-500">
+                    <a
+                      href="https://github.com/vardhan12178"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label="GitHub"
+                      className="transition-colors hover:text-emerald-400 hover:scale-110"
+                    >
+                      <Github size={20} />
+                    </a>
+                    <a
+                      href="https://linkedin.com/in/bala-vardhan-pula-753b011b9/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label="LinkedIn"
+                      className="transition-colors hover:text-emerald-400 hover:scale-110"
+                    >
+                      <Linkedin size={20} />
+                    </a>
+                    <a
+                      href="mailto:balavardhanpula@gmail.com"
+                      aria-label="Email"
+                      className="transition-colors hover:text-emerald-400 hover:scale-110"
+                    >
+                      <Mail size={20} />
+                    </a>
+                  </div>
+                </div>
               </div>
-            </div>
-          </div>
-        </footer>
+            </footer>
           </MotionConfig>
         </ThemeProvider>
 
@@ -153,14 +153,16 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Script
           id="ld-person"
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "Person",
-            name: "Bala Vardhan Pula",
-            jobTitle: "Full Stack Engineer",
-            url: SITE_URL,
-            sameAs: ["https://github.com/vardhan12178", "https://linkedin.com/in/bala-vardhan-pula-753b011b9/"]
-          })}}
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Person",
+              name: "Bala Vardhan Pula",
+              jobTitle: "Full Stack Engineer",
+              url: SITE_URL,
+              sameAs: ["https://github.com/vardhan12178", "https://linkedin.com/in/bala-vardhan-pula-753b011b9/"]
+            })
+          }}
         />
       </body>
     </html>
