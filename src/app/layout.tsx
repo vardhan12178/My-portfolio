@@ -99,53 +99,57 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               {children}
             </main>
             {/* --- Refined Glassmorphism Footer --- */}
-            <footer className="border-t border-zinc-800/50 bg-zinc-950/50 backdrop-blur-xl">
-              <div className="mx-auto max-w-6xl px-6 py-12">
-                <div className="flex flex-col items-center justify-between gap-6 md:flex-row">
+          <footer className="border-t border-zinc-800/50 bg-zinc-950/50 backdrop-blur-xl">
+            <div className="mx-auto max-w-6xl px-6 py-12">
+              <div className="flex flex-col items-center justify-between gap-6 md:flex-row">
 
-                  {/* Brand & Copyright */}
-                  <div className="text-center md:text-left">
-                    <h3 className="font-space text-lg font-bold text-white">
-                      Bala <span className="text-emerald-400">Vardhan</span>
-                    </h3>
-                    <p className="mt-2 text-sm text-zinc-500">
-                      Built with Next.js, Tailwind & Framer Motion.
-                      <br className="hidden md:block" />
-                      © {new Date().getFullYear()} Bala Vardhan. All rights reserved.
-                    </p>
-                  </div>
+                {/* Brand */}
+                <div className="text-center md:text-left">
+                  <h3 className="font-space text-lg font-bold text-white tracking-tight">
+                    Bala <span className="text-emerald-400">Vardhan</span>
+                  </h3>
 
-                  {/* Social Links (Icons) */}
-                  <div className="flex gap-6 text-zinc-500">
-                    <a
-                      href="https://github.com/vardhan12178"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label="GitHub"
-                      className="transition-colors hover:text-emerald-400 hover:scale-110"
-                    >
-                      <Github size={20} />
-                    </a>
-                    <a
-                      href="https://linkedin.com/in/bala-vardhan-pula-753b011b9/"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label="LinkedIn"
-                      className="transition-colors hover:text-emerald-400 hover:scale-110"
-                    >
-                      <Linkedin size={20} />
-                    </a>
-                    <a
-                      href="mailto:balavardhanpula@gmail.com"
-                      aria-label="Email"
-                      className="transition-colors hover:text-emerald-400 hover:scale-110"
-                    >
-                      <Mail size={20} />
-                    </a>
-                  </div>
+                  <p className="mt-2 text-sm text-zinc-500 leading-relaxed">
+                    Full-Stack MERN Engineer • Built with Next.js, Tailwind CSS & Framer Motion
+                    <br className="hidden md:block" />
+                    © {new Date().getFullYear()} Bala Vardhan
+                  </p>
                 </div>
+
+                {/* Social Links */}
+                <div className="flex items-center gap-6 text-zinc-500">
+                  <a
+                    href="https://github.com/vardhan12178"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="GitHub Profile"
+                    className="transition-all duration-200 hover:text-emerald-400 hover:-translate-y-0.5"
+                  >
+                    <Github size={20} />
+                  </a>
+
+                  <a
+                    href="https://linkedin.com/in/bala-vardhan-pula-753b011b9/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="LinkedIn Profile"
+                    className="transition-all duration-200 hover:text-emerald-400 hover:-translate-y-0.5"
+                  >
+                    <Linkedin size={20} />
+                  </a>
+
+                  <a
+                    href="mailto:balavardhanpula@gmail.com"
+                    aria-label="Send Email"
+                    className="transition-all duration-200 hover:text-emerald-400 hover:-translate-y-0.5"
+                  >
+                    <Mail size={20} />
+                  </a>
+                </div>
+
               </div>
-            </footer>
+            </div>
+          </footer>
           </MotionConfig>
         </ThemeProvider>
 

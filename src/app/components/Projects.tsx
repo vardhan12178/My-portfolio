@@ -1,8 +1,8 @@
 "use client";
 
-import { useState, type ReactNode } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 import Image from "next/image";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import {
   ExternalLink,
   Github,
@@ -23,63 +23,66 @@ import {
 // --- PROJECT DATA ---
 const VKART_DATA = {
   id: "vkart",
-  title: "VKart Enterprise Engine",
-  tagline: "A scalable MERN-based eCommerce system with RBAC, secure payments, and cloud media management.",
+  title: "VKart Platform",
+  tagline:
+    "A full-stack MERN eCommerce application featuring AI-powered product search, secure authentication, and scalable order workflows.",
+
   liveUrl: "https://vkart.balavardhan.dev/",
   githubUrl: "https://github.com/vardhan12178/vkart",
+
   technologies: [
-    "React",
+    "React.js",
     "Redux",
-    "Redis",
-    "AI Search",
     "Node.js",
-    "Express",
+    "Express.js",
     "MongoDB",
+    "Redis",
+    "RAG Search",
     "AWS S3",
     "Razorpay",
     "Google OAuth",
-    "JWT + 2FA"
+    "JWT + 2FA",
+    "Socket.io"
   ],
+
   gallery: [
     {
       id: 0,
-      title: "AI Smart Search",
-      desc: "AI-powered product discovery using MongoDB AI Search to find relevant items based on semantic meaning.",
+      title: "AI Semantic Search",
+      desc: "Implemented AI-powered product discovery using vector embeddings and semantic search to allow users to find products using natural language queries.",
       img: "/img/Vkart1.webp",
       icon: <Sparkles size={18} />
     },
     {
       id: 1,
-      title: "Admin Analytics",
-      desc: "Role-protected admin panel with real-time metrics for revenue, user registrations, and order status distribution.",
+      title: "Admin Analytics Dashboard",
+      desc: "Role-protected admin dashboard displaying real-time metrics including revenue insights, user registrations, and order status distribution.",
       img: "/img/Vkart3.webp",
       icon: <BarChart3 size={18} />
     },
     {
       id: 2,
-      title: "Secure Auth & 2FA",
-      desc: "Email-password login, Google OAuth, JWT authentication, session security, and optional two-factor authentication.",
+      title: "Secure Authentication & 2FA",
+      desc: "Authentication system using JWT, Google OAuth, and optional two-factor authentication with protected routes and secure session handling.",
       img: "/img/Vkart2.webp",
       icon: <ShieldCheck size={18} />
     },
     {
       id: 3,
-      title: "Inventory CMS",
-      desc: "Product and category management with secure image uploads to AWS S3, activation toggles, and detail editing.",
+      title: "Inventory & Product CMS",
+      desc: "Admin product management system with secure image uploads to AWS S3, product activation controls, and category management.",
       img: "/img/Vkart5.webp",
       icon: <Layers size={18} />
     },
     {
       id: 4,
-      title: "Order Workflow",
-      desc: "End-to-end order lifecycle: Pending → Placed → Shipped → Out for Delivery → Delivered, managed through a state-driven admin dashboard.",
+      title: "Order Lifecycle Management",
+      desc: "Engineered a complete order workflow from checkout to delivery with status tracking and admin-side order management.",
       img: "/img/Vkart4.webp",
       icon: <ShoppingCart size={18} />
     }
   ]
 };
-
-
 type SupportingProject = {
   title: string;
   badge: string;
@@ -95,50 +98,66 @@ type SupportingProject = {
   status?: string;
 };
 
+// Bump this when replacing public project thumbnails with the same filename.
+const PROJECT_IMAGE_VERSION = "20260307";
+
 const SUPPORTING_PROJECTS: SupportingProject[] = [
   {
     title: "Image Magic Pro",
-    badge: "Utility App",
-    desc: "A Next.js server component web app for batch image conversion and browser-based canvas editing.",
-    impact: "Built an internal API with 'sharp' for high-performance format conversion and JSZip for multi-file downloads.",
-    tags: ["Next.js", "sharp", "JSZip", "Canvas API"],
+    badge: "Developer Utility",
+    desc: "A Next.js web application for batch image conversion and lightweight browser-based editing.",
+    impact:
+      "Implemented a high-performance server-side image processing pipeline using 'sharp', with bulk export support via JSZip for multi-file downloads.",
+    tags: ["Next.js", "Node.js", "Sharp", "JSZip", "Canvas API"],
     links: {
       live: "https://img.balavardhan.dev/",
       github: "https://github.com/vardhan12178/image-magic-pro"
     },
-    img: "/img/image-magic-pro.webp",
+    img: `/img/image-magic-pro.webp?v=${PROJECT_IMAGE_VERSION}`,
     icon: <ImageIcon size={16} />
   },
   {
     title: "FitTrack",
-    badge: "Full-Stack MVP",
-    desc: "A modern fitness and wellness tracking dashboard for logging meals, workflows, and viewing data insights.",
-    impact: "Integrated Firebase Auth & Firestore for secure persistence and used Recharts for visual progress analytics.",
-    tags: ["Next.js 15", "Firebase Auth", "Firestore", "Recharts"],
+    badge: "Full-Stack App",
+    desc: "A fitness and wellness tracking dashboard for logging meals, workouts, and monitoring health progress.",
+    impact:
+      "Integrated Firebase Authentication and Firestore for secure user data storage and used Recharts to visualize health and activity insights.",
+    tags: ["Next.js", "Firebase Auth", "Firestore", "Recharts", "Tailwind CSS"],
     links: {
       live: "https://fitness-tracker-olive.vercel.app/",
       github: "https://github.com/vardhan12178/Fitness-Tracker"
     },
-    img: "/img/fit-tracker-pro.webp",
+    img: `/img/fit-tracker-pro.webp?v=${PROJECT_IMAGE_VERSION}`,
     icon: <Dumbbell size={16} />
   },
   {
     title: "Weather Dashboard",
-    badge: "API Build",
-    desc: "A real-time weather dashboard that fetches city-based forecasts and presents conditions in a simple, readable UI.",
-    impact: "Focus areas: external API integration, response handling, and fast visual feedback for weather metrics.",
-    tags: ["React", "REST APIs", "Tailwind CSS"],
+    badge: "API Integration",
+    desc: "A real-time weather dashboard that displays city-based forecasts and key weather metrics in a responsive UI.",
+    impact:
+      "Focused on external API integration, data parsing, and building a fast and intuitive interface for real-time weather updates.",
+    tags: ["React.js", "REST APIs", "Tailwind CSS"],
     links: {
       live: "https://vardhan-weather.vercel.app/",
       github: "https://github.com/vardhan12178/Node-Weather"
     },
-    img: "/img/weatherly.webp",
+    img: `/img/weatherly.webp?v=${PROJECT_IMAGE_VERSION}`,
     icon: <CloudSun size={16} />
   }
 ];
 
 export default function Projects() {
-  const [activeTab, setActiveTab] = useState(0);
+  const [activeGalleryIndex, setActiveGalleryIndex] = useState(0);
+  
+  useEffect(() => {
+    const intervalId = window.setInterval(() => {
+      setActiveGalleryIndex((currentIndex) =>
+        currentIndex === VKART_DATA.gallery.length - 1 ? 0 : currentIndex + 1
+      );
+    }, 3500);
+
+    return () => window.clearInterval(intervalId);
+  }, []);
 
   return (
     <section id="projects" className="relative bg-zinc-950 py-24 text-zinc-100 overflow-hidden">
@@ -157,7 +176,7 @@ export default function Projects() {
             viewport={{ once: true }}
             className="inline-flex items-center gap-2 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-4 py-1.5 text-sm font-medium text-emerald-300 mb-6"
           >
-            <Zap size={16} /> Flagship Engineering Project
+            <Zap size={16} />Flagship Full-Stack Project
           </motion.div>
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
@@ -175,7 +194,7 @@ export default function Projects() {
             transition={{ delay: 0.2 }}
             className="mx-auto mt-6 max-w-2xl text-zinc-400 text-lg"
           >
-            A production-grade, full-stack eCommerce engine built to handle complex state, real-time data, and secure payment processing.
+          A full-stack MERN e-commerce application built with secure authentication, real-time updates, AI-powered product search, and scalable order workflows.
           </motion.p>
         </div>
 
@@ -199,14 +218,24 @@ export default function Projects() {
                   <div className="h-3 w-3 rounded-full bg-green-500" />
                   <div className="ml-4 text-xs font-mono text-zinc-400">vkart.balavardhan.dev</div>
                 </div>
-                <div className="relative aspect-[16/9]">
-                  <Image
-                    src="/img/Vkart1.webp"
-                    alt="VKart Dashboard"
-                    fill
-                    className="object-cover object-top opacity-90"
-                    priority
-                  />
+                <div className="relative aspect-[16/9] overflow-hidden">
+                  {VKART_DATA.gallery.map((item, index) => (
+                    <div
+                      key={item.id}
+                      className={`absolute inset-0 transition-opacity duration-700 ${
+                        index === activeGalleryIndex ? "opacity-100" : "opacity-0"
+                      }`}
+                    >
+                      <Image
+                        src={item.img}
+                        alt={`${VKART_DATA.title} screenshot ${index + 1}`}
+                        fill
+                        className="object-cover object-top opacity-90"
+                        priority={index === 0}
+                        sizes="(max-width: 1024px) 100vw, 896px"
+                      />
+                    </div>
+                  ))}
                   <div className="absolute inset-0 bg-zinc-950/10" />
                 </div>
               </div>
@@ -223,7 +252,7 @@ export default function Projects() {
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-10">
                 <div className="rounded-xl bg-zinc-950/50 border border-zinc-800 p-4 text-center">
                   <div className="text-xl font-bold text-white font-space mt-1">MERN</div>
-                  <div className="text-xs text-zinc-400 uppercase tracking-wider mt-2">Full-Stack SPA</div>
+                  <div className="text-xs text-zinc-400 uppercase tracking-wider mt-2">FULL-STACK APP</div>
                 </div>
                 <div className="rounded-xl bg-zinc-950/50 border border-zinc-800 p-4 text-center">
                   <div className="text-xl font-bold text-white font-space mt-1">Razorpay</div>
@@ -234,12 +263,12 @@ export default function Projects() {
                   <div className="text-xs text-zinc-400 uppercase tracking-wider mt-2">Authentication</div>
                 </div>
                 <div className="rounded-xl bg-zinc-950/50 border border-zinc-800 p-4 text-center">
-                  <div className="text-xl font-bold text-emerald-400 font-space mt-1">Gemini AI</div>
-                  <div className="text-xs text-zinc-400 uppercase tracking-wider mt-2">Smart Search</div>
+                  <div className="text-xl font-bold text-emerald-400 font-space mt-1">AI Search</div>
+                  <div className="text-xs text-zinc-400 uppercase tracking-wider mt-2">RAG-POWERED</div>
                 </div>
               </div>
 
-              <h3 className="text-2xl font-bold text-white mb-6 font-space">Core Enterprise Features</h3>
+              <h3 className="text-2xl font-bold text-white mb-6 font-space">Core Platform Features</h3>
 
               <div className="grid sm:grid-cols-2 gap-6">
 
@@ -250,7 +279,7 @@ export default function Projects() {
                     <h4 className="font-bold text-zinc-100">AI Semantic Search (RAG)</h4>
                   </div>
                   <p className="text-sm text-zinc-400 leading-relaxed">
-                    Integrated MongoDB Atlas Vector Search with Google Gemini 2.5 Flash embeddings to allow users to search via natural language instead of exact keyword matches.
+                  Implemented AI-powered product search using vector embeddings and MongoDB Atlas Vector Search, allowing users to search with natural language instead of relying only on exact keyword matches.
                   </p>
                 </div>
 
@@ -261,7 +290,7 @@ export default function Projects() {
                     <h4 className="font-bold text-zinc-100">Optimized Data Caching</h4>
                   </div>
                   <p className="text-sm text-zinc-400 leading-relaxed">
-                    Designed a Redis caching architecture to drastically reduce database load. Configured intelligent TTLs (Time-To-Live) to keep data fresh while serving products to users instantly.
+                    Integrated Redis caching for frequently accessed product data to reduce database load and improve response times for high-traffic user actions.
                   </p>
                 </div>
 
@@ -269,10 +298,10 @@ export default function Projects() {
                 <div className="space-y-3">
                   <div className="flex items-center gap-3 text-emerald-400">
                     <ShieldCheck className="h-5 w-5" />
-                    <h4 className="font-bold text-zinc-100">Robust Security & Auth</h4>
+                    <h4 className="font-bold text-zinc-100">Secure Authentication & Access</h4>
                   </div>
                   <p className="text-sm text-zinc-400 leading-relaxed">
-                    Built a highly secure authentication system using JWTs stored in HTTP-only cookies, combined with Google OAuth 2.0 integration and an optional Two-Factor Authentication (2FA) workflow.
+                    Built a secure authentication system using JWT, Google OAuth, and optional two-factor authentication, with protected routes for both user and admin workflows.
                   </p>
                 </div>
 
@@ -280,10 +309,10 @@ export default function Projects() {
                 <div className="space-y-3">
                   <div className="flex items-center gap-3 text-emerald-400">
                     <ShoppingCart className="h-5 w-5" />
-                    <h4 className="font-bold text-zinc-100">End-to-End Order Pipeline</h4>
+                    <h4 className="font-bold text-zinc-100">End-to-End Order Workflow</h4>
                   </div>
                   <p className="text-sm text-zinc-400 leading-relaxed">
-                    Engineered a complete order workflow from checkout to delivery. Includes Razorpay integration, automated PDF invoice generation, and a daily scheduled job to process automatic refunds.
+                    Developed a complete order lifecycle from checkout to delivery, including payment handling, order status tracking, invoice generation, and refund flow management.
                   </p>
                 </div>
 

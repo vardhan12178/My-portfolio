@@ -4,55 +4,56 @@ import { motion } from "framer-motion";
 import {
   SiReact,
   SiNextdotjs,
+  SiJavascript,
   SiTypescript,
   SiTailwindcss,
   SiNodedotjs,
   SiExpress,
   SiMongodb,
+  SiMysql,
   SiRedis,
-  SiDocker,
   SiGit,
-  SiFramer,
   SiRedux,
+  SiPhp,
 } from "react-icons/si";
 import { FaAws } from "react-icons/fa";
-import { Code2, Database, Globe, Layers, Server, Sparkles } from "lucide-react";
+import { Code2, Database, Globe, Layers, Server } from "lucide-react";
 
 /* ============================================================================
-   Data: High-Value MERN Stack Only
+   Data: Recruiter-Friendly, Resume-Aligned Skills
 ============================================================================ */
 const SKILL_CATEGORIES = [
   {
     title: "Frontend Ecosystem",
     icon: <Globe className="text-emerald-400" size={20} />,
     skills: [
-      { name: "Next.js 14", icon: <SiNextdotjs size={20} />, color: "text-white" },
-      { name: "React", icon: <SiReact size={20} />, color: "text-cyan-400" },
+      { name: "React.js", icon: <SiReact size={20} />, color: "text-cyan-400" },
+      { name: "Next.js", icon: <SiNextdotjs size={20} />, color: "text-white" },
+      { name: "JavaScript", icon: <SiJavascript size={20} />, color: "text-yellow-400" },
       { name: "TypeScript", icon: <SiTypescript size={20} />, color: "text-blue-400" },
       { name: "Tailwind CSS", icon: <SiTailwindcss size={20} />, color: "text-teal-400" },
-      { name: "Redux Toolkit", icon: <SiRedux size={20} />, color: "text-teal-500" },
-      { name: "Framer Motion", icon: <SiFramer size={20} />, color: "text-pink-500" },
+      { name: "Redux Toolkit", icon: <SiRedux size={20} />, color: "text-violet-400" },
     ],
   },
   {
-    title: "Backend Architecture",
+    title: "Backend & APIs",
     icon: <Server className="text-teal-400" size={20} />,
     skills: [
       { name: "Node.js", icon: <SiNodedotjs size={20} />, color: "text-green-500" },
       { name: "Express.js", icon: <SiExpress size={20} />, color: "text-white" },
-      { name: "Redis", icon: <SiRedis size={20} />, color: "text-red-500" },
-      { name: "JWT Auth", icon: <Code2 size={20} />, color: "text-yellow-400" },
+      { name: "PHP", icon: <SiPhp size={20} />, color: "text-indigo-400" },
       { name: "REST APIs", icon: <Layers size={20} />, color: "text-orange-400" },
+      { name: "JWT Auth", icon: <Code2 size={20} />, color: "text-yellow-400" },
     ],
   },
   {
-    title: "Data & Infrastructure",
+    title: "Data & Tools",
     icon: <Database className="text-pink-400" size={20} />,
     skills: [
       { name: "MongoDB", icon: <SiMongodb size={20} />, color: "text-green-400" },
-      { name: "PostgreSQL", icon: <Database size={20} />, color: "text-blue-400" },
+      { name: "MySQL", icon: <SiMysql size={20} />, color: "text-blue-400" },
       { name: "Redis", icon: <SiRedis size={20} />, color: "text-red-500" },
-      { name: "Docker", icon: <SiDocker size={20} />, color: "text-blue-500" },
+      { name: "AWS", icon: <FaAws size={20} />, color: "text-orange-400" },
       { name: "Git / GitHub", icon: <SiGit size={20} />, color: "text-orange-500" },
     ],
   },
@@ -80,13 +81,11 @@ const item = {
 export default function Skills() {
   return (
     <section id="skills" className="relative bg-zinc-950 py-24">
-
       {/* Background Decor */}
       <div className="absolute left-0 top-1/4 h-96 w-96 rounded-full bg-emerald-500/5 blur-[100px]" />
-      <div className="absolute right-0 bottom-1/4 h-64 w-64 rounded-full bg-teal-500/5 blur-[80px]" />
+      <div className="absolute bottom-1/4 right-0 h-64 w-64 rounded-full bg-teal-500/5 blur-[80px]" />
 
       <div className="container mx-auto px-6">
-
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -98,7 +97,8 @@ export default function Skills() {
             Technical <span className="text-emerald-400">Expertise</span>
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-zinc-400">
-            A specialized stack focused on performance, scalability, and type-safety.
+            A practical full-stack skill set focused on building scalable, maintainable,
+            and production-ready web applications.
           </p>
         </motion.div>
 
@@ -114,11 +114,11 @@ export default function Skills() {
             <motion.div
               key={idx}
               variants={item}
-              className="group relative overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-900/40 p-8 hover:border-emerald-500/30 transition-all duration-300"
+              className="group relative overflow-hidden rounded-2xl border border-zinc-800 bg-zinc-900/40 p-8 transition-all duration-300 hover:border-emerald-500/30"
             >
               {/* Category Header */}
               <div className="mb-6 flex items-center gap-3">
-                <div className="rounded-lg bg-zinc-800 p-2.5 ring-1 ring-white/5 group-hover:bg-emerald-500/20 group-hover:text-emerald-300 transition-colors">
+                <div className="rounded-lg bg-zinc-800 p-2.5 ring-1 ring-white/5 transition-colors group-hover:bg-emerald-500/20 group-hover:text-emerald-300">
                   {category.icon}
                 </div>
                 <h3 className="font-space text-xl font-bold text-zinc-100">
@@ -131,19 +131,18 @@ export default function Skills() {
                 {category.skills.map((skill) => (
                   <div
                     key={skill.name}
-                    className="flex items-center gap-2 rounded-lg bg-zinc-950/50 px-3 py-2 text-sm font-medium text-zinc-300 border border-zinc-800 transition-all hover:border-emerald-500/30 hover:bg-emerald-950/30 hover:text-white cursor-default"
+                    className="cursor-default rounded-lg border border-zinc-800 bg-zinc-950/50 px-3 py-2 text-sm font-medium text-zinc-300 transition-all hover:border-emerald-500/30 hover:bg-emerald-950/30 hover:text-white"
                   >
-                    <span className={skill.color}>{skill.icon}</span>
-                    {skill.name}
+                    <div className="flex items-center gap-2">
+                      <span className={skill.color}>{skill.icon}</span>
+                      {skill.name}
+                    </div>
                   </div>
                 ))}
               </div>
             </motion.div>
           ))}
         </motion.div>
-
-
-
       </div>
     </section>
   );

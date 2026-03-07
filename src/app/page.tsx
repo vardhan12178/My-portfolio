@@ -74,7 +74,7 @@ export default function Home() {
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75"></span>
                 <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500"></span>
               </span>
-              <span>Actively looking for MERN Stack roles</span>
+              <span>Open to Full-Stack (MERN) Opportunities</span>
             </div>
           </motion.div>
 
@@ -85,7 +85,7 @@ export default function Home() {
             transition={{ duration: 0.6, delay: 0.1 }}
             className="font-space mx-auto max-w-4xl text-5xl font-bold tracking-tight text-white sm:text-7xl md:text-8xl"
           >
-            Engineering Solid <br />
+            Building Scalable <br />
             <span className="bg-gradient-to-r from-emerald-400 via-teal-400 to-cyan-400 bg-clip-text text-transparent">
               Web Applications.
             </span>
@@ -99,8 +99,7 @@ export default function Home() {
             className="mx-auto mt-8 max-w-2xl text-lg text-zinc-400 sm:text-xl leading-relaxed"
           >
             Hi, I'm <span className="text-white font-semibold">Bala Vardhan</span> -
-            a Full-Stack Engineer who loves building clean and maintainable web applications.
-            My core tools are React, Next.js, and Node.js.
+          a Full-Stack Developer focused on building scalable and maintainable web applications. My core stack includes React, Next.js, Node.js, and MongoDB..
 
           </motion.p>
 
@@ -116,7 +115,7 @@ export default function Home() {
               onClick={(e) => smoothScroll(e, "#projects")}
               className="group relative inline-flex h-12 w-full sm:w-auto items-center justify-center overflow-hidden rounded-full bg-white px-8 font-medium text-zinc-950 transition-all hover:bg-zinc-200 hover:scale-105"
             >
-              <span className="mr-2">View Featured Work</span>
+              <span className="mr-2">View Projects</span>
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
             </a>
 
@@ -179,7 +178,7 @@ export default function Home() {
                   <Layers size={24} />
                 </div>
                 <h3 className="text-3xl font-bold text-white font-space">VKart</h3>
-                <p className="text-sm text-zinc-400">Full Stack E-commerce</p>
+                <p className="text-sm text-zinc-400">Full-Stack MERN E-commerce Platform</p>
               </div>
             </div>
 
@@ -189,8 +188,8 @@ export default function Home() {
                 <div className="mb-3 rounded-full bg-cyan-500/20 p-3 text-cyan-400">
                   <Cpu size={24} />
                 </div>
-                <h3 className="text-3xl font-bold text-white font-space">MERN</h3>
-                <p className="text-sm text-zinc-400">Core Expertise</p>
+                <h3 className="text-3xl font-bold text-white font-space">MERN Stack</h3>
+                <p className="text-sm text-zinc-400">Core Development Stack</p>
               </div>
             </div>
           </motion.div>

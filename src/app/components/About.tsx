@@ -42,33 +42,51 @@ export default function About() {
       period: "Oct 2024 – Present",
       type: "Product Engineering",
       achievements: [
-        "Built an end-to-end Employee Handbook Builder, handling everything from database design to the frontend interface.",
-        "Created a custom workflow system that allows different levels of users to review, edit, and approve policies.",
-        "Redesigned 150+ static pages into a dynamic, template-driven system, which made the site much faster and easier to maintain.",
-        "Added SEO improvements, optimized images, and integrated HubSpot forms to improve landing page performance.",
-        "Set up an automated system to generate secure PDFs for company policies and track employee digital signatures."
-      ],
+      "Built an end-to-end Employee Handbook module, handling database design, backend logic, and frontend implementation.",
+      "Implemented a multi-level policy approval workflow with role-based access control for structured review and publishing.",
+      "Refactored 100+ static pages into a reusable template-driven architecture, significantly improving maintainability.",
+      "Enhanced UI and landing pages by implementing responsive layouts, improving SEO, and optimizing image performance.",
+      "Implemented automated PDF generation and digital acknowledgement tracking for company policy distribution."
+    ]
     },
     {
       company: "TCS",
       role: "Frontend Developer",
       period: "Dec 2021 – Jun 2024",
       type: "Enterprise Solutions",
-      achievements: [
-        "Worked on frontend development, building reusable UI components using React and Tailwind CSS.",
-        "Integrated backend REST APIs with the frontend to deliver features for enterprise applications."
-      ],
+        achievements: [
+    "Developed reusable frontend components using React to build responsive enterprise web interfaces.",
+    "Integrated REST APIs with the frontend to enable data-driven dashboards and application features.",
+    "Implemented state management using React Hooks and Redux to maintain consistent application state.",
+    "Improved frontend performance through lazy loading, component optimization, and efficient API usage.",
+    "Collaborated with cross-functional teams to debug issues and deliver stable production-ready features."
+  ]
     },
   ];
 
   // --- Tech Stack (Grouped for Visual Impact) ---
-  const skills = [
-    { label: "Frontend", icon: Layout, items: ["React", "Next.js", "Tailwind CSS", "jQuery"] },
-    { label: "Backend", icon: Server, items: ["Node.js", "Express", "PHP", "REST APIs"] },
-    { label: "Database", icon: Database, items: ["MongoDB", "MySQL"] },
-    { label: "DevOps/Tools", icon: Terminal, items: ["Git", "Postman", "DOMPDF"] },
-  ];
-
+const skills = [
+  { 
+    label: "Frontend", 
+    icon: Layout, 
+    items: ["React.js", "Next.js", "JavaScript", "TypeScript", "Tailwind CSS"] 
+  },
+  { 
+    label: "Backend", 
+    icon: Server, 
+    items: ["Node.js", "Express.js", "PHP", "REST APIs", "JWT Authentication"] 
+  },
+  { 
+    label: "Database", 
+    icon: Database, 
+    items: ["MongoDB", "MySQL", "Redis"] 
+  },
+  { 
+    label: "DevOps / Tools", 
+    icon: Terminal, 
+    items: ["Git", "Postman", "AWS", "Razorpay Integration"] 
+  }
+];
   return (
     <section id="about" className="relative bg-zinc-950 py-24 text-zinc-100">
 
@@ -89,8 +107,7 @@ export default function About() {
           </h2>
           <div className="mt-2 h-1 w-20 rounded-full bg-gradient-to-r from-emerald-500 to-teal-500" />
           <p className="mt-6 max-w-2xl text-zinc-400 text-lg">
-            I'm a software engineer who loves turning complex problems into clean, functional code.
-            My focus is on building solid MERN stack applications that are easy to use and scale.
+           I'm a Full-Stack Developer focused on building scalable and maintainable web applications. I specialize in the MERN stack and enjoy turning complex requirements into clean, reliable software solutions.
           </p>
         </motion.div>
 
@@ -116,7 +133,7 @@ export default function About() {
               </div>
 
               <h3 className="font-space text-2xl font-bold text-white">Bala Vardhan</h3>
-              <p className="text-emerald-400 font-medium">Full Stack Engineer</p>
+              <p className="text-emerald-400 font-medium">Full-Stack Developer</p>
 
               {/* Quick Stats Grid */}
               <div className="mt-6 grid grid-cols-2 gap-4 text-left">
@@ -124,7 +141,7 @@ export default function About() {
                   <div className="flex items-center gap-2 text-zinc-500 text-xs uppercase tracking-wider mb-1">
                     <MapPin size={12} /> Location
                   </div>
-                  <div className="text-zinc-200 text-sm font-semibold">Hyderabad, IN</div>
+                  <div className="text-zinc-200 text-sm font-semibold">Hyderabad, India</div>
                 </div>
                 <div className="rounded-xl bg-zinc-950/50 p-3 border border-zinc-800/50">
                   <div className="flex items-center gap-2 text-zinc-500 text-xs uppercase tracking-wider mb-1">
@@ -141,7 +158,7 @@ export default function About() {
                       <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
                       <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
                     </span>
-                    Open for MERN Roles
+                    Open to MERN Stack Opportunities
                   </div>
                 </div>
               </div>
