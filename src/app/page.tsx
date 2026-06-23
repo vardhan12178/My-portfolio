@@ -18,29 +18,14 @@ import About from "./components/About";
 import Skills from "./components/Skills";
 import Projects from "./components/Projects";
 import Contact from "./components/Contact";
+import { getExperienceText } from "@/lib/experience";
 
 export default function Home() {
   const { scrollY } = useScroll();
   const y1 = useTransform(scrollY, [0, 500], [0, 200]);
   const y2 = useTransform(scrollY, [0, 500], [0, -150]);
 
-  // --- Experience Calculation Logic (Preserved) ---
-  const startTCS = new Date("2021-12-29");
-  const endTCS = new Date("2024-06-10");
-  const startCurrent = new Date("2024-10-01");
-
-  function getExperience() {
-    const now = new Date();
-    const tcsMonths = (endTCS.getFullYear() - startTCS.getFullYear()) * 12 + (endTCS.getMonth() - startTCS.getMonth());
-    const currentMonths = (now.getFullYear() - startCurrent.getFullYear()) * 12 + (now.getMonth() - startCurrent.getMonth());
-    const totalMonths = tcsMonths + currentMonths;
-    const years = Math.floor(totalMonths / 12);
-    const months = totalMonths % 12;
-    return { years, months };
-  }
-
-  const { years, months } = getExperience();
-  const expText = `${years}.${months} Years`; // Cleaned up format for "Tech" look
+  const expText = getExperienceText();
 
   const smoothScroll = useCallback((e: React.MouseEvent, target: string) => {
     e.preventDefault();

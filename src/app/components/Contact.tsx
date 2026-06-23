@@ -153,7 +153,7 @@ export default function Contact() {
 
             {/* WhatsApp/Direct */}
             <a
-              href="https://wa.me/918688412181"
+              href="https://wa.me/919542312181"
               target="_blank"
               rel="noreferrer"
               className="flex items-center justify-center gap-2 rounded-2xl border border-zinc-800 bg-zinc-900/30 p-4 text-sm text-zinc-400 transition-colors hover:text-green-400 hover:border-green-900/50"

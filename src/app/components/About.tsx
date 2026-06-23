@@ -14,44 +14,29 @@ import {
   Terminal
 } from "lucide-react";
 import Image from "next/image";
+import { getExperienceText } from "@/lib/experience";
 
 export default function About() {
-  // --- Dynamic Experience Calculation ---
-  const startTCS = new Date("2021-12-29");
-  const endTCS = new Date("2024-06-10");
-  const startCurrent = new Date("2024-10-01");
-
-  function getExperience() {
-    const now = new Date();
-    const tcsMonths = (endTCS.getFullYear() - startTCS.getFullYear()) * 12 + (endTCS.getMonth() - startTCS.getMonth());
-    const currentMonths = (now.getFullYear() - startCurrent.getFullYear()) * 12 + (now.getMonth() - startCurrent.getMonth());
-    const totalMonths = tcsMonths + currentMonths;
-    const years = Math.floor(totalMonths / 12);
-    const months = totalMonths % 12;
-    return { years, months };
-  }
-
-  const { years, months } = getExperience();
-  const expText = `${years}.${months} Years`;
+  const expText = getExperienceText();
 
   // --- Work Experience Data ---
   const experienceTimeline = [
     {
       company: "HR Geckos",
-      role: "Full Stack Engineer",
+      role: "Fullstack Developer",
       period: "Oct 2024 – Present",
       type: "Product Engineering",
       achievements: [
       "Built an end-to-end Employee Handbook module, handling database design, backend logic, and frontend implementation.",
       "Implemented a multi-level policy approval workflow with role-based access control for structured review and publishing.",
-      "Refactored 100+ static pages into a reusable template-driven architecture, significantly improving maintainability.",
+      "Integrated end-to-end Stripe payment workflows, including embedded checkout, invoice payments, webhook-based status synchronization, subscription billing, and refund handling.",
       "Enhanced UI and landing pages by implementing responsive layouts, improving SEO, and optimizing image performance.",
       "Implemented automated PDF generation and digital acknowledgement tracking for company policy distribution."
     ]
     },
     {
       company: "TCS",
-      role: "Frontend Developer",
+      role: "Fullstack Developer",
       period: "Dec 2021 – Jun 2024",
       type: "Enterprise Solutions",
         achievements: [
@@ -74,7 +59,7 @@ const skills = [
   { 
     label: "Backend", 
     icon: Server, 
-    items: ["Node.js", "Express.js", "PHP", "REST APIs", "JWT Authentication"] 
+    items: ["Node.js", "Express.js", "REST APIs", "JWT Authentication"]
   },
   { 
     label: "Database", 
@@ -167,6 +152,7 @@ const skills = [
               <a
                 href="/Bala_Vardhan_Resume.pdf"
                 target="_blank"
+                download="Bala_Vardhan_Pula_Resume.pdf"
                 className="mt-6 flex w-full items-center justify-center gap-2 rounded-xl bg-emerald-600 px-4 py-3 font-medium text-white transition hover:bg-emerald-700 active:scale-95"
               >
                 <Download size={18} /> Download Resume

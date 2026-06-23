@@ -124,7 +124,7 @@ const SUPPORTING_PROJECTS: SupportingProject[] = [
       "Integrated Firebase Authentication and Firestore for secure user data storage and used Recharts to visualize health and activity insights.",
     tags: ["Next.js", "Firebase Auth", "Firestore", "Recharts", "Tailwind CSS"],
     links: {
-      live: "https://fitness-tracker-olive.vercel.app/",
+      live: "https://fittracker.balavardhan.dev/",
       github: "https://github.com/vardhan12178/Fitness-Tracker"
     },
     img: `/img/fit-tracker-pro.webp?v=${PROJECT_IMAGE_VERSION}`,
@@ -138,7 +138,7 @@ const SUPPORTING_PROJECTS: SupportingProject[] = [
       "Focused on external API integration, data parsing, and building a fast and intuitive interface for real-time weather updates.",
     tags: ["React.js", "REST APIs", "Tailwind CSS"],
     links: {
-      live: "https://vardhan-weather.vercel.app/",
+      live: "https://weatherly.balavardhan.dev/",
       github: "https://github.com/vardhan12178/Node-Weather"
     },
     img: `/img/weatherly.webp?v=${PROJECT_IMAGE_VERSION}`,

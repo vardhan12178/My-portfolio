@@ -8,6 +8,7 @@ import {
   X,
   Home,
   User,
+  Code2,
   FolderOpen,
   Mail,
   Github,
@@ -21,6 +22,7 @@ import clsx from "clsx";
 const NAV_ITEMS = [
   { name: "Home", href: "#home", icon: Home },
   { name: "About", href: "#about", icon: User },
+  { name: "Skills", href: "#skills", icon: Code2 },
   { name: "Projects", href: "#projects", icon: FolderOpen },
   { name: "Contact", href: "#contact", icon: Mail },
 ];
@@ -128,6 +130,7 @@ export default function Header() {
           <a
             href="/Bala_Vardhan_Resume.pdf"
             target="_blank"
+            download="Bala_Vardhan_Pula_Resume.pdf"
             className="flex items-center gap-2 rounded-full bg-emerald-600 px-5 py-2.5 text-sm font-medium text-white transition-all hover:bg-emerald-700 hover:shadow-lg hover:shadow-emerald-500/20 active:scale-95"
           >
             <Download size={16} /> Resume
@@ -171,6 +174,7 @@ export default function Header() {
               <a
                 href="/Bala_Vardhan_Resume.pdf"
                 target="_blank"
+                download="Bala_Vardhan_Pula_Resume.pdf"
                 className="flex items-center gap-2 rounded-full border border-emerald-500/50 bg-emerald-500/10 px-8 py-3 text-lg font-medium text-emerald-400"
               >
                 <FileText size={20} /> Download Resume

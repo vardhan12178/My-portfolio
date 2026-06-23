@@ -14,10 +14,9 @@ import {
   SiRedis,
   SiGit,
   SiRedux,
-  SiPhp,
 } from "react-icons/si";
 import { FaAws } from "react-icons/fa";
-import { Code2, Database, Globe, Layers, Server } from "lucide-react";
+import { Code2, CreditCard, Database, Globe, Layers, Server, Sparkles } from "lucide-react";
 
 /* ============================================================================
    Data: Recruiter-Friendly, Resume-Aligned Skills
@@ -41,9 +40,9 @@ const SKILL_CATEGORIES = [
     skills: [
       { name: "Node.js", icon: <SiNodedotjs size={20} />, color: "text-green-500" },
       { name: "Express.js", icon: <SiExpress size={20} />, color: "text-white" },
-      { name: "PHP", icon: <SiPhp size={20} />, color: "text-indigo-400" },
       { name: "REST APIs", icon: <Layers size={20} />, color: "text-orange-400" },
       { name: "JWT Auth", icon: <Code2 size={20} />, color: "text-yellow-400" },
+      { name: "Payment Gateway Integration", icon: <CreditCard size={20} />, color: "text-emerald-400" },
     ],
   },
   {
@@ -55,6 +54,7 @@ const SKILL_CATEGORIES = [
       { name: "Redis", icon: <SiRedis size={20} />, color: "text-red-500" },
       { name: "AWS", icon: <FaAws size={20} />, color: "text-orange-400" },
       { name: "Git / GitHub", icon: <SiGit size={20} />, color: "text-orange-500" },
+      { name: "RAG / Vector Search", icon: <Sparkles size={20} />, color: "text-violet-400" },
     ],
   },
 ];

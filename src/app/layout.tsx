@@ -44,13 +44,13 @@ export const metadata: Metadata = {
     template: "%s · Bala Vardhan",
   },
   description:
-    "Full Stack Engineer specializing in MERN & Modern Architectures. Transforming legacy code into high-performance applications.",
+    "Full Stack Engineer specializing in the MERN stack. Building scalable, secure, and high-performance web applications.",
   openGraph: {
     type: "website",
     url: SITE_URL,
     siteName: SITE_NAME,
     title: "Bala Vardhan | Full Stack Engineer",
-    description: "Building scalable MERN applications and modernizing legacy systems.",
+    description: "Building scalable, secure, and production-ready MERN applications.",
     images: [{ url: OG_IMAGE, width: 1200, height: 630, alt: "Bala Vardhan Portfolio" }],
     locale: "en_US",
   },
