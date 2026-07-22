@@ -1,201 +1,300 @@
-"use client";
+import Image from "next/image";
+import { ArrowUpRight, Github, Linkedin, Mail } from "lucide-react";
+import HomeMotion from "./components/HomeMotion";
+import VKartGallery from "./components/VKartGallery";
 
-import React, { useCallback } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
-import {
-  ArrowRight,
-  Github,
-  Linkedin,
-  Mail,
-  ChevronDown,
-  Code2,
-  Layers,
-  Cpu
-} from "lucide-react";
+const supportingProjects = [
+  {
+    title: "Image Magic Pro",
+    type: "Image tool",
+    description: "Convert and edit several images at once in the browser.",
+    image: "/img/image-magic-pro.webp",
+    live: "https://img.balavardhan.dev/",
+    github: "https://github.com/vardhan12178/image-magic-pro",
+  },
+  {
+    title: "FitTrack",
+    type: "Full-stack app",
+    description: "Track meals, workouts, and progress in one dashboard.",
+    image: "/img/fit-tracker-pro.webp",
+    live: "https://fittracker.balavardhan.dev/",
+    github: "https://github.com/vardhan12178/Fitness-Tracker",
+  },
+  {
+    title: "Weatherly",
+    type: "Weather app",
+    description: "Search cities and view forecasts and daily weather details.",
+    image: "/img/weatherly.webp",
+    live: "https://weatherly.balavardhan.dev/",
+    github: "https://github.com/vardhan12178/Node-Weather",
+  },
+];
 
-// Components
-import About from "./components/About";
-import Skills from "./components/Skills";
-import Projects from "./components/Projects";
-import Contact from "./components/Contact";
-import { getExperienceText } from "@/lib/experience";
+const experience = [
+  {
+    company: "HR Geckos",
+    role: "Full-stack developer",
+    period: "Oct 2024 — Present",
+    highlights: [
+      "Built an employee handbook used by multiple organizations, from the database to the mobile-friendly interface.",
+      "Built policy review and approval steps with user roles, PDF files, and employee confirmation tracking.",
+      "Added Stripe subscriptions, invoices, refunds, and payment updates.",
+    ],
+  },
+  {
+    company: "Tata Consultancy Services",
+    role: "Full-stack developer",
+    period: "Dec 2021 — Jun 2024",
+    highlights: [
+      "Built reusable React screens and business dashboards.",
+      "Connected REST APIs with Redux and React hooks to keep app data reliable.",
+      "Made pages faster with lazy loading, smaller code bundles, and data caching.",
+    ],
+  },
+];
+
+const projectSignals = [
+  ["Search", "Smart search that understands what users mean"],
+  ["Login", "Google login, user roles, and two-step verification"],
+  ["Store tools", "Products, stock, orders, payments, and refunds"],
+];
 
 export default function Home() {
-  const { scrollY } = useScroll();
-  const y1 = useTransform(scrollY, [0, 500], [0, 200]);
-  const y2 = useTransform(scrollY, [0, 500], [0, -150]);
-
-  const expText = getExperienceText();
-
-  const smoothScroll = useCallback((e: React.MouseEvent, target: string) => {
-    e.preventDefault();
-    const el = document.querySelector(target);
-    if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
-  }, []);
-
   return (
     <>
-      {/* --- HERO SECTION --- */}
-      <section
-        id="home"
-        className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden pt-36 md:pt-40"
-      >
+      <HomeMotion />
+      <main>
+        <section id="home" className="hero section-shell">
+          <div className="hero-copy">
+            <p className="hero-kicker hero-fade">Full-stack developer · Hyderabad</p>
 
-        {/* Parallax Background Elements */}
-        <motion.div style={{ y: y1, x: -50 }} className="absolute top-20 left-[10%] -z-10 h-[300px] w-[300px] rounded-full bg-emerald-600/20 blur-[100px]" />
-        <motion.div style={{ y: y2, x: 50 }} className="absolute bottom-20 right-[10%] -z-10 h-[250px] w-[250px] rounded-full bg-teal-600/20 blur-[100px]" />
-
-        <div className="container relative z-10 mx-auto px-6 text-center">
-
-          {/* 1. Status Badge */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="mb-6 flex justify-center"
-          >
-            <div className="inline-flex items-center gap-2 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-4 py-1.5 text-xs font-medium text-emerald-300 backdrop-blur-md">
-              <span className="relative flex h-2 w-2">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75"></span>
-                <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500"></span>
+            <h1 className="hero-title" aria-label="Bala Vardhan">
+              <span className="hero-mask">
+                <span className="hero-line">Bala</span>
               </span>
-              <span>Open to Full-Stack (MERN) Opportunities</span>
-            </div>
-          </motion.div>
+              <span className="hero-mask">
+                <span className="hero-line">Vardhan</span>
+              </span>
+            </h1>
 
-          {/* 2. Main Headline */}
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            className="font-space mx-auto max-w-4xl text-5xl font-bold tracking-tight text-white sm:text-7xl md:text-8xl"
-          >
-            Building Scalable <br />
-            <span className="bg-gradient-to-r from-emerald-400 via-teal-400 to-cyan-400 bg-clip-text text-transparent">
-              Web Applications.
-            </span>
-          </motion.h1>
+            <p className="hero-intro hero-fade">
+              I build web applications from start to finish — React and Next.js for
+              the interface, Node.js and databases for the backend.
+            </p>
 
-          {/* 3. Sub-headline */}
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="mx-auto mt-8 max-w-2xl text-lg text-zinc-400 sm:text-xl leading-relaxed"
-          >
-            Hi, I'm <span className="text-white font-semibold">Bala Vardhan</span> -
-          a Full-Stack Developer focused on building scalable and maintainable web applications. My core stack includes React, Next.js, Node.js, and MongoDB..
-
-          </motion.p>
-
-          {/* 4. CTA Buttons */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row"
-          >
-            <a
-              href="#projects"
-              onClick={(e) => smoothScroll(e, "#projects")}
-              className="group relative inline-flex h-12 w-full sm:w-auto items-center justify-center overflow-hidden rounded-full bg-white px-8 font-medium text-zinc-950 transition-all hover:bg-zinc-200 hover:scale-105"
-            >
-              <span className="mr-2">View Projects</span>
-              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-            </a>
-
-            <a
-              href="#contact"
-              onClick={(e) => smoothScroll(e, "#contact")}
-              className="inline-flex h-12 w-full sm:w-auto items-center justify-center rounded-full border border-zinc-800 bg-zinc-950/50 px-8 font-medium text-white backdrop-blur-sm transition-all hover:bg-zinc-900 hover:border-zinc-600"
-            >
-              Contact Me
-            </a>
-          </motion.div>
-
-          {/* 5. Social Links (Minimalist) */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.8, delay: 0.5 }}
-            className="mt-10 flex justify-center gap-6"
-          >
-            {[
-              { icon: Github, href: "https://github.com/vardhan12178", label: "Github" },
-              { icon: Linkedin, href: "https://www.linkedin.com/in/bala-vardhan-pula-753b011b9/", label: "LinkedIn" },
-              { icon: Mail, href: "mailto:balavardhanpula@gmail.com", label: "Email" },
-            ].map((social, index) => (
+            <div className="hero-actions hero-fade">
+              <a className="button button-primary" href="#projects">
+                View work
+              </a>
               <a
-                key={index}
-                href={social.href}
+                className="button button-secondary"
+                href="/Bala_Vardhan_Resume.pdf"
                 target="_blank"
                 rel="noreferrer"
-                aria-label={social.label}
-                className="text-zinc-500 hover:text-emerald-400 hover:scale-110 transition-all duration-300"
               >
-                <social.icon className="h-6 w-6" />
+                Resume
               </a>
-            ))}
-          </motion.div>
+            </div>
 
-          {/* 6. Glass Bento Grid Stats */}
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.6 }}
-            className="mx-auto mt-20 grid max-w-4xl grid-cols-1 gap-4 sm:grid-cols-3"
+            <p className="hero-meta hero-fade">
+              <span>HR Geckos</span>
+              <span aria-hidden="true">·</span>
+              <span>Previously TCS</span>
+              <span aria-hidden="true">·</span>
+              <span>4+ years experience</span>
+            </p>
+          </div>
+
+          <a
+            className="hero-visual"
+            href="https://vkart.balavardhan.dev/"
+            target="_blank"
+            rel="noreferrer"
+            aria-label="Open VKart live project"
           >
-            {/* Stat 1: Experience */}
-            <div className="group relative overflow-hidden rounded-2xl border border-white/5 bg-white/5 p-6 backdrop-blur-sm transition-colors hover:bg-white/10 hover:border-white/10">
-              <div className="flex flex-col items-center">
-                <div className="mb-3 rounded-full bg-emerald-500/20 p-3 text-emerald-400">
-                  <Code2 size={24} />
-                </div>
-                <h3 className="text-3xl font-bold text-white font-space">{expText}</h3>
-                <p className="text-sm text-zinc-400">Professional Experience</p>
+            <div className="hero-visual-frame">
+              <div className="browser-chrome" aria-hidden="true">
+                <span />
+                <span />
+                <span />
+                <small>vkart.balavardhan.dev</small>
               </div>
+              <Image
+                src="/img/vkart.webp"
+                alt="VKart product catalogue"
+                width={2880}
+                height={1800}
+                priority
+                quality={85}
+                sizes="(max-width: 900px) 100vw, 48vw"
+              />
+            </div>
+            <span className="hero-visual-caption">Main project — VKart</span>
+          </a>
+        </section>
+
+        <section id="projects" className="work-section">
+          <div className="section-shell">
+            <div className="section-intro-row" data-reveal>
+              <p className="eyebrow">01 — Selected work</p>
+              <h2>Web products built from start to finish.</h2>
             </div>
 
-            {/* Stat 2: VKart Project */}
-            <div className="group relative overflow-hidden rounded-2xl border border-white/5 bg-white/5 p-6 backdrop-blur-sm transition-colors hover:bg-white/10 hover:border-white/10">
-              <div className="flex flex-col items-center">
-                <div className="mb-3 rounded-full bg-teal-500/20 p-3 text-teal-400">
-                  <Layers size={24} />
+            <article className="featured-project" data-reveal>
+              <div className="featured-copy">
+                <p className="project-index">Main project</p>
+                <h3>VKart</h3>
+                <p className="project-lead">
+                  A full-stack shopping app with smart search, secure login, admin
+                  tools, payments, and order tracking.
+                </p>
+
+                <dl className="project-signals">
+                  {projectSignals.map(([term, detail]) => (
+                    <div key={term}>
+                      <dt>{term}</dt>
+                      <dd>{detail}</dd>
+                    </div>
+                  ))}
+                </dl>
+
+                <div className="project-links">
+                  <a href="https://vkart.balavardhan.dev/" target="_blank" rel="noreferrer">
+                    Live app <ArrowUpRight size={16} />
+                  </a>
+                  <a href="https://github.com/vardhan12178/vkart" target="_blank" rel="noreferrer">
+                    Frontend code <Github size={15} />
+                  </a>
+                  <a href="https://github.com/vardhan12178/backend" target="_blank" rel="noreferrer">
+                    Backend code <Github size={15} />
+                  </a>
                 </div>
-                <h3 className="text-3xl font-bold text-white font-space">VKart</h3>
-                <p className="text-sm text-zinc-400">Full-Stack MERN E-commerce Platform</p>
+              </div>
+
+              <div className="featured-visual">
+                <VKartGallery />
+              </div>
+            </article>
+
+            <div className="work-list" aria-label="More projects">
+              {supportingProjects.map((project, index) => (
+                <article className="work-row" key={project.title}>
+                  <span className="work-row-index">0{index + 2}</span>
+                  <a
+                    className="work-row-thumb"
+                    href={project.live}
+                    target="_blank"
+                    rel="noreferrer"
+                    aria-label={`Open ${project.title}`}
+                  >
+                    <Image
+                      src={project.image}
+                      alt=""
+                      width={2880}
+                      height={1800}
+                      sizes="160px"
+                    />
+                  </a>
+                  <div className="work-row-main">
+                    <p className="work-row-type">{project.type}</p>
+                    <h3>{project.title}</h3>
+                    <p>{project.description}</p>
+                  </div>
+                  <div className="work-row-links">
+                    <a href={project.live} target="_blank" rel="noreferrer">
+                      Live <ArrowUpRight size={15} />
+                    </a>
+                    <a href={project.github} target="_blank" rel="noreferrer">
+                      Code <Github size={15} />
+                    </a>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section id="experience" className="experience-section section-shell">
+          <div className="section-intro" data-reveal>
+            <p className="eyebrow">02 — Experience</p>
+            <h2>Experience across product and enterprise teams.</h2>
+          </div>
+
+          <div className="experience-list">
+            {experience.map((job) => (
+              <article className="experience-item" key={job.company} data-reveal>
+                <div className="experience-title">
+                  <div>
+                    <h3>{job.company}</h3>
+                    <p>{job.role}</p>
+                  </div>
+                  <time>{job.period}</time>
+                </div>
+                <ul>
+                  {job.highlights.map((highlight) => (
+                    <li key={highlight}>{highlight}</li>
+                  ))}
+                </ul>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <section id="skills" className="skills-strip section-shell" data-reveal>
+          <p className="eyebrow">03 — Skills</p>
+          <p className="skills-line">
+            React · Next.js · TypeScript · Node.js · Express · MongoDB · MySQL · Redis · AWS · Stripe
+          </p>
+        </section>
+
+        <section id="about" className="about-section section-shell">
+          <div data-reveal>
+            <p className="eyebrow">04 — About</p>
+            <h2>Clear interfaces. Reliable delivery. Code that teams can maintain.</h2>
+          </div>
+          <div className="about-columns" data-reveal>
+            <p>
+              I take a requirement, break it into clear steps, and build from the
+              interface through the API and database.
+            </p>
+            <p>
+              I value clear communication and software that works well in production.
+              I&apos;m open to full-time roles in Hyderabad or remote.
+            </p>
+          </div>
+        </section>
+
+        <section id="contact" className="contact-section">
+          <div className="section-shell contact-inner" data-reveal>
+            <div>
+              <p className="eyebrow">05 — Contact</p>
+              <h2>Have a role in mind? Let&apos;s talk.</h2>
+            </div>
+            <div className="contact-actions">
+              <a className="contact-email" href="mailto:balavardhanpula@gmail.com">
+                Email me
+                <Mail size={18} aria-hidden="true" />
+              </a>
+              <div className="contact-socials">
+                <a
+                  href="https://www.linkedin.com/in/bala-vardhan-pula-753b011b9/"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  LinkedIn <Linkedin size={15} />
+                </a>
+                <a
+                  href="https://github.com/vardhan12178"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  GitHub <Github size={15} />
+                </a>
               </div>
             </div>
-
-            {/* Stat 3: Tech Focus */}
-            <div className="group relative overflow-hidden rounded-2xl border border-white/5 bg-white/5 p-6 backdrop-blur-sm transition-colors hover:bg-white/10 hover:border-white/10">
-              <div className="flex flex-col items-center">
-                <div className="mb-3 rounded-full bg-cyan-500/20 p-3 text-cyan-400">
-                  <Cpu size={24} />
-                </div>
-                <h3 className="text-3xl font-bold text-white font-space">MERN Stack</h3>
-                <p className="text-sm text-zinc-400">Core Development Stack</p>
-              </div>
-            </div>
-          </motion.div>
-
-        </div>
-
-        {/* Scroll Indicator */}
-        <motion.div
-          animate={{ y: [0, 10, 0] }}
-          transition={{ duration: 2, repeat: Infinity }}
-          className="absolute bottom-10 left-1/2 -translate-x-1/2 text-zinc-500"
-        >
-          <ChevronDown className="h-6 w-6" />
-        </motion.div>
-      </section>
-
-      {/* --- Rest of the Page --- */}
-      <About />
-      <Skills />
-      <Projects />
-      <Contact />
+          </div>
+        </section>
+      </main>
     </>
   );
 }
