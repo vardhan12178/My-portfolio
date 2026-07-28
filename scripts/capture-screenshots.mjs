@@ -28,6 +28,28 @@ const shots = [
     settleMs: 1500,
   },
   {
+    name: "jwt-inspector",
+    url: "https://jwt.balavardhan.dev/",
+    settleMs: 2000,
+  },
+  {
+    name: "regex-lab",
+    url: "https://regex.balavardhan.dev/",
+    settleMs: 2000,
+  },
+  {
+    name: "myip-pro",
+    url: "https://ip.balavardhan.dev/",
+    settleMs: 3500,
+    minTextLength: 20,
+  },
+  {
+    name: "diff-pro",
+    url: "https://diff.balavardhan.dev/",
+    settleMs: 2000,
+    clickSample: true,
+  },
+  {
     name: "fit-tracker-pro",
     url: "https://fittracker.balavardhan.dev/",
     settleMs: 1500,
@@ -69,6 +91,14 @@ async function main() {
     }
 
     await page.waitForTimeout(shot.settleMs ?? 1500);
+
+    if (shot.clickSample) {
+      const sample = page.getByRole("button", { name: /sample/i });
+      if (await sample.count()) {
+        await sample.first().click({ timeout: 2000 }).catch(() => {});
+        await page.waitForTimeout(1000);
+      }
+    }
 
     // Dismiss common consent buttons if present
     for (const label of ["Accept all", "Accept", "Got it", "I agree"]) {
