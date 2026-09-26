@@ -1,6 +1,6 @@
 import "./globals.css";
 import type { Metadata, Viewport } from "next";
-import { Instrument_Serif, Inter, JetBrains_Mono } from "next/font/google";
+import { Inter, JetBrains_Mono } from "next/font/google";
 import Link from "next/link";
 import { Github, Linkedin, Mail } from "lucide-react";
 import Header from "./components/Header";
@@ -8,36 +8,30 @@ import SmoothScroll from "./components/SmoothScroll";
 
 const inter = Inter({
   subsets: ["latin"],
-  display: "swap",
   variable: "--font-inter",
+  display: "swap",
 });
 
-const instrument = Instrument_Serif({
+const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
-  weight: "400",
+  variable: "--font-mono",
   display: "swap",
-  variable: "--font-instrument",
-});
-
-const jetbrains = JetBrains_Mono({
-  subsets: ["latin"],
-  display: "swap",
-  variable: "--font-jetbrains",
 });
 
 const siteUrl = "https://balavardhan.dev";
 
 export const viewport: Viewport = {
-  themeColor: "#0c0b0a",
+  themeColor: "#f7f8fa",
   width: "device-width",
   initialScale: 1,
 };
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
-  title: "Bala Vardhan — Full-stack Developer",
+  alternates: { canonical: "/" },
+  title: "Bala Vardhan | Full-stack Developer",
   description:
-    "Full-stack developer with 4+ years of experience building reliable web apps with React, Next.js, Node.js, and databases.",
+    "Bala Vardhan is a full-stack developer with 4+ years of experience building web products with React, Next.js, Node.js, and databases.",
   keywords: [
     "Bala Vardhan",
     "Full-stack Engineer",
@@ -50,14 +44,14 @@ export const metadata: Metadata = {
     type: "website",
     url: siteUrl,
     siteName: "Bala Vardhan",
-    title: "Bala Vardhan — Full-stack Developer",
-    description: "I build web applications from the interface to the backend.",
+    title: "Bala Vardhan | Full-stack Developer",
+    description: "I build web products from interface to backend.",
     images: [{ url: "/og-editorial.png", width: 1730, height: 909, alt: "Bala Vardhan, Full-stack Developer" }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Bala Vardhan — Full-stack Developer",
-    description: "I build web applications from the interface to the backend.",
+    title: "Bala Vardhan | Full-stack Developer",
+    description: "I build web products from interface to backend.",
     images: ["/og-editorial.png"],
   },
 };
@@ -66,11 +60,8 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   const year = new Date().getFullYear();
 
   return (
-    <html
-      lang="en"
-      className={`${inter.variable} ${instrument.variable} ${jetbrains.variable}`}
-    >
-      <body>
+    <html lang="en" className={`${inter.variable} ${jetbrainsMono.variable}`}>
+      <body className="antialiased">
         <Link className="skip-link" href="/#projects">Skip to projects</Link>
         <SmoothScroll>
           <Header />
@@ -79,7 +70,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
             <div className="section-shell footer-inner">
               <div>
                 <Link href="/#home" className="footer-name">Bala Vardhan</Link>
-                <p>Full-stack developer — Hyderabad</p>
+                <p>Full-stack developer / Hyderabad</p>
               </div>
               <p className="footer-note">© {year}</p>
               <div className="footer-links">

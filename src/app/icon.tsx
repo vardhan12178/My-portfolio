@@ -18,11 +18,12 @@ export default function Icon() {
           alignItems: "center",
           justifyContent: "center",
           borderRadius: 16,
-          background: "#d97a4f",
-          color: "#0c0b0a",
-          fontFamily: "Georgia, serif",
+          background: "#1d4ed8",
+          color: "#ffffff",
+          fontFamily: "Arial, sans-serif",
           fontSize: 29,
-          letterSpacing: -2,
+          fontWeight: 700,
+          letterSpacing: -1,
         }}
       >
         BV
