@@ -224,8 +224,9 @@ img { display: block; max-width: 100%; }
   .hero { gap: 40px; padding-block: 52px 64px; }
   .hero-title { max-width: 16ch; font-size: clamp(2.5rem, 10vw, 3.6rem); }
   .hero-intro { margin-top: 18px; font-size: 16px; }
-  .hero-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 24px; }
-  .hero-actions .button { flex: 1 1 calc(50% - 4px); font-size: 13px; min-height: 42px; padding: 0 10px; }
+  .hero-actions { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; margin-top: 24px; }
+  .hero-actions .button { min-width: 0; font-size: 13px; min-height: 44px; padding: 0 12px; white-space: nowrap; }
+  .hero-actions .button-primary, .hero-actions .button-secondary { grid-column: 1 / -1; font-size: 14px; min-height: 48px; }
   .hero-proof { gap: 12px; margin-top: 36px; }
   .hero-proof strong { font-size: 13px; }
   .hero-proof small { font-size: 12px; line-height: 1.35; }
